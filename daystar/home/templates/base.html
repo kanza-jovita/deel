@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Daystar</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="icon" href="{% static 'favicon/favicon.ico' %}" type="image/x-icon">
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+    </head>
+<body>
+   
+    <div>
+        <nav class="navbar navbar-expand-lg border-bottom border-body" style="background-color: #f59090;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/my_logo.jpg' %}" alt="logo"
+                        class="logo-img" /></a>
+    
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+    
+                <div class="collapse navbar-collapse" id="navbarColor01">
+                    <ul class="navbar-nav me-auto">
+                        <!-- <li class="nav-item"> -->
+                            <a class="nav-link active text-white" href="{% url 'index' %}" id="t">Home
+                            <a class="nav-link active text-white" href="{% url 'babiesform' %}" id="t">Babies
+                            <a class="nav-link active text-white" href="{% url 'sittersform' %}" id="t">Sitters
+                            <a class="nav-link active text-white" href="{% url 'payments' %}" id="t">Payments
+                            <a class="nav-link active text-white" href="{% url 'dolls' %}" id="t">Doll Store
+                            <a class="nav-link active text-white" href="{% url 'procurement' %}" id="t">Procurement
+                            <span class="visually-hidden">(current)</span>
+                            </a>
+                        <!-- </li> -->
+        
+                    </ul>
+                </div>
+    
+                <div class="ml-auto">
+                    <a class="btn btn-light" href="/login" id="medi">Logout</a>
+                </div>
+            </div>
+        </nav>
+        <!-- end of nav -->
+    </div>
+   
+    {% block content %}
+
+    {% endblock %}     
+    <br><br><br>
+    <footer>
+        <div class="footer">
+            <div class="social-icons">
+                <a href="https://www.facebook.com/your-page" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://twitter.com/your-handle" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/your-account/" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p>&copy; 2023 Kanza Jovita. All rights reserved.</p>
+        </div>
+  </footer>
+</body>
+</html>
+
+

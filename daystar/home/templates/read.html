@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3 class="text-center">BABIES DETAILS</h3>
+<style>
+    .table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none; /* Remove border of the table */
+}
+
+.table th,
+.table td {
+    padding: 8px;
+    text-align: left;
+    border: none; /* Remove border of table cells */
+    outline: none; /* Remove outline */
+}
+
+.table th {
+    background-color: rgb(49, 48, 48);
+    color: white;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+    
+}
+
+.table tbody tr:hover {
+    background-color: #ddd;
+}
+
+.table th, .table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+</style>
+<br>
+    <table class="table table-bordered">
+        <thead>
+            <tr class=>
+                <th scope="col">#</th>
+                <th scope="col">Categorystay</th>
+                <th scope="col">Name</th>
+                <th scope="col">Number</th>
+                <th scope="col">Date</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Age</th>
+                <th scope="col">Location</th>
+                <th scope="col">Picker's Name</th>
+                <th scope="col">Taker's Name</th>
+                <th scope="col">Time In</th>
+                <th scope="col">Time Out</th>
+                <th scope="col">Parents Names</th>
+                <th scope="col">Comment </th>
+                <th scope="col">Action</th> 
+                
+            </tr>
+        </thead>
+        <tbody>
+           
+            <tr >
+                <td>{{ babies_info.id }}</td>
+                <td>{{ babies_info.c_stay}}</td>
+                <td>{{ babies_info.Baby_name }}</td>
+                <td>{{ babies_info.Baby_number }}</td>
+                <td>{{ babies_info.Date }}</td>
+                <td>{{ babies_info.Gender }}</td>
+                <td>{{ babies_info.Age}}</td>
+                <td>{{ babies_info.Location }}</td>
+                <td>{{ babies_info.Name_of_person_who_brought_the_baby }}</td>
+                <td>{{ babies_info.Name_of_the_person_that_has_taken_baby }}</td>
+                <td>{{ babies_info.Time_In }}</td>
+                <td>{{ babies_info.Time_Out }}</td>
+                <td>{{ babies_info.Parents_names }}</td>
+                <td>{{ babies_info.Comment }}</td>
+                <td>
+                    <div>
+                        <a href="{% url 'edit' id=babies_info.id %}" class="btn btn-primary mb-2">Edit babies</a>
+                    
+                    </div>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+<a href="/babiesform"><button class="btn btn-primary">Back</button></a>
+
+
+{% endblock %}

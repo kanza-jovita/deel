@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+{% load crispy_forms_tags %}
+
+
+<h3 class="text-center"> EDIT SITTER</h3>
+<hr>
+<div class="container">
+    <form method="post" class="registration-form">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br>
+        <button type="submit" name="submit" class="btn btn-primary">Update</button>
+
+    </form>
+
+    <br><br>
+    <br>
+    <br>
+</div>
+
+<style>
+    .container {
+        padding-top: 20px;
+        max-width: 800px;
+        margin: 0 auto; 
+        background-color: white;
+        padding: 20px;
+            }
+</style>
+
+{% endblock %}

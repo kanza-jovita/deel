@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3 class="text-center">BABIES DETAILS</h3>
+<style>
+    .table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none; /* Remove border of the table */
+}
+
+.table th,
+.table td {
+    padding: 8px;
+    text-align: left;
+    border: none; /* Remove border of table cells */
+    outline: none; /* Remove outline */
+}
+
+.table th {
+    background-color: rgb(49, 48, 48);
+    color: white;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+    
+}
+
+.table tbody tr:hover {
+    background-color: #ddd;
+}
+
+.table th, .table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+</style>
+<br>
+    <table class="table table-bordered">
+        <thead>
+            <tr class=>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Number</th>
+                <th scope="col">Date of Birth</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Location</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Level of Education</th>
+                <th scope="col">Next of kin</th>
+                <th scope="col">NIN</th>
+                <th scope="col">Recommenders Name</th>
+                <th scope="col">Religion</th>
+                <th scope="col">Action</th> 
+                
+            </tr>
+        </thead>
+        <tbody>
+           
+            <tr >
+                <td>{{ sitters_info.id }}</td>
+                <td>{{ sitters_info.Sitter_name }}</td>
+                <td>{{ sitters_info.Sitter_number }}</td>
+                <td>{{ sitters_info.Date_of_birth }}</td>
+                <td>{{ sitters_info.Contact }}</td>
+                <td>{{ sitters_info.Location }}</td>
+                <td>{{ sitters_info.Gender }}</td>
+                <td>{{ sitters_info.Level_of_education }}</td>
+                <td>{{ sitters_info.Next_of_kin }}</td>
+                <td>{{ sitters_info.NIN }}</td>
+                <td>{{ sitters_info.Recommenders_name }}</td>
+                <td>{{ sitters_info.Religion}}</td>
+                <td>
+                    <div>
+                            <a href="{% url 'edit_sitter' sitters_info.id %}" class="btn btn-primary mb-2">Edit Sitters</a>
+                        
+                    </div>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+<a href="/babiesform"><button class="btn btn-primary">Back</button></a>
+
+
+{% endblock %}

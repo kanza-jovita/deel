@@ -1,0 +1,17 @@
+{% extends 'base.html' %}{% block content %}
+{% load crispy_forms_tags %}
+
+<h3 class="text-center" style="font-family: 'Times New Roman', Times, serif;">REGISTER SITTER</h3>
+<hr>
+<div class="container">
+    <form method="post" class="registration-form">
+        {% csrf_token %}
+        {{ form|crispy }}<br>
+        <button type="register" class="btn btn-primary">Register</button>
+    </form>
+    <br><br>
+    <br>
+    <br>
+</div>
+
+{% endblock %}
