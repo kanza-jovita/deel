@@ -1,47 +1,12 @@
-
 {% extends 'base.html' %}
-
 {% block content %}
-<h3 class="text-center">BABIES FORM</h3>
-<style>
-    .table {
-    width: 100%;
-    border-collapse: collapse;
-    border: none; /* Remove border of the table */
-}
+<div class="card-header" style="background-color: white;" >
+    <h2>BABIES FORM</h2>
+  </div>
 
-.table th,
-.table td {
-    padding: 8px;
-    text-align: left;
-    border: none; /* Remove border of table cells */
-    outline: none; /* Remove outline */
-}
-
-.table th {
-    background-color: rgb(49, 48, 48);
-    color: white;
-}
-
-.table tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-    
-}
-
-.table tbody tr:hover {
-    background-color: #ddd;
-}
-
-.table th, .table td {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-
-</style>
 <br>
 <a href="{%  url 'addbaby' %}" class="btn btn-primary mb-3">Add new baby</a>
+
 
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
@@ -59,6 +24,7 @@
                 <th scope="col">Picker Name</th>
                 <th scope="col">Time In</th>
                 <th scope="col">Time Out</th>
+                <th scope="col">Parents Names </th>
                 <th scope="col">Comment </th>
                 <th scope=>Action</th>
             </tr>
@@ -81,7 +47,7 @@
                 <td>{{ baby.Parents_names }}</td>
                 <td>{{ baby.Comment }}</td>
                 <td>   
-                    <a href="{% url 'read' id=baby.id %}"class="btn btn-primary mb-2">Read</a>
+                    <a href="{% url 'read' id=baby.id %}"class="btn btn-primary mb-2">View</a>
                 </td>
             </tr>
             {% endfor %}

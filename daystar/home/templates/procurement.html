@@ -2,7 +2,53 @@
 {% load crispy_forms_tags %}
 {% block content %}
 
+<div class="card-header" style="width:50%;margin: 0 auto; background-color: white;">
+    <h1 class="text-center" style="color: #050a0b;">Search for Products</h1>
+</div>
 
+<br>
+<div class="card" style="width: 70%; height: 80px; margin-left: 150px;">
+    <div class="card-body" style="color: black; background-color:#ecc2c9;">
+        <div class="container">
+            <form action="" method="GET" style="width: 100%; text-align: center;" class="search">
+                {{product_filters.form}}
+                <input type="submit" value="Search Products" class="btn btn-dark btn" >
+            </form>
+        </div>
+    </div>
+</div>
+<br>
 
+<div class="table-container">
+    <div class="card-header" style="width:80%; margin: 0 auto; background-color:white;">
+        <h1 class="text-center" style="color: rgb(5, 10, 11); padding-top: 20px;">PRODUCTS IN STOCK</h1>
+    </div>
+</div>
 
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" >Category</th>
+            <th scope="col" >Product Name</th>
+            <th scope="col" >Quantity</th>
+            <th scope="col" >Unit Price(UGX)</th>
+            <th scope="col" >Detail</th>
+        </tr>
+    </thead>
+    {% for product in products %}
+    <tbody>
+        <tr>
+            <th scope="row">{{ product.id }}</th>
+            <td>{{product.Category_name}}</td>
+            <td>{{product.product_name}}</td>
+            <td>{{product.total_quantity}}</td>
+            <td>{{product.received_quantity}}</td>
+            <td>{{product.issued_quantity}}</td>
+            <td>UGX{{product.unit_price}}</td>
+            
+            <td><a href="#"><input type="submit" value="VIEW PRODUCT" class="btn btn-dark btn" type="button"></a></td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
 {% endblock %}

@@ -1,192 +1,40 @@
-/* index.css */
-h3{
-    text-align: center;
-    font-family: 'Times New Roman', Times, serif;
-    margin-left: 350px;
-  }
-  
-#jovita{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 10px;
-    font-family: sans-serif;
-    color: black;
-    font-size: 30px;
-    background-color:#FF204E; 
-  }
-  
-  
-#second{
-  padding-bottom: 10px; 
-  color: black;
-  font-size: 20px;
-  padding-top: 10px;
-  
-  
-  }
-
-.button {
-    width: 100px;
-    height: 40px;
-    border-radius: 20%;
-    background-color:#c71616;
-    color: white; 
-    font-size: 16px;
-    border: 30px;
-    cursor: pointer;
-    text-align: center;
-  }
-  
-.button:hover {
-    background-color: #77b7f2;
-  }
-  
-.button:active {
-    background-color: #59dbfe;
-  }
-.social-icons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-  }
-  
-.social-icons a {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background-color: #333;
-    color: #fff;
-    border-radius: 50%;
-    font-size: 20px;
-    margin: 5px;
-    text-align: center;
-    line-height: 40px;
-    transition: background-color 0.3s ease;
-  }
-  
-.social-icons a:hover {
-    background-color:#FB667A;
-    padding: 20px;
-  
-  }
-
-.footer{
-    padding-top:80px;
-    background-color:  #121314;
-    color: white;
-    position: absolute;
-    width: 100%;
-    }
-  
-    
-  
-#medi {
-      background-color: white;
-      width: 80px;
-      color: black;
-      border-radius: 10px;
-      border: 0px;
-      outline: 1px;
-    
-    
-    }
-
-.logo-img{
-      width:50px;
-      border-radius: 10%;
-      height: 50px;
-    }
-  
-h1 .mac{
-      text-align: center;
-    }
-  
-  
-#medi:hover {
-      background-color: aliceblue;
-      font-size: 35px;
-      border: 10px #343a40;
-      color: black;
-      font-size: large;
-    }
-.nav-link{
-      font-size: larger;
-    }
-.nav-link:hover{
-      color:#FB667A;
-    }
-  
-#t{
-      color:white;
-    }
-#t:hover{
-      color:#FB667A;
-    }
-  
-#tt:hover{
-      color: #FB667A;
-    }
-#tt{
-      color:white;
-      
-    }
-
-.footer{
-    background-color: #040713; 
-    position:fixed; 
-    left: 0; 
-    bottom: 0; 
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    
-}
-
-
-.submit {
-    background-color: #343a40;
-    cursor: pointer;
-      border-radius: 10px;
-      border: 10px solid;
-      padding-left: 20px;
-      padding-right: 40px;
-      padding-bottom: 10px;
-      padding-top: 10px;
-      font-family: 'Ubuntu', sans-serif;
-      font-size: 13px;
-      box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.04);
-      width:200px;
-  }
-.btn{
-    background-color: #343a40;
-    color:aliceblue;
-  }
-.btn:hover {
-    background-image: none;
-    background-color:lightblue;
-    font-size: 35px;
-    border: 10px #343a40;
-    color: lightblue;
-    font-size: larger;
-  }
-
-
-/* form{
+/* Login.css */ 
+form{
   background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   margin-bottom: 20px;
-  
-  
-} */
-
-label{
-color: black;
+  box-shadow: 0 0 15px;
 }
+
+.logo-img{
+  width:50px;
+  border-radius: 1px;
+  height: 50px;
+
+}
+
+.submit {
+  background-color: #343a40;
+  cursor: pointer;
+  border-radius: 10px;
+  border: 10px solid;
+  padding-left: 20px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 13px;
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.04);
+  width:200px;
+}
+.btn{
+  background-color: #343a40;
+  color:aliceblue;
+}
+
 
 #id_username {
 border: 1px solid;
@@ -203,146 +51,42 @@ color: red;
 font-style: bold;
 }
 
-h3 {
-display: inline-block;
-vertical-align: middle;
-margin-bottom: 0;
-}
-
-.login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-  }
-  
-.icon-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%; 
-    border: 1px solid black;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-.icon {
-    font-size: 60px;
-  }
-  
-@media (max-width: 768px) {
-    .login-container {
-        text-align: center;
-    }
-  
-.login-form {
-        width: 50%;
-        margin: 0 auto;
-    }
-  }
-
-.registration-form{
-    max-width: 50%;
-    border: 2px solid rgb(173, 189, 216);
-    border-radius: 25px;
-    padding: 10px;
-    margin-left: 200px;
-    box-shadow: 0 0 15px;
-    background-color:#FB667A
-}
-
-
-
-
-
-
-
-
-
-
-
-/* login.css */  
-/* #medi {
-    background-color: white;
-    width: 80px;
-    color: black;
-    border-radius: 10px;
-    border: 0px;
-    outline: 1px;
-  
-  
-  }
-
-#medi:hover {
-    background-color: aliceblue;
-    font-size: 35px;
-    border: 10px #343a40;
-    color: black;
-    font-size: large;
-  } */
-
-/* .nav-link{
-    font-size: larger;
-  }
-.logo-img{
-    width:70px;
-    border-radius: 10%;
-
-  }
-  
 .social-icons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
-  
-/* .social-icons a {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    background-color: #333;
-    color: #fff;
-    border-radius: 50%;
-    font-size: 20px;
-    margin: 5px;
-    text-align: center;
-    line-height: 40px;
-    transition: background-color 0.3s ease;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.social-icons a {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 20px;
+  margin: 5px;
+  text-align: center;
+  line-height: 40px;
+  transition: background-color 0.3s ease;
+}
+
 .social-icons a:hover {
-    background-color: #4CAF50;
-  }
+  background-color:#FB667A;
+  padding: 20px;
+
+}
+
 .footer{
- 
-    padding-top:60px;
-    background-color: #121314;
-    color: white;
-    position: absolute;
-    width: 100%;
-    } */
-  
+  padding-top:10px;
+  background-color:  #121314;
+  color: white;
+  position: fixed;
+  width: 100%;
+  left: 0; 
+  bottom: 0;
+  text-align: center;
+  }
 
-
-/* #t{
-  color:white;
-}
-#t:hover{
-  color:#FB667A;
-}
-
-#tt:hover{
-  color: #FB667A;
-}
-#tt{
-  color:white;
-} */
-
-
-/* base.css */
-/* .logo-img {
-    width: 50px;
-    border-radius: 10px;
-} */
+ /* index.css */

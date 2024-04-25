@@ -68,3 +68,18 @@ class Doll (models.Model):
     def __str__(self):
         return self.doll_name
 
+class Category(models.Model):
+    name=models.CharField(max_length=50,null=False,blank=False,unique=True)
+    def __str__(self):
+        return self.name
+# defining a model for product
+class Product(models.Model):
+    Category_name=models.ForeignKey(Category, on_delete=models.CASCADE,null=False,blank=False)
+    product_name=models.CharField(max_length=50,null=False,blank=False)
+    total_quantity=models.IntegerField(default=0,null=False,blank=False,validators=[MinValueValidator(1)])
+    received_quantity=models.IntegerField(default=0,null=False,blank=False)
+    issued_quantity=models.IntegerField(default=0,null=False,blank=False)
+    unit_price=models.IntegerField(default=0,null=False,blank=False)
+
+
+    
