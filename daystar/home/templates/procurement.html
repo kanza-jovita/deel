@@ -28,11 +28,14 @@
 <table class="table">
     <thead class="thead-dark">
         <tr>
-            <th scope="col" >Category</th>
-            <th scope="col" >Product Name</th>
-            <th scope="col" >Quantity</th>
-            <th scope="col" >Unit Price(UGX)</th>
-            <th scope="col" >Detail</th>
+            <th scope="col">Category</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Product Number</th>
+            <th scope="col">Total Quantity</th>
+            <th scope="col">Received Quantity</th>
+            <th scope="col">Issueded Quantity</th>
+            <th scope="col">Unit Price(UGX)</th>
+            <th scope="col">Detail</th>
         </tr>
     </thead>
     {% for product in products %}
@@ -46,7 +49,7 @@
             <td>{{product.issued_quantity}}</td>
             <td>UGX{{product.unit_price}}</td>
             
-            <td><a href="#"><input type="submit" value="VIEW PRODUCT" class="btn btn-dark btn" type="button"></a></td>
+            <td><a href="{% url 'product_detail' product.id %}"><input type="submit" value="VIEW PRODUCT" class="btn btn-dark btn" type="button"></a></td>
         </tr>
     </tbody>
     {% endfor %}

@@ -82,4 +82,27 @@ class Product(models.Model):
     unit_price=models.IntegerField(default=0,null=False,blank=False)
 
 
+#defining a model for sales
+  
+class Sale(models.Model):
+    item = models.ForeignKey(Product,on_delete=models.CASCADE,null=False,blank=False)
+    date_of_sale = models.DateField(default=timezone.now)
+    contact=models.CharField(max_length=50,null=False, blank=False)
+    quantity=models.IntegerField(default=0,null=False, blank=False)
+    amount_received = models.IntegerField(default=0,null=False, blank=False)
+    issued_to=models.CharField(max_length=100,null=False, blank=False)#buyer
+    unit_price=models.IntegerField(default=0,null=False, blank=False)#for installments.
+    
+    # the sales made so far(total)
+    def get_total(self):
+        total=self.quantity*self.item.unit_price  
+        return int(total)
+
+# here we are getting change.(money to be given to the customer)
+    def get_change(self):
+        change=self.get_total() - self.amount_received
+        return abs(int(change))
+    
+    def __str__(self):
+        return self.item.product_name # sales is linked to products.
     

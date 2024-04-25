@@ -13,5 +13,14 @@ class Babyreg_form(forms.ModelForm):
         model = Babyreg
         fields = '__all__'
 
+class AddForm(ModelForm):
+    class Meta:
+        model=Product
+        fields=['received_quantity'] # received stock for workers to edit(incoming stock)
 
+
+class SaleForm(ModelForm):
+    class Meta:
+        model=Sale
+        fields=['quantity', 'amount_received','issued_to', 'contact']
 

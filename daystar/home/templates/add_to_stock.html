@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+{% load crispy_forms_tags%}
+{% load static %}
+{% block content%}
+
+<br />
+
+<div class="container">
+  <form method="POST" action="">
+   
+    <h1 class="text-center
+    " style="color:black; margin-left: 20px;" >ADD TO STOCK</h1>
+    <div class="card" style="opacity: 90%;width: 100%;margin-left: 20px; background-color: aliceblue;" >
+      <div class="card-body">
+        {% csrf_token %}
+        {{form | crispy}}
+        
+        <button class="button" type="submit">Add</button>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<script>
+</script>
+{% endblock %}

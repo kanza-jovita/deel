@@ -1,0 +1,76 @@
+{% extends 'base.html'%}
+{% load static%}
+{% block content%}
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card" style="background-color: white;">
+
+
+                <div class="card-header" style="width:95%;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <tr>
+                            <td style="vertical-align: top;">
+                                <img src="" alt="logo" width="100px"
+                                    style="border-radius: 10px;" />
+                            </td>
+                            <td style="text-align: right;">
+
+                                <h4 class="v">Daystar Daycare</h4>
+                                <h4 class="v">Kampala,KabalagalaUganda.</h4>
+                                <h5>Contact us:</h5>
+                                <h5>Date:{{receipt.date_of_sale}}</h5>
+                                <h6 style="padding-top: 20px;">DS-RECEIPT-0{{receipt.id}}</h6>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align: left; padding-top: 30px; padding-left: 10px;">
+                                <h4 style="color: lightslategray;">Bill To</h4>
+                                <h3 style="color:#FB667A;">Baby Name: {{receipt.issued_to | title}}</h3>
+                                <h5 style="color: black;">Parents Contact: {{receipt.contact}}</h5>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <div class="card-block" style="width: 96%;">
+                    <!-- <div class="table-responsive"> -->
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <td><strong style="color:black;">Product Name</strong></td>
+                                <td class="text-xs-center"><strong>Product Quantity</strong></td>
+                                <td class="text-xs-right"><strong>Total Bill(Ugx)</strong></td>
+                                <td class="text-xs-right"><strong>Amount Paid(Ugx)</strong></td>
+                                <td class="text-xs-right">
+                                    <strong>Amount Due(UgX)</strong>
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="v">
+                                <td>{{receipt.item| title}}</td>
+                                <td class="text-xs-center">{{receipt.quantity }}</td>
+                                <td class="text-xs-center">Ugx{{receipt.get_total | title}}
+                                </td>
+                                <td class="text-xs-right">Ugx{{ receipt.amount_received }}
+                                </td>
+                                <td class="text-xs-right">Ugx{{ receipt.get_change }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <h5 class="text-center" id="A">Thank You</h5>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
