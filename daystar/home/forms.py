@@ -13,14 +13,34 @@ class Babyreg_form(forms.ModelForm):
         model = Babyreg
         fields = '__all__'
 
-class AddForm(ModelForm):
+
+class  DollForm(ModelForm):
     class Meta:
-        model=Product
-        fields=['received_quantity'] # received stock for workers to edit(incoming stock)
+        model = Doll
+        fields = '__all__'
+
+class Addform(ModelForm):
+    class Meta:
+        model = Doll
+        fields = ['received_quantity']
 
 
-class SaleForm(ModelForm):
+class SalesrecordForm(ModelForm):
     class Meta:
-        model=Sale
-        fields=['quantity', 'amount_received','issued_to', 'contact']
+        model = Salesrecord
+        fields = [ 'quantity_sold', 'amount_received', 'payee']  
+
+
+
+class Arrival_form(forms.ModelForm):
+    class Meta:
+        model = Arrival
+        fields = '__all__'
+
+
+class Departure_form(ModelForm):
+    class Meta:
+        model = Departure
+        fields = '__all__'
+
 

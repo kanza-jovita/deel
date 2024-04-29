@@ -1,58 +1,107 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="card-header" style="background-color: white;" >
-    <h2>BABIES FORM</h2>
-  </div>
+<style>
+    body {
+        background-color: rgba(158, 184, 217, 0.5); /* Faint background color */
+    }
 
+    .btn-container {
+        display: flex;
+        align-items: center; 
+    }
+
+    .btn {
+        background-color: #000; 
+        color: #fff; 
+        border: none; 
+        padding: 0.5rem 1rem; 
+        margin-right: 0.5rem; 
+        cursor: pointer; 
+    }
+
+    .btn i {
+        margin-right: 0.25rem; 
+    }
+
+    .card-header {
+        background-color: #fff; 
+        padding: 1rem; 
+        margin-bottom: 1rem; 
+    }
+
+    .table {
+        width: 100%; 
+        border-collapse: collapse; 
+        border: 1px solid #dee2e6; 
+    }
+
+    th,
+    td {
+        border: 1px solid #dee2e6;
+        padding: 0.75rem; 
+        text-align: left; 
+    }
+
+    th {
+        background-color: #f0f0f0; 
+    }
+</style>
 <br>
-<a href="{%  url 'addbaby' %}" class="btn btn-primary mb-3">Add new baby</a>
-
-
-<div class="table-responsive">
-    <table class="table table-bordered table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Categorystay</th>
-                <th scope="col">Name</th>
-                <th scope="col">Number</th>
-                <th scope="col">Date</th>
-                <th scope="col">Gender</th>
-                <th scope="col">Age</th>
-                <th scope="col">Location</th>
-                <th scope="col">Taker Name</th>
-                <th scope="col">Picker Name</th>
-                <th scope="col">Time In</th>
-                <th scope="col">Time Out</th>
-                <th scope="col">Parents Names </th>
-                <th scope="col">Comment </th>
-                <th scope=>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for baby in babies %}
-            <tr>
-                <th scope="row">{{ baby.id }}</th>
-                <td>{{ baby.c_stay}}</td>
-                <td>{{ baby.Baby_name }}</td>
-                <td>{{ baby.Baby_number }}</td>
-                <td>{{ baby.Date }}</td>
-                <td>{{ baby.Gender }}</td>
-                <td>{{ baby.Age}}</td>
-                <td>{{ baby.Location }}</td>
-                <td>{{ baby.Name_of_person_who_brought_the_baby }}</td>
-                <td>{{ baby.Name_of_the_person_that_has_taken_baby }}</td>
-                <td>{{ baby.Time_In }}</td>
-                <td>{{ baby.Time_Out }}</td>
-                <td>{{ baby.Parents_names }}</td>
-                <td>{{ baby.Comment }}</td>
-                <td>   
-                    <a href="{% url 'read' id=baby.id %}"class="btn btn-primary mb-2">View</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-   </table>
+<div class="card-header">
+    <h2>BABIES LIST</h2>
 </div>
 
+<br>
+
+<div class="mt-4">
+    <a href="{%  url 'addbaby' %}" class="btn"><i class="fas fa-plus"></i>Add</a>
+
+    <form method="GET" action="{% url 'search_baby' %}">
+        <input type="text" name="search" placeholder="Search">
+        <button type="submit" class="btn">Search</button>
+    </form>
+    <br>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Categorystay</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Parents Names</th>
+                    <th scope=>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for baby in babies %}
+                <tr>
+                    <th scope="row">{{ baby.id }}</th>
+                    <td>{{ baby.c_stay}}</td>
+                    <td>{{ baby.Baby_name }}</td>
+                    <td>{{ baby.Baby_number }}</td>
+                    <td>{{ baby.Date }}</td>
+                    <td>{{ baby.Gender }}</td>
+                    <td>{{ baby.Age}}</td>
+                    <td>{{ baby.Location }}</td>
+                    <td>{{ baby.Parents_names }}</td>
+                    <td class="btn-container">
+                        <a href="{% url 'edit' id=baby.id %}" class="btn"><i class="fas fa-edit"></i>Edit</a>
+                        <form action="{% url 'delete_baby' id=baby.id %}" method="POST" onsubmit="return confirm('Delete')">
+                            {% csrf_token %}
+                            <button class="btn" type="submit"><i class="fas fa-trash"></i>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+<br> <br>
+    </div>
+</div>
 {% endblock %}

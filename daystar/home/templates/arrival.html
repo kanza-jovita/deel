@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card-header" style="background-color: white;" >
+    <h2>ARRIVAL LIST</h2>
+  </div>
+
+<br>
+
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Number</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time In</th>
+                <th scope="col">care giver</th>
+                <th scope="col">Amount</th>
+                <th scope=>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for arrival in arrivals %}
+            <tr>
+                <th scope="row">{{ baby.id }}</th>
+                <td>{{ baby.baby_name}}</td>
+                <td>{{ baby.baby_number }}</td>
+                <td>{{ baby.date }}</td>
+                <td>{{ baby.timein }}</td>
+                <td>{{ baby.care_giver}}</td>
+                <td>{{ baby.amount}}</td>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+   </table>
+</div>
+{% endblock %}

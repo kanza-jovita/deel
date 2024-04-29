@@ -6,6 +6,5 @@ admin.site.register(Categorystay)
 admin.site.register(Sitterreg)
 admin.site.register(Babyreg)
 admin.site.register(Doll)
-admin.site.register(Category)
-admin.site.register(Product)
-admin.site.register(Sale)
+admin.site.register(Category_doll)
+

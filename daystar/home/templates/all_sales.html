@@ -1,16 +1,76 @@
-{% extends 'base.html'%} {% block content%}
-<br></br>
+ {% extends 'base.html'%} {% block content%}
+<br>
 
-<div class="container">
-  <div class="card-header" style="background-color: white; width:40%;">
-    <h1 class="text-center" style="color: black;">TOTAL SALES MADE</h1>
-  </div><br>
+<style>
+  h4{ color:#0C356A;
+    text-shadow: 2px 2px 4px #000000;
+margin-left: 466px;
+font-family: sans-serif;}
+
+    h4{ color:#0C356A;
+        text-shadow: 2px 2px 4px #000000;
+     margin-left: 490px;
+    }
+    
+    body {
+        background-color: rgba(158, 184, 217, 0.5); /* Faint background color */
+    }
+
+    .btn-container {
+        display: flex;
+        align-items: center; 
+    }
+
+    .btn {
+        background-color: #000; 
+        color: #fff; 
+        border: none; 
+        padding: 0.5rem 1rem; 
+        margin-right: 0.5rem; 
+        cursor: pointer; 
+    }
+
+    .btn i {
+        margin-right: 0.25rem; 
+    }
+
+    .card-header {
+        background-color: #fff; 
+        padding: 1rem; 
+        margin-bottom: 1rem; 
+    }
+
+    .table {
+        width: 100%; 
+        border-collapse: collapse; 
+        border: 1px solid #dee2e6; 
+    }
+
+    th,
+    td {
+        border: 1px solid #dee2e6;
+        padding: 0.75rem; 
+        text-align: left; 
+    }
+
+    th {
+        background-color: #f0f0f0; 
+    }
+
+
+
+
+</style>
+
+  
+    <h4 >TOTAL SALES MADE</h4><hr>
+
 
   <table class="table">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Total Amount Expected</th>
-        <th scope="col">Amount Due</th>
+        <th scope="col">Total Amount Received</th>
+        <th scope="col">Total change Given</th>
         <th scope="col">Net Amount</th>
       </tr>
     </thead>
@@ -23,27 +83,29 @@
     </tbody>
   </table>
 </div>
-<br></br>
+<br><br>
 
 <div class="container">
   <table class="table">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Customer name</th>
-        <th scope="col">Product Bought</th>
+        <th scope="col">Baby name</th>
+        <th scope="col">Doll number</th>
         <th scope="col">Quantity</th>
         <th scope="col">Unit Price(UGX)</th>
         <th scope="col">Total Cost</th>
         <th scope="col">Amount Paid</th>
-        <th scope="col">Balance</th>
+        <th scope="col">Debtors</th>
       </tr>
     </thead>
     {% for sale in sales %}
     <tbody>
       <tr>
-        <td style="color:#FB667A;">{{sale.issued_to | title}}</td>
-        <td>{{sale.item | title}}</td>
-        <td>{{sale.quantity}}</td>
+
+        
+        <td style="color:#FB667A;">{{sale.payee | title}}</td>
+        <td>{{ sale.doll.name | title }}</td>
+        <td>{{sale.quantity_sold}}</td>
         <td>UGX{{sale.unit_price}}</td>
         <td>UGX{{sale.get_total}}</td>
         <td>UGX{{sale.amount_received}}</td>
@@ -52,5 +114,6 @@
     </tbody>
     {% endfor %}
   </table>
+  <br><br><br>
 </div>
-{% endblock%}
+{% endblock %}

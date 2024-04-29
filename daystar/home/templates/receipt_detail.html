@@ -1,4 +1,4 @@
-{% extends 'base.html'%}
+receipt_detail.html {% extends 'base.html'%}
 {% load static%}
 {% block content%}
 <br />
@@ -13,24 +13,25 @@
                     <table style="width: 100%; border-collapse: collapse;">
                         <tr>
                             <td style="vertical-align: top;">
-                                <img src="" alt="logo" width="100px"
-                                    style="border-radius: 10px;" />
+    
+                        
                             </td>
                             <td style="text-align: right;">
 
-                                <h4 class="v">Daystar Daycare</h4>
-                                <h4 class="v">Kampala,KabalagalaUganda.</h4>
-                                <h5>Contact us:</h5>
-                                <h5>Date:{{receipt.date_of_sale}}</h5>
-                                <h6 style="padding-top: 20px;">DS-RECEIPT-0{{receipt.id}}</h6>
+                                <h4 class="v">DAYSTAR DAYCARE, Kabalagala </h4>
+                                <h4 class="v">Kampala,Uganda.</h4>
+                                <h5>Contact us: +256789728298</h5>
+                                <h5>Date: {{ receipt.sale_date }}</h5>
+
+                                <h6 style="padding-top: 20px;"> DOLL-RECEIPT-0{{receipt.id}}</h6>
 
                             </td>
                         </tr>
                         <tr>
                             <td colspan="2" style="text-align: left; padding-top: 30px; padding-left: 10px;">
                                 <h4 style="color: lightslategray;">Bill To</h4>
-                                <h3 style="color:#FB667A;">Baby Name: {{receipt.issued_to | title}}</h3>
-                                <h5 style="color: black;">Parents Contact: {{receipt.contact}}</h5>
+                                <h3 style="color:#FB667A;">Child Name: {{receipt.payee | title}}</h3>
+                            
                             </td>
                         </tr>
                     </table>
@@ -42,8 +43,8 @@
                     <table class="table table-sm">
                         <thead>
                             <tr>
-                                <td><strong style="color:black;">Product Name</strong></td>
-                                <td class="text-xs-center"><strong>Product Quantity</strong></td>
+                                <td><strong style="color:black;">Doll Name</strong></td>
+                                <td class="text-xs-center"><strong>Doll Quantity</strong></td>
                                 <td class="text-xs-right"><strong>Total Bill(Ugx)</strong></td>
                                 <td class="text-xs-right"><strong>Amount Paid(Ugx)</strong></td>
                                 <td class="text-xs-right">
@@ -53,8 +54,8 @@
                         </thead>
                         <tbody>
                             <tr class="v">
-                                <td>{{receipt.item| title}}</td>
-                                <td class="text-xs-center">{{receipt.quantity }}</td>
+                                <td>{{receipt.doll| title}}</td>
+                                <td class="text-xs-center">{{receipt.quantity_sold }}</td>
                                 <td class="text-xs-center">Ugx{{receipt.get_total | title}}
                                 </td>
                                 <td class="text-xs-right">Ugx{{ receipt.amount_received }}
@@ -65,7 +66,9 @@
                     </table>
 
 
-                    <h5 class="text-center" id="A">Thank You</h5>
+                    <h5 class="text-center" id="A">Thank You For choosing Daystar daycare</h5>
+                    <!-- <h6 class="text-center" id="D">Designed by Nalugya Vanessa</h6> -->
+                     <!-- </div> -->
                 </div>
 
             </div>

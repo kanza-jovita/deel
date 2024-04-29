@@ -8,10 +8,10 @@ from django.contrib.auth import authenticate,login
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib.postgres.search import SearchQuery, SearchVector
+from django.http import HttpResponseBadRequest
+from django.contrib import messages
 
 
-
-   
 
 # Create your views here.
 def index(request):
@@ -20,29 +20,16 @@ def index(request):
         return HttpResponse(homeContent)
 
 @login_required
-def dash(request):
-        template = loader.get_template('base.html')
+def home(request):
+        template = loader.get_template('home.html')
+        return HttpResponse(template.render())
+
+def payment(request):
+        template = loader.get_template('payment.html')
         return HttpResponse(template.render())
 
 
-@login_required
-def payments(request):
-        template = loader.get_template('payments.html')
-        return HttpResponse(template.render())
-
-
-@login_required
-def dolls(request):
-        template = loader.get_template('dolls.html')
-        return HttpResponse(template.render())
-
-
-# @login_required
-# def procurement(request):
-#         template = loader.get_template('procurement.html')
-#         return HttpResponse(template.render())
-
-
+#Sitter views
 @login_required
 def addsitter(request):
     if request.method == 'POST':
@@ -77,9 +64,19 @@ def edit_sitter(request,id):
       else:
             form =Sitterreg_form(instance=sitter)
       return render(request,'edit_sitter.html',{'form':form,sitter:sitter})
+
+
+def search_sitter(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        sitters = Sitterreg.objects.filter(Sitter_name__icontains=search_query) | Sitterreg.objects.filter(Siiter_number__icontains=search_query)
+    else:
+        sitters = Sitterreg.objects.all()
+
+    return render(request, 'siitersform.html', {'sitters': sitters})
             
       
-
+#Babies views
 @login_required
 def babiesform(request):
       babies= Babyreg.objects.all()
@@ -116,119 +113,164 @@ def edit(request,id):
       return render(request,'edit.html',{'form':form,baby:baby})
 
 
-@login_required
-def procurement(request):
-    query = request.GET.get('q')
-
-    products = Product.objects.all().order_by('-id')
-
-    if query:
-        products = products.annotate(search=SearchVector('product_name')).filter(search=query)
-
-    product_filters = ProductFilter(request.GET, queryset=products)
-    products = product_filters.qs
-
-    return render(request, 'procurement.html', {'products': products, 'product_filters': product_filters})
+def delete_baby (request, id):
+    if request.user.is_authenticated:
+        delete_it = Babyreg.objects.get(id=id)
+        delete_it.delete()
+        messages.success(request, "message deleted")
+        return redirect('babiesform')
+    else:
+        messages.success("you are not authorised")
+        return redirect('babiesform')
 
 
+def search_baby(request):
+    search_query = request.GET.get('search', '')
+    if search_query:
+        babies = Babyreg.objects.filter(Baby_name__icontains=search_query) | Babyreg.objects.filter(Baby_number__icontains=search_query)
+    else:
+        babies = Babyreg.objects.all()
 
-@login_required
-def product_detail(request,product_id):
-    product=Product.objects.get(id=product_id)
-    return render(request,'product_detail.html',{'product':product})
+    return render(request, 'babiesform.html', {'babies': babies})
 
-    
 
- # this retrieves a list of sales records from the database and then orders them by id.
- # and renders the receipt.html template which is responsible for displaying a list of sales receipts. 
+           
+
+     
+
+
+# @login_required
+# def procurement(request):
+#     query = request.GET.get('q')
+
+#     products = Product.objects.all().order_by('-id')
+
+#     if query:
+#         products = products.annotate(search=SearchVector('product_name')).filter(search=query)
+
+#     product_filters = ProductFilter(request.GET, queryset=products)
+#     products = product_filters.qs
+
+#     return render(request, 'procurement.html', {'products': products, 'product_filters': product_filters})
+
+
+
+#Dolls Views
+def dollcorner(request, doll_id):
+    doll = get_object_or_404(Doll, id=doll_id)
+    return render(request, 'dollcorner.html', {'doll': doll})
+
 @login_required
 def receipt(request):
-    sales=Sale.objects.all().order_by('-id')
-    return render(request,'receipt.html',{'sales':sales})
-
-
-# this handles the issuing of an item for sale.
-# it fetches the specific product using pk and processes the sale using SaleForm.
-# after a successful sale it redirects you to the receipt view.
-
-@login_required 
+    sales= Salesrecord.objects.all().order_by('-id') 
+    return render(request,'receipt.html',{'sales':sales})  
+@login_required
 def issue_item(request,pk):
-    issued_item=Product.objects.get(id=pk)
-    sales_form=SaleForm(request.POST)
+    issued_item=Doll.objects.get(id=pk) 
+    sales_form=SalesrecordForm(request.POST)  
 
     if request.method == 'POST':
         if sales_form.is_valid():
             new_sale=sales_form.save(commit=False)
-            new_sale.item=issued_item
-            new_sale.unit_price=issued_item.unit_price
+            new_sale.doll=issued_item
+            new_sale.unit_price=issued_item.Unit_price
             new_sale.save()
-            #keeping track of the stock remaining after sale.
-            issued_quantity=int(request.POST['quantity'])
-            issued_item.total_quantity-=issued_quantity
+            issued_quantity=int(request.POST['quantity_sold'])
+            issued_item.quantity-=issued_quantity
             issued_item.save()
-
-            print(issued_item.product_name)
-            print(request.POST['quantity'])
-            print(issued_item.total_quantity)
-
+            print(issued_item.name_of_the_doll)
+            print(request.POST['quantity_sold'])
+            print(issued_item.quantity)
             return redirect('receipt')
-    return render(request, 'issue_item.html',{'sales_form':sales_form})
+    return render(request, 'issue_item.html',{'sales_form':sales_form} )
 
-
-    
-# This fetches sales receipt from the database based on receipt id parameter.
-# then renders a receipt_detail.html displaying detailed informtion about a selected receipt.
 @login_required
-def receipt_detail(request,receipt_id):
-    # below is a query.
-    # here we are querying all the data by id.
-    receipt=Sale.objects.get(id=receipt_id)
-    return render(request,'receipt_detail.html',{'receipt':receipt})
+def receipt_detail(request, receipt_id):
+            receipt = Salesrecord.objects.get(id=receipt_id)
+            return render(request,'receipt_detail.html',{'receipt':receipt})
 
 
-# This list retrieves a list of all sales records from the db and then calculates
-# the total,change and net values based on the sales data.
-# the results are then rendered in the all_sales.html template.
+@login_required
+def add_to_stock(request, pk):
+    issued_item = Doll.objects.get(id=pk)
+    if request.method == 'POST':
+        form = Addform(request.POST)
+        if form.is_valid():
+            received_quantity = request.POST.get('received_quantity')
+            if received_quantity:
+                try:
+                    added_quantity = int(received_quantity)
+                    issued_item.quantity += added_quantity
+                    issued_item.save()
+                    print(added_quantity)
+                    print(issued_item.quantity)
+                    return redirect('doll')
+                except ValueError:
+                    return HttpResponseBadRequest("Invalid quantity")
+    else:
+        form = Addform()
+    return render(request, 'add_to_stock.html', {'form': form})
+
+def add_to_stock(request,pk):
+    issued_item=Doll.objects.get(id=pk)
+    form=Addform(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            added_quantity=int(request.POST['received_quantity'])
+            issued_item.quantity+=added_quantity
+            issued_item.save()
+            print(added_quantity)
+            print(issued_item.quantity)
+            return redirect('doll')
+    return render(request, 'add_to_stock.html',{'form':form})
+
 @login_required
 def all_sales(request):
-    # query all the data from the module Sale below on line 85.
-    sales=Sale.objects.all()
+    sales=Salesrecord.objects.all()
     total=sum([items.amount_received for items in sales])
     change=sum([items.get_change() for items in sales])
     net=total-change
-    return render(request, 'all_sales.html',{'sales':sales, 'total':total, 'change':change, 'net':net})
+    return render(request,'all_sales.html',{'sales':sales,'total':total,'change':change,'net':net})
 
-
-
-# This handles the process of adding items to the stock.
-# it fetches a product using its pk and processes the addition using the AddForm and updates the stock of the product.
-# After a successful adding of stock, it redirecs you to the home view.
 @login_required
-def add_to_stock(request,pk):
-    issued_item=Product.objects.get(id=pk)
-    form=AddForm(request.POST)
+def doll(request):
+        dolls=Doll.objects.all()
+        return render(request,'doll.html',{'dolls':dolls})
 
-    if request.method=='POST':
+
+
+
+#Arrivals an departure
+def arrival(request):
+      arrivals= Arrival.objects.all()
+      return render(request,'arrival.html',{'arrivals':arrivals})
+
+@login_required
+def arrival_form(request):
+    if request.method == 'POST':
+        form = Arrival_form(request.POST)
         if form.is_valid():
-            added_quantity=int(request.POST['received_quantity'])
-            issued_item.total_quantity += added_quantity
-            issued_item.save()
-            # to add to the remaining stock quantity is reduced.
-            print(added_quantity)
-            print(issued_item.total_quantity)
-            return redirect('procurement')
-    return render(request, 'add_to_stock.html', {'form': form})
-
-# Create your views here.
-# a view is a function that responds to a url request.
-# defined function must have different names.
+            form.save()
+            return redirect('arrival')
+    else:
+        form=Arrival_form()
+    return render(request,'arrival.html',{'form':form})
 
 
+def departure(request):
+      departures= Departure.objects.all()
+      return render(request,'departure.html',{'departures':departures})
+
+@login_required
+def departure_form(request):
+    if request.method == 'POST':
+        form = Departure_form(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('departure')
+    else:
+        form=Departure_form()
+    return render(request,'departure.html',{'form':form})
 
 
-
-
-
-
-
-
+#Payments

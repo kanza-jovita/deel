@@ -1,28 +1,62 @@
-{% extends 'base.html'%}
-{% load crispy_forms_tags%}
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
-{% block content%}
+{% block content %}
 
-<br />
+<style>
+  h4 {
+    font-family: sans-serif;
+    color: #0C356A;
+    text-shadow: 2px 2px 4px #000000;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
 
+  .container {
+    width: 50%;
+    margin: 0 auto;
+  }
+
+  form {
+    border: 2px solid #965151;
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  input[type="text"],
+  input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #a76e6e;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #0C356A;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  button[type="submit"]:hover {
+    background-color: #06315B;
+  }
+</style>
+
+<h4>ADD TO STOCK</h4>
+<hr>
 <div class="container">
   <form method="POST" action="">
-   
-    <h1 class="text-center
-    " style="color:black; margin-left: 20px;" >ADD TO STOCK</h1>
-    <div class="card" style="opacity: 90%;width: 100%;margin-left: 20px; background-color: aliceblue;" >
-      <div class="card-body">
-        {% csrf_token %}
-        {{form | crispy}}
-        
-        <button class="button" type="submit">Add</button>
-
-      </div>
-    </div>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit">Add</button>
   </form>
 </div>
 
-
-<script>
-</script>
 {% endblock %}

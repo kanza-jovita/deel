@@ -31,7 +31,7 @@ class Sitterreg(models.Model):
      
     
 class Babyreg(models.Model):
-    c_stay = models.ForeignKey(Categorystay,on_delete = models.CASCADE,null=True,blank = True)#this links class Babe to class Categorystay
+    c_stay = models.ForeignKey(Categorystay,on_delete = models.CASCADE,null=False,blank = False)#this links class Babe to class Categorystay
     assign = models.ForeignKey(Sitterreg, on_delete = models.CASCADE,null=True,blank = True)
     Baby_name = models.CharField(max_length=30, null='False',blank = 'False')
     Baby_number = models.CharField(max_length=30, null='False',blank = 'False')
@@ -39,70 +39,71 @@ class Babyreg(models.Model):
     Gender = models.CharField(max_length=30, null='False',blank = 'False')
     Age = models.IntegerField()
     Location = models.CharField(max_length=30, null='False',blank = 'False')
-    Name_of_person_who_brought_the_baby =  models.CharField(max_length=30,null="False",blank = "False")
-    Name_of_the_person_that_has_taken_baby =  models.CharField(max_length=30,null="False",blank = "False")
-    Time_In = models.TimeField(max_length=30, null='False',blank = 'False')
-    Time_Out = models.TimeField(max_length=30, null='False',blank = 'False')
     Parents_names = models.CharField(max_length=30, null='False',blank = 'False')
-    Comment = models.CharField(max_length=100, null='False',blank = 'False')
     def __str__(self):
         return self.Baby_name
     
 
-class Payment(models.Model):
-    payee = models.ForeignKey(Babyreg,on_delete = models.CASCADE,null=True,blank = True)
-    c_pay = models.ForeignKey(Categorystay,on_delete = models.CASCADE,null=True,blank = True)
-    pay_no = models.IntegerField(null=True,blank=True)
-    Amount = models.IntegerField(null=True,blank=True)
-    currency = models.CharField(default='Ugx',null=True,blank=True ,max_length=5)
-
-    
-
-class Doll (models.Model):
-    baby_name= models.ForeignKey(Babyreg,on_delete = models.CASCADE,null=True,blank = True)
-    doll_name = models.CharField(max_length=100,null='False', blank = 'False')
-    number = models.IntegerField(null='False', blank = 'False')
-    price = models.IntegerField(null='False', blank = 'False')
-    
-
+class Category_doll(models.Model):  
+     name = models.CharField(max_length=100,null=True, blank=True)
+     def __str__(self):
+         return self.name 
+       
+class Doll(models.Model):
+    c_doll=models.ForeignKey(Category_doll, on_delete=models.CASCADE,null=True, blank=True)
+    name_of_the_doll =models.CharField(max_length=200,null=True, blank=True)
+    doll_number = models.CharField(max_length=200,null=True, blank=True)
+    quantity=models.IntegerField(default=0)
+    issued_quantity=models.IntegerField(default=0,blank=True,null=True) 
+    received_quantity=models.IntegerField(default=0,null=True,blank=True)
+    Unit_price=models.IntegerField(default=0,null=True, blank=True)
+    date=models.DateField(default=timezone.now)
     def __str__(self):
-        return self.doll_name
+        return self.name_of_the_doll
+    
+class Salesrecord(models.Model):    
+    doll=models.ForeignKey(Doll, on_delete=models.CASCADE,null=False, blank=False)
+    payee=models.ForeignKey(Babyreg, on_delete=models.CASCADE,null=False,blank=False)
+    quantity_sold=models.IntegerField(default=0)
+    amount_received=models.IntegerField(default=0)
+    sale_date=models.DateField(default=timezone.now)
+    unit_price=models.IntegerField(default=0)
 
-class Category(models.Model):
-    name=models.CharField(max_length=50,null=False,blank=False,unique=True)
-    def __str__(self):
-        return self.name
-# defining a model for product
-class Product(models.Model):
-    Category_name=models.ForeignKey(Category, on_delete=models.CASCADE,null=False,blank=False)
-    product_name=models.CharField(max_length=50,null=False,blank=False)
-    total_quantity=models.IntegerField(default=0,null=False,blank=False,validators=[MinValueValidator(1)])
-    received_quantity=models.IntegerField(default=0,null=False,blank=False)
-    issued_quantity=models.IntegerField(default=0,null=False,blank=False)
-    unit_price=models.IntegerField(default=0,null=False,blank=False)
-
-
-#defining a model for sales
+     
   
-class Sale(models.Model):
-    item = models.ForeignKey(Product,on_delete=models.CASCADE,null=False,blank=False)
-    date_of_sale = models.DateField(default=timezone.now)
-    contact=models.CharField(max_length=50,null=False, blank=False)
-    quantity=models.IntegerField(default=0,null=False, blank=False)
-    amount_received = models.IntegerField(default=0,null=False, blank=False)
-    issued_to=models.CharField(max_length=100,null=False, blank=False)#buyer
-    unit_price=models.IntegerField(default=0,null=False, blank=False)#for installments.
-    
-    # the sales made so far(total)
     def get_total(self):
-        total=self.quantity*self.item.unit_price  
-        return int(total)
-
-# here we are getting change.(money to be given to the customer)
+        total= self.quantity_sold * self.unit_price
+        return int( total)
+#here we are getting change.(money to be given to theparent)    
     def get_change(self):
-        change=self.get_total() - self.amount_received
-        return abs(int(change))
+        change= self.get_total() - self.amount_received
+        return int(change)#sales is linked to products
     
+
+
+#models for arrival and departure
+
+class Arrival(models.Model):
+    baby_name=models.ForeignKey(Babyreg, on_delete=models.CASCADE)
+    baby_number=models.IntegerField(default=0)
+    date=models.DateField(default=timezone.now)
+    timein=models.TimeField()
+    care_giver=models.CharField(max_length=200)
+    amount=models.IntegerField(null=True, blank=True)
+
     def __str__(self):
-        return self.item.product_name # sales is linked to products.
+        return self.baby_number
+
+
+class Departure(models.Model):
+    baby_name=models.ForeignKey(Babyreg,on_delete=models.CASCADE)
+    baby_number=models.IntegerField(default=0) 
+    date=models.DateField(default=timezone.now)
+    timeout=models.TimeField()
+    picker=models.CharField(max_length=200)
+    comment=models.CharField(max_length=200,null=True, blank=True)
+    def __str__(self):
+        return self.baby_name
     
+
+#Payment model
