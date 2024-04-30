@@ -2,73 +2,77 @@
 {% load static %}
 
 {% block content %}
- <style>
-    h4{ color:#0C356A;
-        text-shadow: 2px 2px 4px #000000;
-     margin-left: 490px;
+<style>
+    /* Move to the top right corner */
+    .button-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px; /* Add some margin at the bottom of buttons */
     }
-    
+
+    /* Your existing styles */
+    h4 {
+        color: #0C356A;
+        text-shadow: 2px 2px 4px #000000;
+        margin-left: 490px;
+    }
+
     body {
         background-color: rgba(158, 184, 217, 0.5); /* Faint background color */
     }
 
     .btn-container {
         display: flex;
-        align-items: center; 
+        align-items: center;
     }
 
     .btn {
-        background-color: #000; 
-        color: #fff; 
-        border: none; 
-        padding: 0.5rem 1rem; 
-        margin-right: 0.5rem; 
-        cursor: pointer; 
+        background-color: #000;
+        color: #fff;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-right: 0.5rem;
+        cursor: pointer;
     }
 
     .btn i {
-        margin-right: 0.25rem; 
+        margin-right: 0.25rem;
     }
 
     .card-header {
-        background-color: #fff; 
-        padding: 1rem; 
-        margin-bottom: 1rem; 
+        background-color: #fff;
+        padding: 1rem;
+        margin-bottom: 1rem;
     }
 
     .table {
-        width: 100%; 
-        border-collapse: collapse; 
-        border: 1px solid #dee2e6; 
+        width: 100%;
+        border-collapse: collapse;
+        border: 1px solid #dee2e6;
     }
 
     th,
     td {
         border: 1px solid #dee2e6;
-        padding: 0.75rem; 
-        text-align: left; 
+        padding: 0.75rem;
+        text-align: left;
     }
 
     th {
-        background-color: #f0f0f0; 
+        background-color: #f0f0f0;
     }
 
+</style>
 
- </style>
-
-<br>
-    <a  href="{% url 'receipt' %}" class="hover_button" ><input type="submit" value="Receipts" class="btn btn-primary " placeholder="Receipts"/></a>
-    <a href="{% url 'all_sales' %}"  class="hover-button"><input type= "submit" value="All_sales" class="btn btn-primary" type="button"/></a>
-
+<div class="button-container">
+    <a href="{% url 'receipt' %}" class="hover_button"><input type="submit" value="Receipts" class="btn btn-primary" placeholder="Receipts"/></a>
+    <a href="{% url 'all_sales' %}" class="hover-button"><input type="submit" value="All_sales" class="btn btn-primary" type="button"/></a>
+</div>
 
 <div class="table-container">
-    
-        <h4 >DOLLS IN  STOCK</h4><hr>
-
-    
+    <h4>DOLLS IN STOCK</h4><hr>
 </div>
 <table class="table table-bordered">
-    
     <thead class="thead-dark table-bordered">
         <tr>
             <th scope="col" class="project-h1">Category</th>
@@ -87,22 +91,13 @@
             <td>{{doll.doll_number}}</td>
             <td>{{doll.quantity}}</td>
             <td>UGX{{doll.Unit_price}}</td>
-           <div> <!-- here we are hadling the buy item link n its handled by product_detail view -->
-            
-            <td >
-                <a href="{% url 'dollcorner' doll_id=doll.id %}" class="btn btn-primary">SELL DOLL</a>
-            </td>
-
-
-
-        </div>
-
-
+            <div><!-- here we are hadling the buy item link n its handled by product_detail view -->
+                <td>
+                    <a href="{% url 'dollcorner' doll_id=doll.id %}" class="btn btn-primary">SELL DOLL</a>
+                </td>
+            </div>
         </tr>
     </tbody>
     {% endfor %}
 </table>
-</div>
-</div>
-</div>
 {% endblock %}

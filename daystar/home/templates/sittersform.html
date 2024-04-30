@@ -45,22 +45,50 @@
     th {
         background-color: #f0f0f0; 
     }
+
+    /* Centering the search bar */
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    /* Adjusting the width of the search input */
+    .search-input {
+        width: 300px; /* Adjust this value as needed */
+        margin-right: 0.5rem; /* Adding some space between input and button */
+    }
+
+    /* Resizing the search button */
+    .search-btn {
+        padding: 0.5rem 0.75rem; /* Adjust this value as needed */
+    }
+
+    /* Moving the Add button to the right corner */
+    .add-btn {
+        margin-left: auto; /* Automatically align to the right */
+    }
 </style>
 
 <div class="card-header" style="background-color: white;" >
     <h2>SITTERS LIST</h2>
-  </div>
+</div>
 
-    <br>
-<a href="{%  url 'addsitter' %}" class="btn btn-primary mb-3">Add new sitter</a>
-
-<form method="GET" action="{% url 'search_sitter' %}">
-    <input type="text" name="search" placeholder="Search">
-    <button type="submit" class="btn">Search</button>
-</form>
 <br>
-    
-<div class="table-responsive">
+
+<div class="mt-4">
+    <div class="btn-container">
+        <a href="{%  url 'addsitter' %}" class="btn btn-primary mb-3 add-btn">Add new sitter</a>
+    </div>
+
+    <div class="search-container">
+        <form method="GET" action="{% url 'search_sitter' %}">
+            <input type="text" name="search" placeholder="Search" class="search-input">
+            <button type="submit" class="btn search-btn">Search</button>
+        </form>
+    </div>
+
+    <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead class="thead-dark">
                 <tr>
@@ -76,7 +104,7 @@
                     <th scope="col">NIN</th>
                     <th scope="col">Recommenders Name</th>
                     <th scope="col">Religion</th>
-                    <th scope=>Action</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -102,6 +130,6 @@
             </tbody>
        </table>
     </div>
-    
+</div>
 
 {% endblock %}
