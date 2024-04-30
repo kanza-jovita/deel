@@ -44,3 +44,12 @@ class Departure_form(ModelForm):
         fields = '__all__'
 
 
+class AddForm(ModelForm):
+     class Meta:
+         model=Procurement
+         fields=['received_quantity']  
+
+class Usedform(ModelForm):
+     class Meta:
+         model=Used
+         fields='__all__'

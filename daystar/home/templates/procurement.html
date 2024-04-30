@@ -1,0 +1,69 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block content %}
+
+<style>
+    h4{margin-left: 490px;
+    font-family: sans-serif;
+    color:#0C356A;
+    text-shadow: 2px 2px 4px #000000;}
+</style>
+
+<h4 class="">ITEMS IN THE STOCK</h4>
+<div class="card">
+    <div class="card-body" >
+<div class="container">
+    <form action =""method="GET" style="width: 100%; text-align:center" class="search">
+        {{ items_filters.form}}
+        <input type="submit" value="Search Items" class="btn btn-primary">
+    </form>
+</div>
+</div>
+</div>
+    <a href="/addstocks" class="p-2 bg-teal-500 rounded-lg shadow-lg">Add newstock</a>
+
+<div class=>
+<table class="table table-bordered">
+    <thead>
+        <tr class=>
+           
+            <th>#</th>
+            <th>Category</th>
+            <th>Items</th>
+            <th>Date</th>
+            <th>Quantity</th>
+            <th>Price(UGX)</th>
+            <th>Total price(UGX)</th>
+            <th>Issued_quantity</th>
+            <th>Net_stock</th>
+            <th>Action</th>
+        
+        </tr>
+    </thead>
+    <tbody>
+{% for each in procurement %}           
+        <tr >
+            <td> {{each.id}}</td>
+           <td>{{each.item}}</td>
+            <td>{{each.items}}</td>
+            <td>{{each.date}}</td>
+            <td>{{each.Quantity}}</td>
+            <td>Ugx{{each.price}}</td>
+            <td>Ugx{{each.t_price}}</td>
+            <td>{{ each.issued_quantity}}</td>
+            <td>{{each.Net_stock}}</td>
+           
+          <td>
+                <a href="{% url 'readstocks' id=each.id %}" >read</a>
+                
+            </td>
+        </tr>
+        {% endfor %} 
+    
+    </tbody>
+</table>
+</div>
+{% endblock %}
+
+
+

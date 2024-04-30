@@ -106,4 +106,25 @@ class Departure(models.Model):
         return self.baby_name
     
 
-#Payment model
+#Procurement model
+class Category(models.Model):
+    name = models.CharField(max_length=100,null=True, blank=True) 
+    def __str__(self):
+        return self.name 
+    
+
+class Procurement(models.Model):
+    category = models.ForeignKey(Category,on_delete=models.CASCADE,null=True, blank=True)
+    item_name = models.CharField(max_length=200,)
+    Quantity=models.IntegerField(default=0)
+    date=models.DateField(auto_now_add=True, null=True)
+    Unit_price=models.IntegerField( null=True)
+    received_quantity=models.IntegerField(default=0,null=True,blank=True)
+
+    def __str__(self):
+        return self.item_name
+      
+class Used(models.Model): 
+    item = models.ForeignKey(Procurement,on_delete=models.CASCADE) 
+    quantity_issued=models.IntegerField(default=0)
+    usage_date=models.DateField()

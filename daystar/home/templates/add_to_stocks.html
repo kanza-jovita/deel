@@ -19,7 +19,7 @@
   }
 
   form {
-    border: 2px solid #965151;
+    border: 1px solid #000;
     padding: 20px;
     border-radius: 10px;
   }
@@ -29,13 +29,13 @@
     width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 10px;
-    border: 2px solid #a76e6e;
+    border: 1px solid #000;
     border-radius: 5px;
     box-sizing: border-box;
   }
 
   button[type="submit"] {
-    width: 100%;
+    width: 30%;
     padding: 10px;
     background-color: #0C356A;
     color: #fff;
@@ -48,7 +48,10 @@
     background-color: #06315B;
   }
 </style>
-<h4>ADD TO STOCK</h4>
+
+<div class="card-header">
+    <h2>ADD TO STOCK</h2>
+</div>
 <hr>
 <div class="container">
   <form method="POST" action="">
@@ -57,4 +60,5 @@
     <button type="submit">Add</button>
   </form>
 </div>
+
 {% endblock %}

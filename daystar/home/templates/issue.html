@@ -3,12 +3,12 @@
 {% load static %}
 {% block content %}
 <style>
-
-h4{ color:#0C356A;
+h4{ 
+    color:#0C356A;
     text-shadow: 2px 2px 4px #000000;
     margin-left: 580px;
-    font-family: sans-serif;}
-
+    font-family: sans-serif;
+}
 .sales-form {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -25,7 +25,6 @@ h4{ color:#0C356A;
     padding-right: 15px;
     margin-bottom: 10px;  
 }
-
 label {
     font-weight: bold;
     margin-top: 7px;
@@ -34,7 +33,7 @@ label {
 
 button[type="submit"] {
     margin-top: 30px;
-    background-color: #0C356A;
+    background-color: rgb(50, 48, 48);
     color: white;
     border: none;
     border-radius: 5px;
@@ -42,18 +41,19 @@ button[type="submit"] {
     cursor: pointer;
     max-width: 200px;
     height: 50px;    
-}   
+}    
 </style>
 
-<h4>SALES FORM</h4><hr> 
+<div class="card-header">
+    <h2>ISSUE FORM</h2>
+</div><hr>
 <div class="back-container">
         <div class="container">
             <form method="POST" class="sales-form">
-        
                 {% csrf_token %}
-                {{ sales_form | crispy }}
-                <button type="submit" class="btn btn-primary" >SELL</button>
+                {{ issue_form | crispy }}
+                <button type="submit" class="btn btn-primary" >ISSUE</button>
             </form>
-        </div>       
+        </div>   
     </form>
 {% endblock %}

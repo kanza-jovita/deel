@@ -46,5 +46,9 @@ urlpatterns = [
     path('arrival_form/<int:id>/',views.arrival_form,name='arrival_form'),
     path('departure_form/<int:id>/',views.departure_form,name='departure_form'),
 
-
+#procurement
+    path('inventory/', views.inventory, name='inventory'),
+    path('add_to_stocks/<str:pk>', views.add_to_stocks, name='add_to_stocks'),
+    path('all_issue_items/',views.all_issue_items,name='all_issue_items'),
+    path('issue/<str:pk>',views.issue,name='issue'),
 ]

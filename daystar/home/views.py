@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.contrib.postgres.search import SearchQuery, SearchVector
 from django.http import HttpResponseBadRequest
 from django.contrib import messages
+from django.db.models import Sum
 
 
 
@@ -272,5 +273,69 @@ def departure_form(request):
         form=Departure_form()
     return render(request,'departure.html',{'form':form})
 
+    
 
-#Payments
+
+#Procurement
+@login_required
+def add_to_stocks(request, pk):
+    issued_procurement = Procurement.objects.get(id=pk)
+    
+    if request.method == 'POST':
+        form = AddForm(request.POST)
+        if form.is_valid():
+            received_quantity = form.cleaned_data.get('received_quantity')
+            added_quantity = int(received_quantity)
+            issued_procurement.Quantity += added_quantity
+
+            issued_procurement.save()
+            return redirect('inventory')  
+    else:
+        form = AddForm()
+    
+    return render(request, 'add_to_stocks.html', {'form': form})
+
+@login_required
+def inventory(request):
+    inventories=Procurement.objects.all()
+    return render(request,'inventory.html',{'inventories':inventories})
+    
+def issue(request, pk):
+    issued_item = Procurement.objects.get(id=pk) 
+    issue_form = Usedform(request.POST)  
+
+    if request.method == 'POST':
+        if issue_form.is_valid():
+            new_issue = issue_form.save(commit=False)
+            new_issue.item = issued_item
+            new_issue.save()
+            issued_quantity = int(request.POST['quantity_issued'])
+            issued_item.Quantity -= issued_quantity
+
+            issued_item.save()
+            print(issued_item.item_name)
+            print(request.POST['quantity_issued'])
+            print(issued_item.Quantity)
+            return redirect('inventory')
+    return render(request, 'issue.html', {'issue_form': issue_form})
+
+@login_required
+def all_issue_items(request):
+    issues = Used.objects.all()
+    total_issued_quantity = issues.aggregate(total_issued_quantity=Sum('quantity_issued'))['total_issued_quantity'] or 0
+    total_received_quantity = Procurement.objects.aggregate(total_received_quantity=Sum('Quantity'))['total_received_quantity'] or 0
+    net_quantity = total_received_quantity - total_issued_quantity
+    return render(request, 'all_issue_items.html', {'issues': issues, 'total_issued_quantity': total_issued_quantity, 'total_received_quantity': total_received_quantity, 'net_quantity': net_quantity})
+
+ 
+
+
+  
+
+
+
+
+
+
+
+ 

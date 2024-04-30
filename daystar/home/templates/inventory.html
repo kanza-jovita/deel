@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <br>
+    <!-- <a href="/all_issue_items"  class="hover-button"><input type= "submit" value="Stock Issued" class="btn btn-primary" type="button"/></a> -->
+
+<div class="card-header">
+        <h2>ITEMS IN STOCK</h2>
+    </div>
+    <br>
+<table class="table table-bordered">
+    <thead class="thead-dark table-bordered">
+        <tr>
+            <th scope="col" class="project-h1">Category</th>
+            <th scope="col" class="project-h1">Stock name</th>
+            <th scope="col" class="project-h1">Quantity</th>
+            <th scope="col" class="project-h1">Unit Price(Ugx)</th>
+            <th scope="col" class="project-h1">Detail</th>
+        </tr>
+    </thead>
+    {% for product  in inventories %}
+    <tbody>
+        <tr style="font-family: sans-serif;">
+            <td>{{product.category}}</td>
+            <td>{{product.item_name}}</td>
+             <td>{{product.Quantity}}</td>
+            <td>UGX{{product.Unit_price}}</td>
+           <div> 
+            <td >
+                <!-- <a href="{% url 'issue' pk=product.id %}" class="btn btn-primary">Issue Stock</a> -->
+
+                <!-- <a href="{% url 'add_to_stocks' pk=product.id %}" class="btn btn-primary">Add stock</a> -->
+            </td>
+        </div>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+</div>
+</div>
+</div>
+{% endblock %}

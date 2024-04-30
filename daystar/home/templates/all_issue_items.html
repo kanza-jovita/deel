@@ -1,0 +1,50 @@
+{% extends 'base.html'%} {% block content%}
+<br>
+
+<div class="card-header">
+<h2>ALL QUANTITY</h2>
+</div>
+<br>
+
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Available Quantity</th>
+        <th scope="col">Total Quantity issued</th>
+        <th scope="col">Net Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{total_received_quantity}}</td>
+        <td>{{total_issued_quantity}}</td>
+        <td>{{net_quantity}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br><br>
+
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Stock name</th>
+        <th scope="col">Quantity Issued</th>
+        <th scope="col">Issue date</th>  
+      </tr>
+    </thead>
+    {% for issue  in issues %}
+    <tbody>
+      <tr> 
+        <td>{{issue.item | title}}</td>
+        <td>{{issue.quantity_issued}}</td>
+        <td>{{issue.usage_date}}</td>  
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
+</div>
+{% endblock%}
+
+

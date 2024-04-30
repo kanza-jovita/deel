@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<h4 class="mb-3">stock status</h4>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Category</th>
+                <th>Items</th>
+                <th>Date</th>
+                <th>Quantity</th>
+                <th>Price(UGX)</th>
+                <th>Total price(UGX)</th>
+                <th>Issued_quantity</th>
+                <th>Net_stock</th>
+                <th>Action</th>  
+            </tr>
+        </thead>
+        <tbody>
+           
+            <tr>
+                <td> {{stocks.id}}</td>
+                <td>{{stocks.item}}</td>
+                 <td>{{stocks.items}}</td>
+                 <td>{{stocks.date}}</td>
+                 <td>{{stocks.Quantity}}</td>
+                 <td>Ugx{{stocks.price}}</td>
+                 <td>Ugx{{stocks.t_price}}</td>
+                 <td>{{ stocks.issued_quantity}}</td>
+                 <td>{{stocks.Net_stock}}</td>
+            
+               
+                <td>
+                    <div>
+                        <a href="{% url 'editstocks' id=stocks.id %}" class="btn btn-primary mb-2">Edit stocks</a>
+                    
+                    </div>
+                </td>
+            </tr>
+        
+        </tbody>
+
+    </table>
+    <a href="/sitterform"><button class="btn btn-primary">Go back</button></a>
+</div>
+
+{% endblock %}
