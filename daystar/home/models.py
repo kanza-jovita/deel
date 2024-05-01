@@ -128,3 +128,14 @@ class Used(models.Model):
     item = models.ForeignKey(Procurement,on_delete=models.CASCADE) 
     quantity_issued=models.IntegerField(default=0)
     usage_date=models.DateField()
+
+
+class  Payment(models.Model):
+    payee = models.ForeignKey(Babyreg,on_delete=models.CASCADE ,null=True, blank=True)
+    c_payment = models.ForeignKey(Categorystay, on_delete=models.CASCADE,null=True, blank=True) 
+    amount=models.IntegerField(null=True, blank=True)
+    payno = models.IntegerField(null=True, blank=True)
+    currency = models.CharField(max_length=10,null=True, blank=True,default='Ugx')
+    Date = models.DateField(auto_now_add=True, null=True)
+    def __int__(self):
+      return self.payee    

@@ -9,5 +9,6 @@ admin.site.register(Sitterreg)
 admin.site.register(Babyreg)
 admin.site.register(Doll)
 admin.site.register(Category_doll)
+admin.site.register(Payment)
 
 

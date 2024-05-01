@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content%}
+<div class="card-header">
+    <h2>PAYMENT LIST</h2>
+</div>
+<a href="/paymentform" class="btn btn-primary mb-3">Back</a>
+</td>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="table-teal">
+            <tr>
+                <th scope="col"> Baby Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Date</th>
+                <th scope="col">Total Amount</th>
+                <th scope="col">Action</th>
+           
+        </thead>
+        <tbody>
+            {% for payment in payments %}
+            <tr>
+    
+                <td>{{ payment.baby_name}}</td>
+                <td>{{ payment.C_payment}}</td>
+                <td>{{ payment.date }}</td>
+                <td>{{ payment.total_amount}}</td>
+
+                <td>
+                    <div>
+                        <a href="{% url 'editpayment' id=payment.id %}" class="btn btn-primary mb-3">Edit payment</a>
+
+
+                    </div>
+                </td>
+                  
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

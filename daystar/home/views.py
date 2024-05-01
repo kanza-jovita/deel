@@ -327,6 +327,56 @@ def all_issue_items(request):
     net_quantity = total_received_quantity - total_issued_quantity
     return render(request, 'all_issue_items.html', {'issues': issues, 'total_issued_quantity': total_issued_quantity, 'total_received_quantity': total_received_quantity, 'net_quantity': net_quantity})
 
+
+#Payments
+def paymentform(request):
+    payment= Payment.objects.all()
+    return render(request,'paymentform.html',{'payment':payment})
+    
+
+def addpayment(request):
+    if request.method=='POST':
+        form=PaymentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print(form)
+            return redirect('paymentform')
+    else:
+        form=PaymentForm()
+    return render(request,'addpayment.html',{'form':form})
+    
+
+
+def editpayment(request, id):
+    payment = get_object_or_404(Payment, id=id)
+    
+    if request.method == 'POST':
+        form = PaymentForm(request.POST, instance=payment)
+        if form.is_valid():
+            form.save()
+            return redirect('paymentlist')  # Redirect to the payment list page after editing payment
+    else:
+        form = PaymentForm(instance=payment)
+    
+    return render(request, 'editpayment.html', {'form': form, 'payment': payment})
+
+
+def paymentlist(request):
+  payments=Payment.objects.all()
+  return render(request,'paymentlist.html',{'payments':payments})
+
+def createpayment(request):
+    if request.method == 'POST':
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('paymentlist')  # Redirect to the payment list page after creating a payment
+    else:
+        form = PaymentForm()
+    
+    return render(request, 'createpayment.html', {'form': form})
+
+
  
 
 

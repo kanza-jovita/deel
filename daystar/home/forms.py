@@ -53,3 +53,8 @@ class Usedform(ModelForm):
      class Meta:
          model=Used
          fields='__all__'
+
+class PaymentForm(ModelForm):
+    class Meta:
+        model = Payment
+        fields = '__all__'        
