@@ -62,6 +62,8 @@ def edit_sitter(request,id):
         if form.is_valid():
             form.save()
             return redirect('sittersform')
+        else:
+            print ("form is not valid")
     else:
             form =Sitterreg_form(instance=sitter)
     return render(request,'edit_sitter.html',{'form':form,sitter:sitter})
@@ -293,8 +295,8 @@ def all_issue_items(request):
 
 #Payments
 def paymentform(request):
-    payment= Payment.objects.all()
-    return render(request,'paymentform.html',{'payment':payment})
+    payments= Payment.objects.all()
+    return render(request,'paymentform.html',{'payments':payments})
     
 
 def addpayment(request):
@@ -351,8 +353,6 @@ def create_payment(request):
             return redirect('payment_list')
     else:
         form = SitterpaymentForm()
-    
-
     return render(request, 'create_payment.html', {'form': form})
 
 

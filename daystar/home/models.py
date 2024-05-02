@@ -47,21 +47,6 @@ class Babyreg(models.Model):
     def __str__(self):
         return self.Baby_name
     
-class Departure(models.Model):
-    babys_name=models.ForeignKey(Babyreg,on_delete=models.CASCADE)
-    baby_number=models.IntegerField(default=0) 
-    date=models.DateField(default=timezone.now)
-    timeout=models.TimeField()
-    picker=models.CharField(max_length=200)
-    comment=models.CharField(max_length=200,null=True, blank=True)
-    def __str__(self):
-        return self.babys_name
-class Arrival(models.Model):
-    baby_name=models.ForeignKey(Babyreg, on_delete=models.CASCADE)
-    baby_number=models.IntegerField(default=0)
-    date=models.DateField(default=timezone.now)
-    timein=models.TimeField()
-    broughtby=models.CharField(max_length=200)
 
 class assignment(models.Model):
     sitter_name=models.ForeignKey(Sitterreg, on_delete=models.CASCADE)
