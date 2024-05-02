@@ -2,7 +2,7 @@
 {% load static %}
 {% block content%}
 <h4 class="mb-3">BABIES PRESENT</h4><hr>
-<a href="/addsarrival" class="btn btn-primary mb-3">Add</a>
+<a href="/addarrival" class="btn btn-primary mb-3">Add</a>
 <!-- <a style="margin-left: 900px;" href="/arrival" class="btn btn-primary mb-3">DAILY DEPARTURE REGISTER</a> -->
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
@@ -29,7 +29,7 @@
                 <td>{{ baby.timein }}</td>
                 <td>{{ baby.broughtby}}</td>
                 <td>
-                    <a href="{% url 'editsarrival' id=baby.id %}" class="btn btn-primary">Edit </a>
+                    <a href="{% url 'editarrival' id=baby.id %}" class="btn btn-primary">Edit </a>
                 </td>
             </tr>
             {% endfor %}

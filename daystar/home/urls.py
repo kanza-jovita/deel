@@ -32,8 +32,8 @@ urlpatterns = [
     path('receipt_detail/<int:receipt_id>', views.receipt_detail, name='receipt_detail'),
 #arrival and departure
     path('arrival/', views.arrival, name='arrival'),
-    path('addsarrival/', views.addsarrival, name='addsarrival'),
-    path('editsarrival/<int:id>/', views.editsarrival, name='editsarrival'),
+    path('addarrival/', views.addarrival, name='addarrival'),
+    path('editarrival/<int:id>/', views.editarrival, name='editarrival'),
     path('departure/', views.departure, name='departure'),
     path('adddeparture/', views.adddeparture, name='adddeparture'),
     path('editdeparture/<int:id>/', views.editdeparture, name='editdeparture'),

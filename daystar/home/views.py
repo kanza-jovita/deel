@@ -365,7 +365,7 @@ def arrival(request):
     arrivals=Arrival.objects.all()
     return render(request,'arrival.html',{'arrivals':arrivals})
   
-def addsarrival(request):
+def addarrival(request):
       if request.method=='POST':
         form=ArrivalForm(request.POST)
         if form.is_valid():
@@ -374,10 +374,10 @@ def addsarrival(request):
             return redirect('arrival')
       else:
         form=ArrivalForm()
-      return render(request,'addsarrival.html',{'form':form })         
+      return render(request,'addarrival.html',{'form':form })         
   
 
-def editsarrival(request,id):
+def editarrival(request,id):
      arrivals=get_object_or_404(Arrival,id=id)
      if request.method == 'POST':  
        form=ArrivalForm(request.POST,instance=arrivals)
@@ -386,7 +386,7 @@ def editsarrival(request,id):
            return redirect('arrival')
      else:
             form=ArrivalForm(instance=arrivals) 
-     return render(request,'editsarrival.html',{'form':form,'arrivals':arrivals})     
+     return render(request,'editarrival.html',{'form':form,'arrivals':arrivals})     
 
 def departure(request):
   babys=Departure.objects.all()
