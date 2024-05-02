@@ -16,18 +16,18 @@ from django.db.models import Sum
 
 # Create your views here.
 def index(request):
-        template = loader.get_template('index.html')
-        homeContent = template.render()
-        return HttpResponse(homeContent)
+    template = loader.get_template('index.html')
+    homeContent = template.render()
+    return HttpResponse(homeContent)
 
 @login_required
 def home(request):
-        template = loader.get_template('home.html')
-        return HttpResponse(template.render())
+    template = loader.get_template('home.html')
+    return HttpResponse(template.render())
 
 def payment(request):
-        template = loader.get_template('payment.html')
-        return HttpResponse(template.render())
+    template = loader.get_template('payment.html')
+    return HttpResponse(template.render())
 
 
 #Sitter views
@@ -45,26 +45,26 @@ def addsitter(request):
 
 @login_required
 def sittersform(request):
-      sitters= Sitterreg.objects.all()
-      return render(request,'sittersform.html',{'sitters':sitters})
+    sitters= Sitterreg.objects.all()
+    return render(request,'sittersform.html',{'sitters':sitters})
 
     
 
 @login_required
 def read_sitter(request,id ):
-      sitters_info=Sitterreg.objects.get(id=id)
-      return render(request,'read_sitter.html',{'sitters_info':sitters_info})
+    sitters_info=Sitterreg.objects.get(id=id)
+    return render(request,'read_sitter.html',{'sitters_info':sitters_info})
 @login_required
 def edit_sitter(request,id):
-      sitter=get_object_or_404(Sitterreg,id=id)
-      if request.method == 'POST':
-            form=Sitterreg_form (request.POST,instance=sitter)
-            if form.is_valid():
-                  form.save()
-                  return redirect('sittersform')
-      else:
+    sitter=get_object_or_404(Sitterreg,id=id)
+    if request.method == 'POST':
+        form=Sitterreg_form (request.POST,instance=sitter)
+        if form.is_valid():
+            form.save()
+            return redirect('sittersform')
+    else:
             form =Sitterreg_form(instance=sitter)
-      return render(request,'edit_sitter.html',{'form':form,sitter:sitter})
+    return render(request,'edit_sitter.html',{'form':form,sitter:sitter})
 
 
 def search_sitter(request):
@@ -97,21 +97,21 @@ def addbaby(request):
 
 @login_required
 def read(request,id ):
-      babies_info=Babyreg.objects.get(id=id)
-      return render(request,'read.html',{'babies_info':babies_info})
+    babies_info=Babyreg.objects.get(id=id)
+    return render(request,'read.html',{'babies_info':babies_info})
 
 
 @login_required
 def edit(request,id):
-      baby=get_object_or_404(Babyreg,id=id)
-      if request.method == 'POST':
-            form=Babyreg_form (request.POST,instance=baby)
-            if form.is_valid():
-                  form.save()
-                  return redirect('babiesform')
-      else:
+    baby=get_object_or_404(Babyreg,id=id)
+    if request.method == 'POST':
+        form=Babyreg_form (request.POST,instance=baby)
+        if form.is_valid():
+            form.save()
+            return redirect('babiesform')
+    else:
             form =Babyreg_form(instance=baby)
-      return render(request,'edit.html',{'form':form,baby:baby})
+    return render(request,'edit.html',{'form':form,baby:baby})
 
 
 def delete_baby (request, id):
@@ -162,10 +162,6 @@ def dollcorner(request, doll_id):
     return render(request, 'dollcorner.html', {'doll': doll})
 
 @login_required
-def receipt(request):
-    sales= Salesrecord.objects.all().order_by('-id') 
-    return render(request,'receipt.html',{'sales':sales})  
-@login_required
 def issue_item(request,pk):
     issued_item=Doll.objects.get(id=pk) 
     sales_form=SalesrecordForm(request.POST)  
@@ -186,9 +182,14 @@ def issue_item(request,pk):
     return render(request, 'issue_item.html',{'sales_form':sales_form} )
 
 @login_required
+def receipt(request):
+    sales= Salesrecord.objects.all().order_by('-id') 
+    return render(request,'receipt.html',{'sales':sales})  
+
+@login_required
 def receipt_detail(request, receipt_id):
-            receipt = Salesrecord.objects.get(id=receipt_id)
-            return render(request,'receipt_detail.html',{'receipt':receipt})
+    receipt = Salesrecord.objects.get(id=receipt_id)
+    return render(request,'receipt_detail.html',{'receipt':receipt})
 
 
 @login_required
@@ -235,16 +236,16 @@ def all_sales(request):
 
 @login_required
 def doll(request):
-        dolls=Doll.objects.all()
-        return render(request,'doll.html',{'dolls':dolls})
+    dolls=Doll.objects.all()
+    return render(request,'doll.html',{'dolls':dolls})
 
 
 
 
 #Arrivals an departure
 def arrival(request):
-      arrivals= Arrival.objects.all()
-      return render(request,'arrival.html',{'arrivals':arrivals})
+    arrivals= Arrival.objects.all()
+    return render(request,'arrival.html',{'arrivals':arrivals})
 
 @login_required
 def arrival_form(request):
@@ -259,8 +260,8 @@ def arrival_form(request):
 
 
 def departure(request):
-      departures= Departure.objects.all()
-      return render(request,'departure.html',{'departures':departures})
+    departures= Departure.objects.all()
+    return render(request,'departure.html',{'departures':departures})
 
 @login_required
 def departure_form(request):
@@ -362,8 +363,8 @@ def editpayment(request, id):
 
 
 def paymentlist(request):
-  payments=Payment.objects.all()
-  return render(request,'paymentlist.html',{'payments':payments})
+    payments=Payment.objects.all()
+    return render(request,'paymentlist.html',{'payments':payments})
 
 def createpayment(request):
     if request.method == 'POST':

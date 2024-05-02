@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
-<style>
+<!-- <style>
 
 h4{ color:#0C356A;
     text-shadow: 2px 2px 4px #000000;
@@ -43,9 +43,11 @@ button[type="submit"] {
     max-width: 200px;
     height: 50px;    
 }   
-</style>
+</style> -->
 
-<h4>SALES FORM</h4><hr> 
+<div class="card-header">
+    <h2>SALES FORM</h2>
+</div>
 <div class="back-container">
         <div class="container">
             <form method="POST" class="sales-form">
@@ -54,6 +56,7 @@ button[type="submit"] {
                 {{ sales_form | crispy }}
                 <button type="submit" class="btn btn-primary" >SELL</button>
             </form>
+            <br><br>
         </div>       
     </form>
 {% endblock %}

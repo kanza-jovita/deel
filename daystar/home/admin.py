@@ -10,5 +10,6 @@ admin.site.register(Babyreg)
 admin.site.register(Doll)
 admin.site.register(Category_doll)
 admin.site.register(Payment)
+admin.site.register(Salesrecord)
 
 

@@ -69,7 +69,8 @@ class Salesrecord(models.Model):
     sale_date=models.DateField(default=timezone.now)
     unit_price=models.IntegerField(default=0)
 
-     
+
+
   
     def get_total(self):
         total= self.quantity_sold * self.unit_price
@@ -135,7 +136,7 @@ class  Payment(models.Model):
     c_payment = models.ForeignKey(Categorystay, on_delete=models.CASCADE,null=True, blank=True) 
     amount=models.IntegerField(null=True, blank=True)
     payno = models.IntegerField(null=True, blank=True)
-    currency = models.CharField(max_length=10,null=True, blank=True,default='Ugx')
+    currency = models.CharField(max_length=10,null=True, blank=True)
     Date = models.DateField(auto_now_add=True, null=True)
-    def __int__(self):
+    def __str__(self):
       return self.payee    
