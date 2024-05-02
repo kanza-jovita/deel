@@ -1,41 +1,46 @@
 {% extends 'base.html' %}
-{% block content %}
-<div class="card-header" style="background-color: white;" >
-    <h2>DEPARTURE LIST</h2>
-  </div>
 
-<br>
+{% load static %}
+
+{% block content%}
+<h4 class="mb-3">BABIES LEFT</h4><hr>
+<a href="/adddeparture" class="btn btn-primary mb-3">Add</a>
+<!-- <a style="margin-left: 900px;" href="/arrival" class="btn btn-primary mb-3">DAILY DEPARTURE REGISTER</a> -->
 
 
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
-        <thead class="thead-dark">
+        <thead class="table-white">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Number</th>
+                <th scope="col">Baby No</th>
                 <th scope="col">Date</th>
-                <th scope="col">Time Out</th>
+                <th scope="col">Timeout</th>
                 <th scope="col">Picker</th>
-                <th scope="col">Parents Names </th>
+                <th scope="col">Comment</th>
                 <th scope=>Action</th>
             </tr>
         </thead>
         <tbody>
-            {% for departure in departures %}
+
+           
+         
+            {% for baby in babys %}
             <tr>
-                <th scope="row">{{ baby.id }}</th>
-                <td>{{ baby.baby_name }}</td>
+                <td>{{ baby.id }}</td>
+                <td>{{ baby.babys_name}}</td>
                 <td>{{ baby.baby_number }}</td>
                 <td>{{ baby.date }}</td>
                 <td>{{ baby.timeout }}</td>
                 <td>{{ baby.picker}}</td>
-                <td>{{ baby.comment }}</td>
+                <td>{{ baby.comment}}</td>
+                <td>
+                    <a href="{% url 'editdeparture' id=baby.id %}" class="btn btn-primary ">Edit</a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
-   </table>
+    </table>
 </div>
-
 {% endblock %}

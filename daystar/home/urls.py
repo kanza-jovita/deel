@@ -32,11 +32,16 @@ urlpatterns = [
     path('receipt_detail/<int:receipt_id>', views.receipt_detail, name='receipt_detail'),
 #arrival and departure
     path('arrival/', views.arrival, name='arrival'),
+    path('addsarrival/', views.addsarrival, name='addsarrival'),
+    path('editsarrival/<int:id>/', views.editsarrival, name='editsarrival'),
     path('departure/', views.departure, name='departure'),
-    path('arrival_form/', views.arrival_form, name='arrival_form'),
-    path('departure_form/', views.departure_form, name='departure_form'),
-    path('arrival_form/<int:id>/', views.arrival_form, name='arrival_form'),
-    path('departure_form/<int:id>/', views.departure_form, name='departure_form'),
+    path('adddeparture/', views.adddeparture, name='adddeparture'),
+    path('editdeparture/<int:id>/', views.editdeparture, name='editdeparture'),
+    path('onduty/', views.onduty, name='onduty'),
+    path('addonduty/', views.addonduty, name='addonduty'),
+    path('readonduty/<int:id>/', views.readonduty, name='readonduty'),
+    path('editdontudy/<int:id>/', views.editonduty, name='editonduty'),
+    
 #procurement
     path('inventory/', views.inventory, name='inventory'),
     path('add_to_stocks/<str:pk>', views.add_to_stocks, name='add_to_stocks'),
@@ -48,4 +53,10 @@ urlpatterns = [
     path('editpayment/<int:id>/', views.editpayment, name='editpayment'),
     path('paymentlist/', views.paymentlist, name='paymentlist'),
     path('createpayment/', views.createpayment, name='createpayment'),
+#sitterpayment
+    path('create_payment/', views.create_payment, name='create_payment'),
+    path('payment_list/', views.payment_list, name='payment_list'),
+    
 ]
+
+

@@ -1,40 +1,39 @@
 {% extends 'base.html' %}
-{% block content %}
-<div class="card-header" style="background-color: white;" >
-    <h2>ARRIVAL LIST</h2>
-  </div>
-
-<br>
-
-
+{% load static %}
+{% block content%}
+<h4 class="mb-3">BABIES PRESENT</h4><hr>
+<a href="/addsarrival" class="btn btn-primary mb-3">Add</a>
+<!-- <a style="margin-left: 900px;" href="/arrival" class="btn btn-primary mb-3">DAILY DEPARTURE REGISTER</a> -->
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
-        <thead class="thead-dark">
+        <thead class="table-white">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Number</th>
+                <th scope="col">Babysnumber</th>
                 <th scope="col">Date</th>
-                <th scope="col">Time In</th>
-                <th scope="col">care giver</th>
-                <th scope="col">Amount</th>
+                <th scope="col">Timein</th>
+                <th scope="col">Brought By</th>
                 <th scope=>Action</th>
             </tr>
         </thead>
         <tbody>
-            {% for arrival in arrivals %}
+
+           
+            {% for baby in arrivals %}
             <tr>
-                <th scope="row">{{ baby.id }}</th>
+                <td>{{ baby.id }}</td>
                 <td>{{ baby.baby_name}}</td>
                 <td>{{ baby.baby_number }}</td>
                 <td>{{ baby.date }}</td>
                 <td>{{ baby.timein }}</td>
-                <td>{{ baby.care_giver}}</td>
-                <td>{{ baby.amount}}</td>
+                <td>{{ baby.broughtby}}</td>
+                <td>
+                    <a href="{% url 'editsarrival' id=baby.id %}" class="btn btn-primary">Edit </a>
                 </td>
             </tr>
             {% endfor %}
         </tbody>
-   </table>
+    </table>
 </div>
 {% endblock %}

@@ -1,4 +1,3 @@
-
 from django.db import models
 from django.contrib.auth .models import User
 from django.utils import timezone
@@ -10,17 +9,14 @@ class Categorystay(models.Model):
     def __str__(self):
         return self.name
     
-
-
-
 class Sitterreg(models.Model):
     Sitter_name = models.CharField(max_length=30, null='False',blank = 'False')
     Sitter_number = models.CharField(max_length=30, null='False',blank = 'False')
     Date_of_birth = models.DateField(null="True", blank="True")
     Contact = models.IntegerField()
-    Location = models.CharField(max_length=30, null='False',blank = 'False')
-    Gender =  models.CharField(max_length=10,null="False",blank = "False")
-    Level_of_education = models.CharField(max_length=30, null='False',blank = 'False')
+    Location = models.CharField(choices=[('kabalagala', 'kabalagala')], max_length=100)
+    Gender =  models.CharField(choices=[('male', 'Male'),('female', 'Female')], max_length=100)
+    Level_of_education = models.CharField(choices=[('Degree','Degree'),('Diploma','Diploma'),('Certificate','Certificate')],max_length=200,default=0)
     Next_of_kin = models.CharField(max_length=30, null='False',blank = 'False')
     NIN = models.CharField(max_length=30, null='False',blank = 'False')
     Recommenders_name = models.CharField(max_length=30, null='False',blank = 'False')
@@ -28,6 +24,14 @@ class Sitterreg(models.Model):
     def __str__(self):
         return self.Sitter_name
 
+class Sitter_arrival(models.Model):
+    sitter_name=models.ForeignKey(Sitterreg, on_delete=models.CASCADE) 
+    sitter_number=models.IntegerField(default=0)
+    date_of_arrival=models.DateField(default=timezone.now)   
+    timein=models.TimeField ()
+    Attendancestatus=models.CharField(choices=[('onduty', 'onduty')], max_length=100)
+    def __str__(self):
+        return self.sitter_name
      
     
 class Babyreg(models.Model):
@@ -43,6 +47,28 @@ class Babyreg(models.Model):
     def __str__(self):
         return self.Baby_name
     
+class Departure(models.Model):
+    babys_name=models.ForeignKey(Babyreg,on_delete=models.CASCADE)
+    baby_number=models.IntegerField(default=0) 
+    date=models.DateField(default=timezone.now)
+    timeout=models.TimeField()
+    picker=models.CharField(max_length=200)
+    comment=models.CharField(max_length=200,null=True, blank=True)
+    def __str__(self):
+        return self.babys_name
+class Arrival(models.Model):
+    baby_name=models.ForeignKey(Babyreg, on_delete=models.CASCADE)
+    baby_number=models.IntegerField(default=0)
+    date=models.DateField(default=timezone.now)
+    timein=models.TimeField()
+    broughtby=models.CharField(max_length=200)
+
+class assignment(models.Model):
+    sitter_name=models.ForeignKey(Sitterreg, on_delete=models.CASCADE)
+    baby_name=models.ForeignKey(Babyreg, on_delete=models.CASCADE) 
+    date=models.DateField(default=timezone.now)
+    day=models.CharField(max_length=100,choices=[('fullday', 'fullday'),('halfday','halfday' )]) 
+   
 
 class Category_doll(models.Model):  
      name = models.CharField(max_length=100,null=True, blank=True)
@@ -79,32 +105,6 @@ class Salesrecord(models.Model):
         return int(change)#sales is linked to products
     
 
-
-#models for arrival and departure
-
-class Arrival(models.Model):
-    baby_name=models.ForeignKey(Babyreg, on_delete=models.CASCADE)
-    baby_number=models.IntegerField(default=0)
-    date=models.DateField(default=timezone.now)
-    timein=models.TimeField()
-    care_giver=models.CharField(max_length=200)
-    amount=models.IntegerField(null=True, blank=True)
-
-    def __str__(self):
-        return self.baby_number
-
-
-class Departure(models.Model):
-    baby_name=models.ForeignKey(Babyreg,on_delete=models.CASCADE)
-    baby_number=models.IntegerField(default=0) 
-    date=models.DateField(default=timezone.now)
-    timeout=models.TimeField()
-    picker=models.CharField(max_length=200)
-    comment=models.CharField(max_length=200,null=True, blank=True)
-    def __str__(self):
-        return self.baby_name
-    
-
 #Procurement model
 class Category(models.Model):
     name = models.CharField(max_length=100,null=True, blank=True) 
@@ -132,9 +132,48 @@ class Used(models.Model):
 class Payment(models.Model):
     payee = models.ForeignKey(Babyreg,on_delete=models.CASCADE ,null=True, blank=True)
     c_payment = models.ForeignKey(Categorystay, on_delete=models.CASCADE,null=True, blank=True) 
-    amount=models.IntegerField(null=True, blank=True)
     payno = models.IntegerField(null=True, blank=True)
-    currency = models.CharField(max_length=10,null=True, blank=True)
     date = models.DateField(auto_now_add=True, null=True)
+    amount=models.IntegerField(null=True, blank=True)
+    balance=models.IntegerField(null=True, blank=True)
     def __str__(self):
       return self.payee    
+    
+class Sitterpayment(models.Model):
+    sitter_name=models.ForeignKey(Sitterreg, on_delete=models.CASCADE)
+    amount=models.IntegerField(default=0)
+    date=models.DateField(default=timezone.now)
+    numbers_of_babies_attended_to=models.IntegerField(default=0)
+    def __str__(self):
+        return f"Sitter Payment - {self.sitter_name}"
+
+
+    def total_amount(self):
+        total= self.amount * self.numbers_of_babies_attended_to
+        return int(total)
+    
+
+#models for arrival and departure
+
+class Arrival(models.Model):
+    baby_name=models.ForeignKey(Babyreg, on_delete=models.CASCADE)
+    baby_number=models.IntegerField(default=0)
+    date=models.DateField(default=timezone.now)
+    timein=models.TimeField()
+    broughtby=models.CharField(max_length=200)
+    amount=models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.baby_number
+
+
+class Departure(models.Model):
+    baby_name=models.ForeignKey(Babyreg,on_delete=models.CASCADE)
+    baby_number=models.IntegerField(default=0) 
+    date=models.DateField(default=timezone.now)
+    timeout=models.TimeField()
+    picker=models.CharField(max_length=200)
+    comment=models.CharField(max_length=200,null=True, blank=True)
+    def __str__(self):
+        return self.baby_name
+    

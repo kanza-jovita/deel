@@ -57,4 +57,26 @@ class Usedform(ModelForm):
 class PaymentForm(ModelForm):
     class Meta:
         model = Payment
-        fields = '__all__'        
+        fields = '__all__' 
+
+
+class SitterpaymentForm(ModelForm):
+     class Meta:
+         model=Sitterpayment
+         fields='__all__'
+
+class ArrivalForm(ModelForm):
+     class Meta:
+         model=Arrival
+         fields='__all__'
+
+
+class   DepartureForm(ModelForm):
+     class Meta:
+         model=Departure
+         fields='__all__'
+
+class Sitter_arrivalForm(ModelForm):
+     class Meta:
+         model=Sitter_arrival
+         fields='__all__'      

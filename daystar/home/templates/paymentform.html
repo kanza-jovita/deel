@@ -13,9 +13,12 @@
                 <th scope="col">#</th>
                 <th scope="col">Payee</th>
                 <th scope="col">Period</th>
-                <th scope="col">Amount</th>
                 <th scope="col">Refno</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Balance</th>
                 <th scope="col">Date</th>
+               
+               
                 <th scope=>Action</th>
                
             </tr>
@@ -27,9 +30,12 @@
                 <td>{{ payment.id }}</td>
                 <td>{{ payment.payee }}</td>
                 <td>{{ payment.c_payment }}</td>
-                <td>{{ payment.amount }}</td>
                 <td>{{ payment.payno }}</td>
+                <td>{{ payment.amount }}</td>
+                <td>{{ payment.balance }}</td>
                 <td>{{ payment.date }}</td>
+                
+                
 
                 <td>
                     <a href="{% url 'editpayment' id=payment.id %}" class="btn btn-primary ">Update</a>
