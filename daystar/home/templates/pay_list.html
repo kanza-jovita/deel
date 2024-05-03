@@ -1,7 +1,78 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content%}
-<h4 class="mb-3">SITTER PAYMENT LIST</h4><hr>
+<style>
+    body {
+        background-color: rgba(158, 184, 217, 0.5); /* Faint background color */
+    }
+
+    .btn-container {
+        display: flex;
+        align-items: center; 
+    }
+
+    .btn {
+        background-color: #000; 
+        color: #fff; 
+        border: none; 
+        padding: 0.5rem 1rem; 
+        margin-right: 0.5rem; 
+        cursor: pointer; 
+    }
+
+    .btn i {
+        margin-right: 0.25rem; 
+    }
+
+    .card-header {
+        background-color: #fff; 
+        padding: 1rem; 
+        margin-bottom: 1rem; 
+    }
+
+    .table {
+        width: 100%; 
+        border-collapse: collapse; 
+        border: 1px solid #dee2e6; 
+    }
+
+    th,
+    td {
+        border: 1px solid #dee2e6;
+        padding: 0.75rem; 
+        text-align: left; 
+    }
+
+    th {
+        background-color: #f0f0f0; 
+    }
+
+    /* Centering the search bar */
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    /* Adjusting the width of the search input */
+    .search-input {
+        width: 300px; /* Adjust this value as needed */
+        margin-right: 0.5rem; /* Adding some space between input and button */
+    }
+
+    /* Resizing the search button */
+    .search-btn {
+        padding: 0.5rem 0.75rem; /* Adjust this value as needed */
+    }
+
+    /* Moving the Add button to the right corner */
+    .add-btn {
+        margin-left: auto; /* Automatically align to the right */
+    }
+</style>
+<div class="card-header">
+    <h2>SITTER PAY LIST</h2>
+</div>
 <a href="{% url 'add_payment' %}" class="btn btn-primary">Add Payment</a>
 <a href="{% url 'addpayment' %}" class="btn btn-primary">Babies Payment</a>
 </td>
@@ -14,7 +85,7 @@
                 <th scope="col"> Sitter Name</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Date</th>
-                <th scope="col">Babies Attended</th>
+                <th scope="col">Babies Assigned</th>
                 <th scope="col">Total Amount</th>
         </thead>
         <tbody>
@@ -23,7 +94,7 @@
                 <td>{{ payment.sitter_name}}</td>
                 <td>UGX{{ payment.amount }}</td>
                 <td>{{ payment.date }}</td>
-                <td>{{ payment.numbers_of_babies_attended_to}}</td>
+                <td>{{ payment.babies_assigned}}</td>
                 <td>UGX{{ payment.total_amount}}</td>     
             </tr>
             {% endfor %}

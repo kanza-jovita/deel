@@ -122,6 +122,9 @@
                     <td>{{ sitter.Religion }}</td>
                     <td>   
                         <!-- <a href="{% url 'read_sitter' id=sitter.id %}"class="btn btn-primary mb-2">View</a> -->
+                        <a href="{% url 'edit_sitter' id=sitter.id %}" class="btn"><i class="fas fa-edit"></i>Edit</a>
+                        <a href="{% url 'delete_sitter' id=sitter.id %}" class="btn"><i class="fas fa-trash"></i>Delete</a>
+
                         <td>
                             <button type="button" class="btn btn-success me-1"
                                 href="{% url 'read_sitter' id=sitter.id %}" data-bs-toggle="modal"
@@ -145,14 +148,13 @@
 
                                     <div class="modal-body">
                                         <ul class="list-unstyled">
-                                            <li>Baby No: <strong> {{ baby.baby_no }} </strong> </li>
-                                            <li>First Name: <strong> {{ baby.b_first_name }} </strong> </li>
-                                            <li>Last Name: <strong> {{ baby.b_last_name }} </strong> </li>
-                                            <li>Age: <strong> {{ baby.b_age }} </strong> </li>
-                                            <li>Gender: <strong> {{ baby.b_gender }} </strong> </li>
-                                            <li>Location: <strong> {{ baby.b_location }} </strong> </li>
-                                            <li>Father Name: <strong> {{ baby.b_father_first_name }} {{ baby.b_father_last_name }} </strong> </li>
-                                            <li>Mother Name: <strong> {{ baby.b_mother_first_name }} {{ baby.b_mother_last_name }} </strong> </li>
+                                            <li>Sitter No: <strong> {{ sitter.sitter_name }} </strong> </li>
+                                            <li>Sitter Name: <strong> {{ sitter.sitter_number }} </strong> </li>
+                                            <li>Age: <strong> {{ sitter.b_age }} </strong> </li>
+                                            <li>Gender: <strong> {{ sitter.gender }} </strong> </li>
+                                            <li>Location: <strong> {{ sitter.location }} </strong> </li>
+                                            <li>Father Name: <strong> {{ sitter_father_name }} {{ baby.b_father_last_name }} </strong> </li>
+                                            <li>Mother Name: <strong> {{ sitter.mother_name }} {{ baby.b_mother_last_name }} </strong> </li>
 
                                         </ul>
                                     </div>

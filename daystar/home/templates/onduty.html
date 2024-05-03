@@ -98,7 +98,7 @@
                 <td>{{ sitter.timein }}</td>
                 <td>{{ sitter.Attendancestatus}}</td>
                 <td>
-                    <a href="{% url 'readonduty' id=sitter.id %}"  class="btn btn-primary ">Read</a>
+                    <a href="{% url 'editonduty' id=sitter.id %}"  class="btn btn-primary ">Update</a>
                 </td>
             </tr>
             {% endfor %}

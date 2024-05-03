@@ -30,19 +30,15 @@ class SalesrecordForm(ModelForm):
         model = Salesrecord
         fields = [ 'quantity_sold', 'amount_received', 'payee']  
 
-
-
 class Arrival_form(forms.ModelForm):
     class Meta:
         model = Arrival
         fields = '__all__'
 
-
 class Departure_form(ModelForm):
     class Meta:
         model = Departure
         fields = '__all__'
-
 
 class AddForm(ModelForm):
      class Meta:
@@ -59,7 +55,6 @@ class PaymentForm(ModelForm):
         model = Payment
         fields = '__all__' 
 
-
 class SitterpaymentForm(ModelForm):
      class Meta:
          model=Sitterpayment
@@ -69,7 +64,6 @@ class ArrivalForm(ModelForm):
      class Meta:
          model=Arrival
          fields='__all__'
-
 
 class   DepartureForm(ModelForm):
      class Meta:

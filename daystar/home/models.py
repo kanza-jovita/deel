@@ -32,29 +32,20 @@ class Sitter_arrival(models.Model):
     Attendancestatus = models.CharField(choices=[('onduty', 'On Duty'), ('offduty', 'Off Duty')], max_length=100)
     def __str__(self):
         return self.sitter_name
-     
-    
+        
 class Babyreg(models.Model):
     c_stay = models.ForeignKey(Categorystay,on_delete = models.CASCADE,null=False,blank = False)#this links class Babe to class Categorystay
-    assign = models.ForeignKey(Sitterreg, on_delete = models.CASCADE,null=True,blank = True)
     Baby_name = models.CharField(max_length=30, null='False',blank = 'False')
     Baby_number = models.CharField(max_length=30, null='False',blank = 'False')
-    Date = models.DateField(max_length=30, null='False',blank = 'False')
+    Date = models.DateField(default=timezone.now)
     Gender = models.CharField(max_length=30, null='False',blank = 'False')
     Age = models.IntegerField()
     Location = models.CharField(max_length=30, null='False',blank = 'False')
     Parents_names = models.CharField(max_length=30, null='False',blank = 'False')
     def __str__(self):
         return self.Baby_name
-    
-#assignment of babies to sitters
-# class assignment(models.Model):
-#     sitter_name=models.ForeignKey(Sitterreg, on_delete=models.CASCADE)
-#     baby_name=models.ForeignKey(Babyreg, on_delete=models.CASCADE) 
-#     date=models.DateField(default=timezone.now)
-#     day=models.CharField(max_length=100,choices=[('fullday', 'fullday'),('halfday','halfday' )]) 
-   
 
+#Dolls    
 class Category_doll(models.Model):  
      name = models.CharField(max_length=100,null=True, blank=True)
      def __str__(self):
@@ -80,23 +71,24 @@ class Salesrecord(models.Model):
     sale_date=models.DateField(default=timezone.now)
     unit_price=models.IntegerField(default=0)
 
+    def __int__(self):
+        return self.payee
 
     def get_total(self):
         total= self.quantity_sold * self.unit_price
         return int( total)
-#here we are getting change.(money to be given to theparent)    
+#here we are getting change.(money to be given to the parent)    
     def get_change(self):
         change= self.get_total() - self.amount_received
         return int(change)#sales is linked to products
     
-
-#Procurement model
+    
+#Procurement
 class Category(models.Model):
     name = models.CharField(max_length=100,null=True, blank=True) 
     def __str__(self):
         return self.name 
     
-
 class Procurement(models.Model):
     category = models.ForeignKey(Category,on_delete=models.CASCADE,null=True, blank=True)
     item_name = models.CharField(max_length=200,)
@@ -113,14 +105,14 @@ class Used(models.Model):
     quantity_issued=models.IntegerField(default=0)
     usage_date=models.DateField()
 
-#models for baby arrival and departure
+#Baby arrival and departure
 class Arrival(models.Model):
     baby_name=models.ForeignKey(Babyreg, on_delete=models.CASCADE)
-    baby_number=models.IntegerField(default=0)
+    baby_number=models.CharField(max_length=30, null='False',blank = 'False')
+    assign = models.ForeignKey(Sitterreg, on_delete = models.CASCADE,null=True,blank = True)
     date=models.DateField(default=timezone.now)
     timein=models.TimeField()
     broughtby=models.CharField(max_length=200)
-    amount=models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.baby_number
@@ -128,7 +120,7 @@ class Arrival(models.Model):
 
 class Departure(models.Model):
     baby_name=models.ForeignKey(Babyreg,on_delete=models.CASCADE)
-    baby_number=models.IntegerField(default=0) 
+    baby_number=models.CharField(max_length=10) 
     date=models.DateField(default=timezone.now)
     timeout=models.TimeField()
     picker=models.CharField(max_length=200)
@@ -136,7 +128,7 @@ class Departure(models.Model):
     def __str__(self):
         return self.baby_name
     
-#Payments
+#Babies payments
 class Payment(models.Model):
     payee = models.ForeignKey(Babyreg,on_delete=models.CASCADE ,null=True, blank=True)
     c_payment = models.ForeignKey(Categorystay, on_delete=models.CASCADE,null=True, blank=True) 
@@ -146,8 +138,7 @@ class Payment(models.Model):
     balance=models.IntegerField(null=True, blank=True)
     def __str__(self):
       return str(self.payee ) 
-
-
+    
     def get_balance(self):
         return self.actual_amount - self.amount_paid  
 
@@ -157,13 +148,13 @@ class Sitterpayment(models.Model):
     sitter_name = models.ForeignKey(Sitterreg, on_delete=models.CASCADE)
     amount = models.IntegerField(default=0)
     date = models.DateField(default=timezone.now)
-    numbers_of_babies_attended_to = models.IntegerField(default=0)
+    babies_assigned = models.IntegerField(default=0)
 
     def __str__(self):
         return f"Sitter Payment - {self.sitter_name}"
 
     def total_amount(self):
-        total = self.amount * self.numbers_of_babies_attended_to
+        total = self.amount * self.babies_assigned
         return total  # Removed int() conversion here
 
     

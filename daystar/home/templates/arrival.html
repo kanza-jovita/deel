@@ -74,18 +74,18 @@
 <div class="card-header">
     <h2>BABIES PRESENT</h2>
 </div>
-<!-- <a href="/addarrival" class="btn btn-primary mb-3">Add</a> -->
-<!-- <a style="margin-left: 900px;" href="/arrival" class="btn btn-primary mb-3">DAILY DEPARTURE REGISTER</a> -->
+<a href="/addarrival" class="btn btn-primary mb-3">Add</a>
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
         <thead class="table-white">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Babysnumber</th>
+                <th scope="col">Baby number</th>
+                <th scope="col">Assigned</th>
                 <th scope="col">Date</th>
-                <th scope="col">Timein</th>
-                <th scope="col">Brought By</th>
+                <th scope="col">Time In</th>
+                <th scope="col">Bringer</th>
                 <th scope=>Action</th>
             </tr>
         </thead>
@@ -95,11 +95,12 @@
                 <td>{{ baby.id }}</td>
                 <td>{{ baby.baby_name}}</td>
                 <td>{{ baby.baby_number }}</td>
+                <td>{{ baby.assign }}</td>
                 <td>{{ baby.date }}</td>
                 <td>{{ baby.timein }}</td>
                 <td>{{ baby.broughtby}}</td>
                 <td>
-                    <!-- <a href="{% url 'editarrival' id=baby.id %}" class="btn btn-primary">Edit </a> -->
+                    <a href="{% url 'editarrival' id=baby.id %}" class="btn btn-primary">Edit </a>
                 </td>
             </tr>
             {% endfor %}

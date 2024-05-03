@@ -27,6 +27,10 @@ def home(request):
 
 #Sitter views
 @login_required
+def sittersform(request):
+    sitters= Sitterreg.objects.all()
+    return render(request,'sittersform.html',{'sitters':sitters})
+@login_required
 def addsitter(request):
     if request.method == 'POST':
         form = Sitterreg_form(request.POST)
@@ -37,39 +41,44 @@ def addsitter(request):
         form=Sitterreg_form()
     return render(request,'addsitter.html',{'form':form})
 
-
-@login_required
-def sittersform(request):
-    sitters= Sitterreg.objects.all()
-    return render(request,'sittersform.html',{'sitters':sitters})
-
 @login_required
 def read_sitter(request,id ):
     sitters_info=Sitterreg.objects.get(id=id)
     return render(request,'read_sitter.html',{'sitters_info':sitters_info})
 @login_required
-def edit_sitter(request,id):
-    sitter=get_object_or_404(Sitterreg,id=id)
+def edit_sitter(request, id):
+    sitter = get_object_or_404(Sitterreg, id=id)
     if request.method == 'POST':
-        form=Sitterreg_form (request.POST,instance=sitter)
+        form = Sitterreg_form(request.POST, instance=sitter)
         if form.is_valid():
             form.save()
             return redirect('sittersform')
         else:
-            print ("form is not valid")
+            print("Form is not valid")
     else:
-            form =Sitterreg_form(instance=sitter)
-    return render(request,'edit_sitter.html',{'form':form,sitter:sitter})
+        form = Sitterreg_form(instance=sitter)
+    return render(request, 'edit_sitter.html', {'form': form, 'sitter': sitter})
 
 
 def search_sitter(request):
     search_query = request.GET.get('search', '')
     if search_query:
-        sitters = Sitterreg.objects.filter(Sitter_name__icontains=search_query) | Sitterreg.objects.filter(Siiter_number__icontains=search_query)
+        sitters = Sitterreg.objects.filter(Sitter_name__icontains=search_query) | Sitterreg.objects.filter(Sitter_number__icontains=search_query)
     else:
         sitters = Sitterreg.objects.all()
 
-    return render(request, 'siitersform.html', {'sitters': sitters})
+    return render(request, 'sittersform.html', {'sitters': sitters})
+
+def delete_sitter (request, id):
+    if request.user.is_authenticated:
+        delete_it = Sitterreg.objects.get(id=id)
+        delete_it.delete()
+        messages.success(request, "message deleted")
+        return redirect('sittersform')
+    else:
+        messages.success("you are not authorised")
+        return redirect('sittersform')
+
             
       
 #Babies views
@@ -173,7 +182,7 @@ def issue_item(request,pk):
 
 @login_required
 def receipt(request):
-    sales= Salesrecord.objects.all().order_by('-id') 
+    sales= Salesrecord.objects.all().order_by('id') 
     return render(request,'receipt.html',{'sales':sales})  
 
 @login_required
@@ -233,7 +242,6 @@ def doll(request):
 @login_required
 def add_to_stocks(request, pk):
     issued_procurement = Procurement.objects.get(id=pk)
-    
     if request.method == 'POST':
         form = AddForm(request.POST)
         if form.is_valid():
@@ -281,10 +289,7 @@ def all_issue_items(request):
     return render(request, 'all_issue_items.html', {'issues': issues, 'total_issued_quantity': total_issued_quantity, 'total_received_quantity': total_received_quantity, 'net_quantity': net_quantity})
 
 
-#Payments
-# def paymentform(request):
-#     payment= Payment.objects.all()
-#     return render(request,'paymentform.html',{'payment':payment})
+#Babies payments
 def paymentform(request):
     if request.method == 'POST':
         form = PaymentForm(request.POST)
@@ -325,26 +330,12 @@ def editpayment(request, id):
     return render(request, 'editpayment.html', {'form': form, 'payment': payment})
 
 
-# def createpayment(request):
-#     if request.method == 'POST':
-#         form = PaymentForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('paymentlist') 
-#     else:
-#         form = PaymentForm()
-    
-#     return render(request, 'createpayment.html', {'form': form})
-
-
-
-#Sitterpayment
+#Sitterpayments
 def add_payment(request):
     if request.method == 'POST':
         form = SitterpaymentForm(request.POST)
         if form.is_valid():
             form.save()
-           
             return redirect('pay_list')
     else:
         form = SitterpaymentForm()
@@ -395,6 +386,7 @@ def editarrival(request,id):
             form=ArrivalForm(instance=arrivals) 
      return render(request,'editarrival.html',{'form':form,'arrivals':arrivals})     
 
+#departures
 def departure(request):
   babys=Departure.objects.all()
   return render(request,'departure.html',{'babys':babys})
@@ -440,7 +432,6 @@ def addonduty(request):
     return render(request, 'addonduty.html', {'form': form})
   
   
-
 def editonduty(request, id):
     onduty=get_object_or_404(Sitter_arrival,id=id)
     if request.method == 'POST':  

@@ -21,6 +21,8 @@ urlpatterns = [
     path("read_sitter/<int:id>/", views.read_sitter, name="read_sitter"),
     path("edit_sitter/<int:id>/", views.edit_sitter, name="edit_sitter"),
     path("search_sitter/", views.search_sitter, name="search_sitter"),
+     path("delete_sitter/<int:id>/", views.delete_sitter, name="delete_sitter"),
+     
 #Dolls
     path('doll/', views.doll, name='doll'),
     path('dollscorner/<int:doll_id>/', views.dollcorner, name='dollcorner'),
@@ -52,7 +54,6 @@ urlpatterns = [
 #sitterpayment
     path('add_payment/', views.add_payment, name='add_payment'),
     path('pay_list/', views.pay_list, name='pay_list'),
-    
 ]
 
 
