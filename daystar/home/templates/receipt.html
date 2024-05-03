@@ -1,6 +1,6 @@
 {% extends 'base.html'%} 
 {% block content%}
-<br /><br>
+<br><br>
 <div class="container" style="background-color: aliceblue;">
     <h1 class="card-header text-center" class="v">ALL RECEIPTS</h1><br>
     {% for sale in sales %}
@@ -9,8 +9,8 @@
         <div class="card-body">
             <h5 style="text-align: right;"><h5>Date: {{ receipt.sale_date}}</h5>
         </h5>
-            <h2 class="v">DAYSTAR DAYCARE</h2>
-            <h3 class="card-title" style="color:#FB667A; ">Child name : {{sale.payee | title}}</h3>
+            <h2 class="v">Daystar Daycare</h2>
+            <h3 class="card-title" style="color:#365486; ">Child name : {{sale.payee | title}}</h3>
         
             <h6 class="card-text">Doll Name : {{sale.doll}}</h6>
             <h6 class="card-text">Amount Paid: UGX{{ sale.amount_received }}</h6>

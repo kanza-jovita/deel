@@ -4,8 +4,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("",views.index, name="index"),
-    path("home/",views.home, name="home"),
-    path("payment/",views.payment, name="payment"),    
+    path("home/",views.home, name="home"),    
 #login and logout
     path("login/", auth_views.LoginView.as_view(template_name ="login.html"), name="login"),
     path('logout/', auth_views.LogoutView.as_view(template_name='project/index.html'), name='logout'),
@@ -39,7 +38,6 @@ urlpatterns = [
     path('editdeparture/<int:id>/', views.editdeparture, name='editdeparture'),
     path('onduty/', views.onduty, name='onduty'),
     path('addonduty/', views.addonduty, name='addonduty'),
-    path('readonduty/<int:id>/', views.readonduty, name='readonduty'),
     path('editdontudy/<int:id>/', views.editonduty, name='editonduty'),
     
 #procurement
@@ -51,11 +49,9 @@ urlpatterns = [
     path('paymentform/', views.paymentform, name='paymentform'),
     path('addpayment/', views.addpayment, name='addpayment'),
     path('editpayment/<int:id>/', views.editpayment, name='editpayment'),
-    path('paymentlist/', views.paymentlist, name='paymentlist'),
-    path('createpayment/', views.createpayment, name='createpayment'),
 #sitterpayment
-    path('create_payment/', views.create_payment, name='create_payment'),
-    path('payment_list/', views.payment_list, name='payment_list'),
+    path('add_payment/', views.add_payment, name='add_payment'),
+    path('pay_list/', views.pay_list, name='pay_list'),
     
 ]
 

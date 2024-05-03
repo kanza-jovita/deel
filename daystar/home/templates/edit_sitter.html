@@ -1,7 +1,5 @@
 {% extends 'base.html' %} {% block content %}
 {% load crispy_forms_tags %}
-
-
 <div class="card-header" style="background-color: white;" >
     <h2>EDIT SITTER</h2>
   </div>
@@ -12,14 +10,10 @@
         {{ form|crispy }}
         <br>
         <button type="submit" name="submit" class="btn btn-primary">Update</button>
-
     </form>
-
-    <br><br>
-    <br>
+    <br><br><br>
     <br>
 </div>
-
 <style>
     .container {
         padding-top: 20px;
@@ -29,5 +23,4 @@
         padding: 20px;
             }
 </style>
-
 {% endblock %}

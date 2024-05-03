@@ -2,47 +2,75 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
-<!-- <style>
-h4{ 
-    color:#0C356A;
-    text-shadow: 2px 2px 4px #000000;
-    margin-left: 580px;
-    font-family: sans-serif;
-}
-.sales-form {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    max-width: 50%;
-    margin: auto;
-    border-radius: 5px;
-    border: solid black;
-    margin-bottom: 6px;
-    border-radius: 10px;
-    padding-left: 20px;
-    padding-bottom: 15px;
-    padding-top: 15px;
-    padding-right: 15px;
-    margin-bottom: 10px;  
-}
-label {
-    font-weight: bold;
-    margin-top: 7px;
-    margin-bottom:5px ;
-}
+<style>
+    body {
+        background-color: rgba(158, 184, 217, 0.5); /* Faint background color */
+    }
 
-button[type="submit"] {
-    margin-top: 30px;
-    background-color: rgb(50, 48, 48);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    max-width: 200px;
-    height: 50px;    
-}    
-</style> -->
+    .btn-container {
+        display: flex;
+        align-items: center; 
+    }
+
+    .btn {
+        background-color: #000; 
+        color: #fff; 
+        border: none; 
+        padding: 0.5rem 1rem; 
+        margin-right: 0.5rem; 
+        cursor: pointer; 
+    }
+
+    .btn i {
+        margin-right: 0.25rem; 
+    }
+
+    .card-header {
+        background-color: #fff; 
+        padding: 1rem; 
+        margin-bottom: 1rem; 
+    }
+
+    .table {
+        width: 100%; 
+        border-collapse: collapse; 
+        border: 1px solid #dee2e6; 
+    }
+
+    th,
+    td {
+        border: 1px solid #dee2e6;
+        padding: 0.75rem; 
+        text-align: left; 
+    }
+
+    th {
+        background-color: #f0f0f0; 
+    }
+
+    /* Centering the search bar */
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    /* Adjusting the width of the search input */
+    .search-input {
+        width: 300px; /* Adjust this value as needed */
+        margin-right: 0.5rem; /* Adding some space between input and button */
+    }
+
+    /* Resizing the search button */
+    .search-btn {
+        padding: 0.5rem 0.75rem; /* Adjust this value as needed */
+    }
+
+    /* Moving the Add button to the right corner */
+    .add-btn {
+        margin-left: auto; /* Automatically align to the right */
+    }
+</style>
 
 <div class="card-header">
     <h2>ISSUE FORM</h2>

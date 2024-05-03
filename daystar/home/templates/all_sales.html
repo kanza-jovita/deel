@@ -4,8 +4,8 @@
 <style>
   h4{ color:#0C356A;
     text-shadow: 2px 2px 4px #000000;
-margin-left: 466px;
-font-family: sans-serif;}
+    margin-left: 466px;
+    font-family: sans-serif;}
 
     h4{ color:#0C356A;
         text-shadow: 2px 2px 4px #000000;
@@ -56,17 +56,10 @@ font-family: sans-serif;}
     th {
         background-color: #f0f0f0; 
     }
-
-
-
-
 </style>
-
 <div class="card-header">
   <h2>SALES MADE</h2>
 </div>
-
-
   <table class="table">
     <thead class="thead-dark">
       <tr>
@@ -102,9 +95,7 @@ font-family: sans-serif;}
     {% for sale in sales %}
     <tbody>
       <tr>
-
-        
-        <td style="color:#FB667A;">{{sale.payee | title}}</td>
+        <td>{{sale.payee | title}}</td>
         <td>{{ sale.doll.name | title }}</td>
         <td>{{sale.quantity_sold}}</td>
         <td>UGX{{sale.unit_price}}</td>

@@ -1,15 +1,9 @@
 {% extends 'base.html'%}
 {% load static %}
 {% block content %}
-
-<style>
-    h4{margin-left: 490px;
-    font-family: sans-serif;
-    color:#0C356A;
-    text-shadow: 2px 2px 4px #000000;}
-</style>
-
-<h4 class="">ITEMS IN THE STOCK</h4>
+<div class="card-header">
+    <h2>ITEMS IN STOCK</h2>
+</div>
 <div class="card">
     <div class="card-body" >
 <div class="container">
@@ -21,7 +15,6 @@
 </div>
 </div>
     <a href="/addstocks" class="p-2 bg-teal-500 rounded-lg shadow-lg">Add newstock</a>
-
 <div class=>
 <table class="table table-bordered">
     <thead>
@@ -37,7 +30,6 @@
             <th>Issued_quantity</th>
             <th>Net_stock</th>
             <th>Action</th>
-        
         </tr>
     </thead>
     <tbody>
@@ -52,7 +44,6 @@
             <td>Ugx{{each.t_price}}</td>
             <td>{{ each.issued_quantity}}</td>
             <td>{{each.Net_stock}}</td>
-           
           <td>
                 <a href="{% url 'readstocks' id=each.id %}" >read</a>
                 

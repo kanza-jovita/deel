@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+<h4 class="mb-3">SITTER PAYMENT LIST</h4><hr>
+<a href="{% url 'add_payment' %}" class="btn btn-primary">Add Payment</a>
+<a href="{% url 'addpayment' %}" class="btn btn-primary">Babies Payment</a>
+</td>
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="table-white">
+            <tr>
+              
+              
+                <th scope="col"> Sitter Name</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Date</th>
+                <th scope="col">Babies Attended</th>
+                <th scope="col">Total Amount</th>
+        </thead>
+        <tbody>
+            {% for payment in payments %}
+            <tr>
+                <td>{{ payment.sitter_name}}</td>
+                <td>UGX{{ payment.amount }}</td>
+                <td>{{ payment.date }}</td>
+                <td>{{ payment.numbers_of_babies_attended_to}}</td>
+                <td>UGX{{ payment.total_amount}}</td>     
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br><br>
+{% endblock %}
