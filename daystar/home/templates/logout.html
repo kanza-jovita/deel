@@ -1,11 +1,17 @@
 {% extends 'base.html' %} {% load crispy_forms_tags %} {% block content %}
 <br><br><br><br><br><br>
+<style>
+  body {
+      background-color: rgba(158, 184, 217, 0.5); 
+  }
+
+</style>
 <div class="body container-fluid container">
   <h2 class="text-center">You have successsfully logged out</h2><br>
   <h6 class="text-center "><a href="{% url 'login' %}"><input
     type="submit"
     value="Login Again"
-    class="btn btn-info btn-danger"
+    class="btn btn-info btn-primary"
     type="button"
 /></a></h6>
 </div>

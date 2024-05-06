@@ -2,9 +2,11 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
-<h4 >UPDATE SITTERS INFORMATION </h4><hr>
+<div class="card-header">
+    <h2>UPDATE SITTER INFORMATION</h2>
+</div>
 <div class="container">
-    <form method="POST" class="sitter-form">
+    <form method="POST" class="registration-form">
         {% csrf_token %}
         {{ form | crispy }}
         <button type="submit" class="btn btn-primary" >Update</button>

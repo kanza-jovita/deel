@@ -84,6 +84,7 @@
             <th scope="col" class="project-h1">Stock name</th>
             <th scope="col" class="project-h1">Quantity</th>
             <th scope="col" class="project-h1">Unit Price(Ugx)</th>
+            <th scope="col" class="project-h1">Total Amount(Ugx)</th>
             <th scope="col" class="project-h1">Detail</th>
         </tr>
     </thead>
@@ -94,6 +95,7 @@
             <td>{{product.item_name}}</td>
              <td>{{product.Quantity}}</td>
             <td>UGX{{product.Unit_price}}</td>
+            <td>UGX{{product.total_amount}}</td>
            <div> 
             <td >
                 <a href="{% url 'issue' pk=product.id %}" class="btn btn-primary">Issue Stock</a>
@@ -105,6 +107,7 @@
     </tbody>
     {% endfor %}
 </table>
+<br><br><br>
 </div>
 </div>
 </div>

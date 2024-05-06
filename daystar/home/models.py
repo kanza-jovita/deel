@@ -26,24 +26,29 @@ class Sitterreg(models.Model):
 
 class Sitter_arrival(models.Model):
     sitter_name=models.ForeignKey(Sitterreg, on_delete=models.CASCADE) 
-    sitter_number=models.IntegerField(default=0)
+    # sitter_number=models.IntegerField(default=0)
     date_of_arrival=models.DateField(default=timezone.now)   
     timein=models.TimeField ()
+    timeout=models.TimeField (null=True, blank=True)
     Attendancestatus = models.CharField(choices=[('onduty', 'On Duty'), ('offduty', 'Off Duty')], max_length=100)
     def __str__(self):
         return self.sitter_name
         
 class Babyreg(models.Model):
-    c_stay = models.ForeignKey(Categorystay,on_delete = models.CASCADE,null=False,blank = False)#this links class Babe to class Categorystay
-    Baby_name = models.CharField(max_length=30, null='False',blank = 'False')
-    Baby_number = models.CharField(max_length=30, null='False',blank = 'False')
+    c_stay = models.ForeignKey(Categorystay, on_delete=models.CASCADE, null=False, blank=False)
+    Baby_name = models.CharField(max_length=30, null=False, blank=False)
+    Baby_number = models.CharField(max_length=30, null=False, blank=False)
     Date = models.DateField(default=timezone.now)
-    Gender = models.CharField(max_length=30, null='False',blank = 'False')
+    Gender = models.CharField(max_length=30, null=False, blank=False)
     Age = models.IntegerField()
-    Location = models.CharField(max_length=30, null='False',blank = 'False')
-    Parents_names = models.CharField(max_length=30, null='False',blank = 'False')
+    Location = models.CharField(max_length=30, null=False, blank=False)
+    Parents_names = models.CharField(max_length=30, null=False, blank=False)
+    timein = models.TimeField(default=timezone.now)
+    brought = models.CharField(max_length=200)
+
     def __str__(self):
         return self.Baby_name
+
 
 #Dolls    
 class Category_doll(models.Model):  
@@ -90,40 +95,50 @@ class Category(models.Model):
         return self.name 
     
 class Procurement(models.Model):
-    category = models.ForeignKey(Category,on_delete=models.CASCADE,null=True, blank=True)
-    item_name = models.CharField(max_length=200,)
-    Quantity=models.IntegerField(default=0)
-    date=models.DateField(auto_now_add=True, null=True)
-    Unit_price=models.IntegerField( null=True)
-    received_quantity=models.IntegerField(default=0,null=True,blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    item_name = models.CharField(max_length=200)
+    Quantity = models.IntegerField(default=0)
+    date = models.DateField(auto_now_add=True, null=True)
+    Unit_price = models.IntegerField(null=True)
+    received_quantity = models.IntegerField(default=0, null=True, blank=True)
 
     def __str__(self):
         return self.item_name
-      
-class Used(models.Model): 
-    item = models.ForeignKey(Procurement,on_delete=models.CASCADE) 
-    quantity_issued=models.IntegerField(default=0)
-    usage_date=models.DateField()
 
-#Baby arrival and departure
-class Arrival(models.Model):
-    baby_name=models.ForeignKey(Babyreg, on_delete=models.CASCADE)
-    baby_number=models.CharField(max_length=30, null='False',blank = 'False')
-    assign = models.ForeignKey(Sitterreg, on_delete = models.CASCADE,null=True,blank = True)
-    date=models.DateField(default=timezone.now)
-    timein=models.TimeField()
-    broughtby=models.CharField(max_length=200)
+    def total_amount(self):
+        if self.Quantity is not None and self.Unit_price is not None:
+            return self.Quantity * self.Unit_price
+        return 0
+
+class Used(models.Model):
+    item = models.ForeignKey(Procurement, on_delete=models.CASCADE)
+    quantity_issued = models.IntegerField(default=0)
+    issue_date = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return self.baby_number
+        return f"Issued {self.quantity_issued} units of {self.item.item_name} on {self.issue_date}"
+
+#Baby departure
+# class Arrival(models.Model):
+#     baby_name=models.ForeignKey(Babyreg, on_delete=models.CASCADE)
+#     baby_number=models.CharField(max_length=30, null='False',blank = 'False')
+#     assign = models.ForeignKey(Sitterreg, on_delete = models.CASCADE,null=True,blank = True)
+#     date=models.DateField(default=timezone.now)
+#     timein=models.TimeField()
+#     brought=models.CharField(max_length=200)
+
+#     def __str__(self):
+#         return self.baby_number
 
 
 class Departure(models.Model):
     baby_name=models.ForeignKey(Babyreg,on_delete=models.CASCADE)
-    baby_number=models.CharField(max_length=10) 
+    # baby_number=models.CharField(max_length=10) 
     date=models.DateField(default=timezone.now)
     timeout=models.TimeField()
     picker=models.CharField(max_length=200)
+    contact = models.CharField(max_length=30)
+    NIN = models.CharField(max_length=30, null='False',blank = 'False')
     comment=models.CharField(max_length=200,null=True, blank=True)
     def __str__(self):
         return self.baby_name
@@ -145,7 +160,7 @@ class Payment(models.Model):
 
 #Sitter payments    
 class Sitterpayment(models.Model):
-    sitter_name = models.ForeignKey(Sitterreg, on_delete=models.CASCADE)
+    sitter_name = models.ForeignKey(Sitter_arrival, on_delete=models.CASCADE)
     amount = models.IntegerField(default=0)
     date = models.DateField(default=timezone.now)
     babies_assigned = models.IntegerField(default=0)
@@ -156,5 +171,6 @@ class Sitterpayment(models.Model):
     def total_amount(self):
         total = self.amount * self.babies_assigned
         return total  # Removed int() conversion here
+
 
     

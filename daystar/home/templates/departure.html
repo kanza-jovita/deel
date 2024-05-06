@@ -84,23 +84,25 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Baby No</th>
                 <th scope="col">Date</th>
                 <th scope="col">Timeout</th>
                 <th scope="col">Picker</th>
+                <th scope="col">Contact</th>
+                <th scope="col">NIN</th>
                 <th scope="col">Comment</th>
                 <th scope=>Action</th>
             </tr>
         </thead>
         <tbody>
-            {% for baby in babys %}
+            {% for baby in babies %}
             <tr>
-                <td>{{ baby.id }}</td>
+                <td>BB-00{{ baby.id }}</td>
                 <td>{{ baby.baby_name}}</td>
-                <td>{{ baby.baby_number }}</td>
                 <td>{{ baby.date }}</td>
                 <td>{{ baby.timeout }}</td>
                 <td>{{ baby.picker}}</td>
+                <td>{{ baby.contact}}</td>
+                <td>{{ baby.NIN}}</td>
                 <td>{{ baby.comment}}</td>
                 <td>
                     <a href="{% url 'editdeparture' id=baby.id %}" class="btn btn-primary ">Edit</a>

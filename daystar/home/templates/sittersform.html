@@ -90,7 +90,7 @@
         <table class="table table-bordered table-hover">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Sitter Number</th>
                     <th scope="col">Name</th>
                     <th scope="col">Number</th>
                     <th scope="col">Date Of Birth</th>
@@ -108,7 +108,7 @@
             <tbody>
                 {% for sitter in sitters %}
                 <tr>
-                    <th scope="row">{{ sitter.id }}</th>
+                    <th scope="row">ST-00{{ sitter.id }}</th>
                     <td>{{ sitter.Sitter_name }}</td>
                     <td>{{ sitter.Sitter_number }}</td>
                     <td>{{ sitter.Date_of_birth }}</td>

@@ -8,7 +8,6 @@
 <div class="back-container">
         <div class="container">
             <form method="POST" class="sales-form">
-        
                 {% csrf_token %}
                 {{ sales_form | crispy }}
                 <button type="submit" class="btn btn-primary" >SELL</button>

@@ -61,29 +61,116 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-body">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'index' %}"><img  src="{% static 'images/logo.jpg' %}" alt="logo"
-                    class="logo-img"></a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarColor01">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <!-- <a class="nav-link active" href="{% url 'index' %}" id="t">Home -->
-                            <span class="visually-hidden">(current)</span>
-                        </a>
-                    </li>
+    <body>
+        <div>
+          <nav
+            class="navbar navbar-expand-lg border-bottom border-body"
+            style="background-color: #02315E"
+          >
+            <div class="container-fluid">
+              <a class="navbar-brand" href=""
+                ><img style="border-radius: 50px;"
+                  src="{% static 'images/logo.jpg' %}"
+                  alt="logo"
+                  class="logo-img"
+              /></a>
     
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+    
+              <div
+                class="collapse navbar-collapse justify-content-center"
+                id="navbarColor01"
+              >
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active text-white" href="/home/" id="t">Home</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle active text-white"
+                      href=""
+                      id="babiesDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      Babies
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="babiesDropdown">
+                      <a class="dropdown-item" href="/babiesform/">Babies Arrival</a>
+                      <!-- <a class="dropdown-item" href="/arrival/">Arrival</a> -->
+                      <a class="dropdown-item" href="/departure/">Departure</a>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle active text-white"
+                      href=""
+                      id="sittersDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      Sitters
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="sittersDropdown">
+                      <a class="dropdown-item" href="/sittersform/">Sitters List</a>
+                      <a class="dropdown-item" href="/onduty/">Duty</a>
+                      <!-- <a class="dropdown-item" href="/editonduty/">Off Duty</a> -->
+                    </div>
+                  </li>
+                  
+                  <!-- dropdown for Doll Store -->
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle active text-white"
+                      href="#"
+                      id="dollDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      Doll Store
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dollDropdown">
+                        <a class="dropdown-item" href="/doll/">Dolls</a>
+                      <a class="dropdown-item" href="/all_sales/">Sales</a>
+                      <a class="dropdown-item" href="/receipt/">Receipts</a>
+                    </div>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active text-white" href="/paymentform/" id="t"
+                      >Payments</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active text-white" href="/inventory/" id="t"
+                      >Stock</a
+                    >
+                  </li>
                 </ul>
+              </div>
+    
+              <div class="ml-auto">
+                <a class="btn btn-light" href="/logout" id="medi">Logout</a>
+              </div>
             </div>
+          </nav>
+          <!-- end of nav -->
         </div>
-    </nav>
-    <!-- end of nav -->
 
     <div class="login-container" style="padding-top: 10px;">
       </div>
@@ -98,11 +185,11 @@
     {% endblock %}
     <footer>
         <div class="footer">
-            <div class="social-icons">
+            <!-- <div class="social-icons">
                 <a href="https://www.facebook.com/your-page" target="_blank"><i class="fab fa-facebook"></i></a>
                 <a href="https://twitter.com/your-handle" target="_blank"><i class="fab fa-twitter"></i></a>
                 <a href="https://www.instagram.com/your-account/" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div>
+            </div> -->
             <p>&copy; 2023 Kanza Jovita. All rights reserved.</p>
         </div>
   </footer>

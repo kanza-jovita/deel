@@ -12,6 +12,7 @@ class Babyreg_form(forms.ModelForm):
     class Meta:
         model = Babyreg
         fields = '__all__'
+        
 
 
 class  DollForm(ModelForm):
@@ -30,10 +31,10 @@ class SalesrecordForm(ModelForm):
         model = Salesrecord
         fields = [ 'quantity_sold', 'amount_received', 'payee']  
 
-class Arrival_form(forms.ModelForm):
-    class Meta:
-        model = Arrival
-        fields = '__all__'
+# class Arrival_form(forms.ModelForm):
+#     class Meta:
+#         model = Arrival
+#         fields = '__all__'
 
 class Departure_form(ModelForm):
     class Meta:
@@ -60,10 +61,10 @@ class SitterpaymentForm(ModelForm):
          model=Sitterpayment
          fields='__all__'
 
-class ArrivalForm(ModelForm):
-     class Meta:
-         model=Arrival
-         fields='__all__'
+# class ArrivalForm(ModelForm):
+#      class Meta:
+#          model=Arrival
+#          fields='__all__'
 
 class   DepartureForm(ModelForm):
      class Meta:

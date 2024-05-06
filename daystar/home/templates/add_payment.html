@@ -5,8 +5,9 @@
 <div class="card-header">
     <h2>SITTER PAYMENT FORM</h2>
 </div>
+<br><br>
 <div class="container">
-    <form method="POST" class="sitter-form">
+    <form method="POST" class="registration-form">
         {% csrf_token %}
         {{ form | crispy }}
         <button type="submit" class="btn btn-primary" >Submit</button>

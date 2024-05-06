@@ -90,7 +90,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Bay Number</th>
                     <th scope="col">Categorystay</th>
                     <th scope="col">Name</th>
                     <th scope="col">Number</th>
@@ -99,13 +99,15 @@
                     <th scope="col">Age</th>
                     <th scope="col">Location</th>
                     <th scope="col">Parents Names</th>
+                    <th scope="col">Time In</th>
+                    <th scope="col">Brought by</th>
                     <th scope="col">Action</th> <!-- Fixed typo here -->
                 </tr>
             </thead>
             <tbody>
                 {% for baby in babies %}
                 <tr>
-                    <th scope="row">{{ baby.id }}</th>
+                    <th scope="row">BB-00{{ baby.id }}</th>
                     <td>{{ baby.c_stay}}</td>
                     <td>{{ baby.Baby_name }}</td>
                     <td>{{ baby.Baby_number }}</td>
@@ -114,6 +116,8 @@
                     <td>{{ baby.Age}}</td>
                     <td>{{ baby.Location }}</td>
                     <td>{{ baby.Parents_names }}</td>
+                    <td>{{ baby.timein }}</td>
+                    <td>{{ baby.brought }}</td>
                     <td class="btn-container">
                         <a href="{% url 'edit' id=baby.id %}" class="btn"><i class="fas fa-edit"></i>Edit</a>
                         <form action="{% url 'delete_baby' id=baby.id %}" method="POST" onsubmit="return confirm('Delete')">

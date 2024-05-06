@@ -1,11 +1,15 @@
 .registration-form{
-    max-width: 50%;
+    /* max-width: 50%; */
     border: 2px solid rgb(173, 189, 216);
     border-radius: 25px;
     padding: 10px;
-    margin-left: 200px;
+    margin: 0 auto;
     box-shadow: 0 0 15px;
     background-color: rgba(158, 184, 217, 0.5);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+
 }
 
 

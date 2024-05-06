@@ -1,7 +1,92 @@
-{% extends 'base.html' %}
-{% load crispy_forms_tags %}
-{% block content %}
+{% extends 'base.html' %}{% block content %}
+{% include 'dash.html' %}
+<!-- <style>
+    body {
+        background-color: rgba(158, 184, 217, 0.5); 
+    }
 
-<h1>This is the home page</h1>
+</style>
 
-{% endblock %}
+<div class="px-2 py-8 mx-auto">
+    <div class="grid grid-cols-4 gap-8">
+        <div class="text-center md:border-r">
+            <h6 class="text-2xl font-bold lg:text-5xl xl:text-6xl"> {{ count_babies }} </h6>
+            <p class="text-sm font-medium tracking-widest text-gray-800 uppercase lg:text-base">
+                Babies
+            </p>
+        </div>
+        <div class="text-center md:border-r">
+            <h6 class="text-2xl font-bold lg:text-5xl xl:text-6xl"> {{ count_sitters }} </h6>
+            <p class="text-sm font-medium tracking-widest text-gray-800 uppercase lg:text-base">
+                Sitters
+            </p>
+        </div>
+        <div class="text-center md:border-r">
+            <h6 class="text-2xl font-bold lg:text-5xl xl:text-6xl"> {{ count_enrolled_babies }}</h6>
+            <p class="text-sm font-medium tracking-widest text-gray-800 uppercase lg:text-base">
+                Enrolled
+            </p>
+        </div>
+        <div class="text-center">
+            <h6 class="text-2xl font-bold lg:text-5xl xl:text-6xl"> {{ count_transactions }}  </h6>
+            <p class="text-sm font-medium tracking-widest text-gray-800 uppercase lg:text-base">
+                Transactions
+            </p>
+        </div>
+    </div>
+</div>
+<div class="p-4 flex gap-4 justify-end">
+    <a href="/addbaby/" class="p-2 bg-blue-500 text-white rounded-lg shadow-lg"> Add Baby </a>
+    <a href="/addsitter/" class="p-2 bg-blue-500 text-white rounded-lg shadow-lg"> Add Sitter </a>
+</div>
+
+<div class="flex gap-2 p-4">
+    <input type="text" placeholder="Search Baby" class="p-2 rounded-lg border w-full">
+    <button class="p-2 bg-black text-white rounded-lg"> Search </button>
+</div>
+<div class="grid grid-cols-2 gap-4 p-4">
+    <div class="w-full">
+        <p class="p-2 text-lg"> Recent babies </p>
+        <table class="w-full">
+            <thead class="bg-black text-white">
+                <tr>
+                    <th> # </th>
+                    <th> Name </th>
+                    <th> Age </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for baby in recent_babies %}
+                    <tr>
+                        <td> ST-00{{ baby.id }} </td>
+                        <td> <a class="text-blue-500" href="/baby/view/{{ baby.id }}"> {{ baby.baby_name }} </a> </td>
+                        <td> {{ baby.Baby_name }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="w-full">
+        <p class="p-2 text-lg"> Recent sitters </p>
+        <table class="w-full">
+            <thead class="bg-black text-white">
+                <tr>
+                    <th> # </th>
+                    <th> Sitter Name </th>
+                    <th>Date of birth </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sitter in sitters %}
+                    <tr>
+                        <td> CS-00{{ sitter.id }} </td>
+                        <td> <a class="text-blue-500" href="/sitter/view/{{ course.id }}"> {{ sitter.sitter_name }} </a> </td>
+                        <td> {{ sitter.sitter_name }} </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %} -->

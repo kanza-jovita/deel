@@ -80,8 +80,7 @@
     <table class="table table-bordered table-hover">
         <thead class="table-white">
             <tr>
-              
-              
+                <th scope="col">Sitter No</th>
                 <th scope="col"> Sitter Name</th>
                 <th scope="col">Amount</th>
                 <th scope="col">Date</th>
@@ -91,6 +90,7 @@
         <tbody>
             {% for payment in payments %}
             <tr>
+                <td>{{ payment.sitter_name}}</td>
                 <td>{{ payment.sitter_name}}</td>
                 <td>UGX{{ payment.amount }}</td>
                 <td>{{ payment.date }}</td>

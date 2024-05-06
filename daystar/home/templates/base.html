@@ -15,13 +15,14 @@
       href="{% static 'favicon/favicon.ico' %}"
       type="image/x-icon"
     />
+    
     {% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
   </head>
   <body>
     <div>
       <nav
         class="navbar navbar-expand-lg border-bottom border-body"
-        style="background-color: #02315E"
+        style="background-color: #02315E;"
       >
         <div class="container-fluid">
           <a class="navbar-brand" href=""
@@ -64,8 +65,8 @@
                   Babies
                 </a>
                 <div class="dropdown-menu" aria-labelledby="babiesDropdown">
-                  <a class="dropdown-item" href="/babiesform/">Babies List</a>
-                  <a class="dropdown-item" href="/arrival/">Arrival</a>
+                  <a class="dropdown-item" href="/babiesform/">Baby Arrival</a>
+                  <!-- <a class="dropdown-item" href="/arrival/">Arrival</a> -->
                   <a class="dropdown-item" href="/departure/">Departure</a>
                 </div>
               </li>
@@ -83,8 +84,8 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="sittersDropdown">
                   <a class="dropdown-item" href="/sittersform/">Sitters List</a>
-                  <a class="dropdown-item" href="/onduty/">On Duty</a>
-                  <a class="dropdown-item" href="/editonduty/">Off Duty</a>
+                  <a class="dropdown-item" href="/onduty/">Duty</a>
+                  <!-- <a class="dropdown-item" href="/editonduty/">Off Duty</a> -->
                 </div>
               </li>
               
@@ -129,10 +130,10 @@
     </div>
 
     {% block content %} {% endblock %}
-    <br /><br /><br />
+    <br/><br /><br />
     <footer>
       <div class="footer">
-        <div class="social-icons">
+        <!-- <div class="social-icons">
           <a href="https://www.facebook.com/your-page" target="_blank"
             ><i class="fab fa-facebook"></i
           ></a>
@@ -142,7 +143,7 @@
           <a href="https://www.instagram.com/your-account/" target="_blank"
             ><i class="fab fa-instagram"></i
           ></a>
-        </div>
+        </div> -->
         <p>&copy; 2023 Kanza Jovita. All rights reserved.</p>
       </div>
     </footer>
