@@ -12,36 +12,31 @@
             background-color: rgba(158, 184, 217, 0.5); 
         }
     </style>
-    <p style="font-size: x-large;color:rgb(22, 47, 144); text-align: center; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">Welcome to DayStar Daycare! What would you like to do today?</p>
     
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-3 text-center mb-4">
-                <div class="p-4 shadow" style="border-radius: 50px; background-color:  rgba(99, 141, 195, 0.5);">
+                <div class="bg-white p-4 rounded shadow">
                     <h2 class="text-2xl font-bold text-blue-500 mb-2">{{ count_babies }}</h2>
-                    <!-- <p class="text-gray-600 font-medium"><b>Babies</b></p> -->
-                    <a style="background-color: rgba(99, 141, 195, 0.5);" href="{%  url 'babiesform' %}" class="btn">Babies</a>
+                    <p class="text-gray-600 font-medium">Babies</p>
                 </div>
             </div>
             <div class="col-md-3 text-center mb-4">
-                <div class="bg-white p-4 shadow" style="border-radius: 50px;">
+                <div class="bg-white p-4 rounded shadow">
                     <h2 class="text-2xl font-bold text-blue-500 mb-2">{{ count_sitters }}</h2>
-                    <!-- <p class="text-gray-600 font-medium"><b>Sitters</b></p> -->
-                    <a style="background-color: rgba(99, 141, 195, 0.5);" href="{%  url 'sittersform' %}" class="btn ">Sitters</a>
+                    <p class="text-gray-600 font-medium">Sitters</p>
                 </div>
             </div>
             <div class="col-md-3 text-center mb-4">
-                <div class=" p-4  shadow" style="border-radius: 50px; background-color:  rgba(99, 141, 195, 0.5);">
+                <div class="bg-white p-4 rounded shadow">
                     <h2 class="text-2xl font-bold text-blue-500 mb-2">{{ count_dolls_in_stock }}</h2>
-                    <!-- <p class="text-gray-600 font-medium"><b>Dolls</b></p> -->
-                    <a style="background-color: rgba(99, 141, 195, 0.5);" href="{%  url 'doll' %}" class="btn">Dolls</a>
+                    <p class="text-gray-600 font-medium">Dolls</p>
                 </div>
             </div>
             <div class="col-md-3 text-center mb-4">
-                <div class="bg-white p-4 shadow" style="border-radius: 50px;">
+                <div class="bg-white p-4 rounded shadow">
                     <h2 class="text-2xl font-bold text-blue-500 mb-2">{{ count_payments }}</h2>
-                    <!-- <p class="text-gray-600 font-medium"><b>Payments</b></p> -->
-                    <a style="background-color: rgba(99, 141, 195, 0.5);" href="{%  url 'paymentform' %}" class="btn">Payments</a>
+                    <p class="text-gray-600 font-medium">Payments</p>
                 </div>
             </div>
         </div>
@@ -50,7 +45,7 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-6 mb-4">
-                <div class="bg-white p-4 shadow" style="border-radius: 50px;">
+                <div class="bg-white p-4 rounded shadow">
                     <h2 class="text-lg font-bold mb-3">Recent Babies</h2>
                     <table class="table">
                         <thead class="bg-blue-500 text-white">
@@ -73,7 +68,7 @@
                 </div>
             </div>
             <div class="col-md-6 mb-4">
-                <div class="bg-white p-4 shadow" style="border-radius: 50px;">
+                <div class="bg-white p-4 rounded shadow">
                     <h2 class="text-lg font-bold mb-3">Recent Sitters</h2>
                     <table class="table">
                         <thead class="bg-blue-500 text-white">
