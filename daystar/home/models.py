@@ -33,7 +33,7 @@ class Sitter_arrival(models.Model):
 #Sitter payments    
 class Sitterpayment(models.Model):
     sitter_names = models.ForeignKey(Sitter_arrival, on_delete=models.CASCADE)
-    amount = models.IntegerField(default=0)
+    amount = models.IntegerField(default=3000)
     date = models.DateField(default=timezone.now)
     babies_assigned = models.IntegerField(default=0)
     def __str__(self):
