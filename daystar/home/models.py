@@ -128,10 +128,6 @@ class Payment(models.Model):
         super().save(*args, **kwargs)
 
 
-
-
-
-
 #Dolls    
 class Category_doll(models.Model):  
      name = models.CharField(max_length=100,null=True, blank=True)
@@ -187,15 +183,16 @@ class Procurement(models.Model):
     def __str__(self):
         return str(self.item_name)
 
-    def total_amount(self):
-        if self.Quantity is not None and self.Unit_price is not None:
-            return self.Quantity * self.Unit_price
-        return 0
+    # def total_amount(self):
+    #     if self.Quantity is not None and self.Unit_price is not None:
+    #         return self.Quantity * self.Unit_price
+    #     return 0
 
 class Used(models.Model):
     item = models.ForeignKey(Procurement, on_delete=models.CASCADE)
     quantity_issued = models.IntegerField(default=0)
     issue_date = models.DateField(default=timezone.now)
+    issued_to = models.CharField(default=0, max_length=100)
 
     def __str__(self):
         return f"Issued {self.quantity_issued} units of {self.item.item_name} on {self.issue_date}"

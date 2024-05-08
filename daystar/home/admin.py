@@ -14,7 +14,6 @@ admin.site.register(Payment)
 admin.site.register(Categorymode)
 admin.site.register(Sitterpayment)
 admin.site.register(Salesrecord)
-# admin.site.register(Arrival)
 admin.site.register(Departure)
 
 

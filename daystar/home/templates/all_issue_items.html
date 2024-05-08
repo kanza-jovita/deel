@@ -97,6 +97,7 @@
         <th scope="col">Stock name</th>
         <th scope="col">Quantity Issued</th>
         <th scope="col">Issue date</th>  
+        <th scope="col">Issued To</th>  
       </tr>
     </thead>
     {% for issue  in issues %}
@@ -104,7 +105,8 @@
       <tr> 
         <td>{{issue.item | title}}</td>
         <td>{{issue.quantity_issued}}</td>
-        <td>{{issue.usage_date}}</td>  
+        <td>{{issue.issue_date}}</td>  
+        <td>{{issue.issued_to}}</td>  
       </tr>
     </tbody>
     {% endfor %}

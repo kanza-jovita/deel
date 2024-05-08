@@ -94,15 +94,16 @@
             <tr>
                 <td>ST-00{{ sitter.id }}</td>
                 <td>{{ sitter.sitter_name}}</td>
-                <!-- <td>{{ sitter.sitter_number }}</td> -->
                 <td>{{ sitter.date_of_arrival }}</td>
                 <td>{{ sitter.timein }}</td>
                 <td>{{ sitter.timeout }}</td>
                 <td>{{ sitter.Attendancestatus}}</td>
-                <td>
+                <td class="btn-container">
                     <a href="{% url 'editonduty' id=sitter.id %}"  class="btn btn-primary ">Update</a>
-                    <a href="{% url 'onduty' id=sitter.id %}" class="btn"><i class="fas fa-trash"></i>Delete</a>
-
+                    <form action="{% url 'delete_onduty' id=sitter.id %}" method="POST" onsubmit="return confirm('Delete')">
+                        {% csrf_token %}
+                        <button class="btn" type="submit"><i class="fas fa-trash"></i>Delete</button>
+                    </form>
                 </td>
             </tr>
             {% endfor %}

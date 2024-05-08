@@ -152,6 +152,16 @@ def editonduty(request, id):
             form=Sitter_arrivalForm(instance=onduty) 
     return render(request,'editonduty.html',{'form':form,'onduty':onduty})   
 
+@login_required
+def delete_onduty(request, id):
+    if request.method == 'POST':
+        instance = get_object_or_404(Sitter_arrival, id=id)
+        instance.delete()
+        return redirect('onduty')
+    else:
+        # Handle GET request or other cases
+        pass
+
 
               
 #Babies views
