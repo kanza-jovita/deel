@@ -132,7 +132,7 @@ def edit(request,id):
             form =Babyreg_form(instance=baby)
     return render(request,'edit.html',{'form':form,baby:baby})
 
-
+@login_required
 def delete_baby (request, id):
     if request.user.is_authenticated:
         delete_it = Babyreg.objects.get(id=id)
