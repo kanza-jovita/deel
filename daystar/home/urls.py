@@ -48,7 +48,7 @@ urlpatterns = [
     path('all_issue_items/', views.all_issue_items, name='all_issue_items'),
     path('issue/<str:pk>',views.issue,name='issue'),
 #payments
-    path('paymentform/', views.paymentform, name='paymentform'),
+    path('paymentform/', views.payment, name='paymentform'),
     path('addpayment/', views.addpayment, name='addpayment'),
     path('editpayment/<int:id>/', views.editpayment, name='editpayment'),
 #sitterpayment

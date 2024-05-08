@@ -69,12 +69,22 @@
     .add-btn {
         margin-left: auto; /* Automatically align to the right */
     }
+
+    .Pending {
+    color: red;
+    font-weight: bold; 
+}
+
+/* CSS for blue text */
+    .Cleared {
+    color: green;
+    font-weight: bold; 
+}
 </style>
 <div class="card-header">
     <h2>PAYMENTS</h2>
 </div>
-<a style="float: right;" href="/addpayment" class="btn btn-primary mb-3">Babies payment</a>
-<a href="/add_payment" class="btn btn-primary mb-3">Sitterpayment</a>
+<a style="float: right;" href="/addpayment" class="btn btn-primary mb-3">Make payment</a>
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
         <thead class="table-teal">
@@ -82,10 +92,12 @@
                 <th scope="col">Baby No</th>
                 <th scope="col">Payee</th>
                 <th scope="col">Period</th>
-                <th scope="col">Refno</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Balance</th>
+                <th scope="col">Mode</th>
                 <th scope="col">Date</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Amount Paid</th>
+                <th scope="col">Status</th>
+                <th scope="col">Balance</th>
                 <th scope=>Action</th>
             </tr>
         </thead>
@@ -95,10 +107,15 @@
                 <td>BB-00{{ payment.id }}</td>
                 <td>{{ payment.payee }}</td>
                 <td>{{ payment.c_payment }}</td>
-                <td>{{ payment.payno }}</td>
-                <td>{{ payment.amount }}</td>
-                <td>{{ payment.balance }}</td>
+                <td>{{ payment.c_mode }}</td>
                 <td>{{ payment.date }}</td>
+                <td>{{ payment.selected_amount }}</td>
+                <td>{{ payment.amount_paid }}</td>
+                <td class="{% if payment.payment_status == 'Pending' %}Pending{% elif payment.payment_status == 'Cleared' %}Cleared{% endif %}">
+                    {{ payment.payment_status }}
+                </td>
+                <td>{{ payment.balance }}</td>
+                
                 <td>
                     <a href="{% url 'editpayment' id=payment.id %}" class="btn btn-primary ">Update</a>
                 </td>

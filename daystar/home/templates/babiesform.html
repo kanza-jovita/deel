@@ -93,7 +93,6 @@
                     <th scope="col">Bay Number</th>
                     <th scope="col">Categorystay</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Number</th>
                     <th scope="col">Date</th>
                     <th scope="col">Gender</th>
                     <th scope="col">Age</th>
@@ -110,7 +109,6 @@
                     <th scope="row">BB-00{{ baby.id }}</th>
                     <td>{{ baby.c_stay}}</td>
                     <td>{{ baby.Baby_name }}</td>
-                    <td>{{ baby.Baby_number }}</td>
                     <td>{{ baby.Date }}</td>
                     <td>{{ baby.Gender }}</td>
                     <td>{{ baby.Age}}</td>
@@ -124,6 +122,48 @@
                             {% csrf_token %}
                             <button class="btn" type="submit"><i class="fas fa-trash"></i>Delete</button>
                         </form>
+                        <td>
+                            <button type="button" class="btn btn-success me-1"
+                                href="{% url 'read' id=baby.id %}" data-bs-toggle="modal"
+                                data-bs-target="#myModal{{baby.id}}">
+                                <i class="fa-solid fa-circle-info fa-lg"></i>
+                            </button>
+
+
+                            <!-- modal view -->
+                            <div class="modal" id="myModal{{baby.id}}" tabindex="-1" aria-labelledby="myModallabel1" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Baby: {{ baby.b_first_name}} {{ baby.b_last_name}}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                            <span aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <ul class="list-unstyled">
+                                            <li>Baby Name: <strong> {{ sitter.sitter_name }} </strong> </li>
+                                            <li>Age: <strong> {{ sitter.b_age }} </strong> </li>
+                                            <li>Gender: <strong> {{ sitter.gender }} </strong> </li>
+                                            <li>Location: <strong> {{ sitter.location }} </strong> </li>
+                                            <li>Father Name: <strong> {{ sitter_father_name }} {{ baby.b_father_last_name }} </strong> </li>
+                                            <li>Mother Name: <strong> {{ sitter.mother_name }} {{ baby.b_mother_last_name }} </strong> </li>
+
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary"
+                                            data-bs-dismiss="modal">Close</button>
+                                            <a href="{% url 'read' id=baby.id %}" type="button" class="btn btn-success">View</a>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </td>
                     </td>
                 </tr>
                 {% endfor %}
