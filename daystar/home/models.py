@@ -9,6 +9,7 @@ class Sitterreg(models.Model):
     Sitter_number = models.CharField(max_length=30, null=False,blank=False)
     Date_of_birth = models.DateField(null=True, blank=True)
     Contact = models.IntegerField()
+    date = models.DateField(default=timezone.now)
     Location_choices = [('kabalagala', 'Kabalagala'),]
     Location = models.CharField(choices=Location_choices, max_length=100)
     Gender =  models.CharField(choices=[('male', 'Male'),('female', 'Female')], max_length=100)
@@ -57,13 +58,13 @@ class Babyreg(models.Model):
     c_stay = models.ForeignKey(Categorystay, on_delete=models.SET_NULL, null=True, blank=True)
     assigned = models.ForeignKey(Sitter_arrival, on_delete=models.SET_NULL, null=True, blank=True)
     Baby_name = models.CharField(max_length=30, null=False, blank=False)
-    Date = models.DateField(default=timezone.now)
+    Date = models.DateTimeField()
     Gender = models.CharField(max_length=30, null=False, blank=False)
     Age = models.IntegerField()
     Location = models.CharField(max_length=30, null=False, blank=False)
     Parents_names = models.CharField(max_length=30, null=False, blank=False)
-    timein = models.TimeField(default=timezone.now)
     brought = models.CharField(max_length=200)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
 
     def __str__(self):
         print(f"Baby name: {self.Baby_name}, Type: {type(self.Baby_name)}")

@@ -4,7 +4,7 @@ from django.template import loader
 from .forms import * 
 from .models import *
 from .filters import *
-from django.contrib.auth import authenticate,login  
+from django.contrib.auth import authenticate,login,logout 
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib.postgres.search import SearchQuery, SearchVector
@@ -21,7 +21,10 @@ def index(request):
     homeContent = template.render()
     return HttpResponse(homeContent)
 
-@login_required
+def log_out(request):
+    return redirect('/login/')
+
+@login_required 
 def home(request):
     count_babies = Babyreg.objects.count()
     count_sitters = Sitterreg.objects.count()
@@ -52,6 +55,8 @@ def addsitter(request):
         if form.is_valid():
             form.save()
             return redirect('sittersform')
+        else:
+            print("Form is not valid")
     else:
         form=Sitterreg_form()
     return render(request,'addsitter.html',{'form':form})
@@ -102,6 +107,8 @@ def add_payment(request):
         if form.is_valid():
             form.save()
             return redirect('pay_list')
+        else:
+            print("Form is not valid")
     else:
         form = SitterpaymentForm()
     return render(request, 'add_payment.html', {'form': form})
@@ -135,6 +142,8 @@ def addonduty(request):
         if form.is_valid():
             form.save()
             return redirect('onduty')
+        else:
+            print("Form is not valid")
     else:
         form = Sitter_arrivalForm()  
     return render(request, 'addonduty.html', {'form': form})
@@ -177,6 +186,8 @@ def addbaby(request):
         if form.is_valid():
             form.save()
             return redirect('babiesform')
+        else:
+            print("Form is not valid")
     else:
         form=Babyreg_form()
     return render(request,'addbaby.html',{'form':form})
@@ -235,6 +246,8 @@ def addpayment(request):
             form.save()
             print(form)
             return redirect('paymentform')
+        else:
+            print("Form is not valid")
     else:
         form=PaymentForm()
     return render(request,'addpayment.html',{'form':form})
@@ -282,6 +295,8 @@ def adddeparture(request):
             form.save()
             print(form)
             return redirect('departure')
+        else:
+            print("Form is not valid")
    else:
             form=DepartureForm()
    return render(request,'adddeparture.html',{'form':form })      
@@ -374,6 +389,8 @@ def add_to_stock(request, pk):
                     return redirect('doll')
                 except ValueError:
                     return HttpResponseBadRequest("Invalid quantity")
+            else:
+                print("Form is not valid")
     else:
         form = Addform()
     return render(request, 'add_to_stock.html', {'form': form})
@@ -404,7 +421,9 @@ def add_to_stocks(request, pk):
             issued_procurement.Quantity += added_quantity
 
             issued_procurement.save()
-            return redirect('inventory')  
+            return redirect('inventory') 
+        else:
+            print("Form is not valid") 
     else:
         form = AddForm()
     

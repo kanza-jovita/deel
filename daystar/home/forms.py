@@ -7,11 +7,15 @@ class Sitterreg_form(forms.ModelForm):
     class Meta:
         model = Sitterreg
         fields = '__all__'
+        
 
 class Babyreg_form(forms.ModelForm):
     class Meta:
         model = Babyreg
         fields = '__all__'
+        widgets = {
+            'Date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
         
 
 
@@ -31,10 +35,6 @@ class SalesrecordForm(ModelForm):
         model = Salesrecord
         fields = [ 'quantity_sold', 'amount_received', 'payee']  
 
-# class Arrival_form(forms.ModelForm):
-#     class Meta:
-#         model = Arrival
-#         fields = '__all__'
 
 class Departure_form(ModelForm):
     class Meta:
@@ -61,10 +61,6 @@ class SitterpaymentForm(ModelForm):
          model=Sitterpayment
          fields='__all__'
 
-# class ArrivalForm(ModelForm):
-#      class Meta:
-#          model=Arrival
-#          fields='__all__'
 
 class   DepartureForm(ModelForm):
      class Meta:
