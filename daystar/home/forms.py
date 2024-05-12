@@ -7,6 +7,9 @@ class Sitterreg_form(forms.ModelForm):
     class Meta:
         model = Sitterreg
         fields = '__all__'
+        widgets = {
+            'date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
         
 
 class Babyreg_form(forms.ModelForm):
@@ -40,6 +43,9 @@ class Departure_form(ModelForm):
     class Meta:
         model = Departure
         fields = '__all__'
+        widgets = {
+            'date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
 
 class AddForm(ModelForm):
      class Meta:
@@ -54,7 +60,7 @@ class Usedform(ModelForm):
 class PaymentForm(ModelForm):
     class Meta:
         model = Payment
-        fields = '__all__' 
+        fields = ['payee', 'c_payment','c_mode', 'selected_amount','amount_paid','payment_status'] 
 
 class SitterpaymentForm(ModelForm):
      class Meta:
@@ -70,4 +76,11 @@ class   DepartureForm(ModelForm):
 class Sitter_arrivalForm(ModelForm):
      class Meta:
          model=Sitter_arrival
-         fields='__all__'      
+         fields=['date_of_arrival', 'sitter_name', 'babies', 'Attendancestatus']
+         widgets = {
+            'date_of_arrival': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
+         widgets = {
+            'babies':forms.CheckboxSelectMultiple(attrs={'class':'checkbox'}),
+        }      
+         

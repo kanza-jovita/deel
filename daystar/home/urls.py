@@ -7,7 +7,8 @@ urlpatterns = [
     path("home/",views.home, name="home"),    
 #login and logout
     path("login/", auth_views.LoginView.as_view(template_name ="login.html"), name="login"),
-    path('logout/', views.log_out, name='logout'),
+    path("logout/", auth_views.LogoutView.as_view(template_name ="logout.html"), name="logout"),
+    
 #babies
     path("addbaby/", views.addbaby, name="addbaby"),
     path("babiesform/", views.babiesform, name="babiesform"),
@@ -53,9 +54,15 @@ urlpatterns = [
     path('paymentform/', views.payment, name='paymentform'),
     path('addpayment/', views.addpayment, name='addpayment'),
     path('editpayment/<int:id>/', views.editpayment, name='editpayment'),
+    path('paymentform/', views.all_payments, name='paymentform'),
 #sitterpayment
     path('add_payment/', views.add_payment, name='add_payment'),
     path('pay_list/', views.pay_list, name='pay_list'),
+
+
+#assign
+    path('assign_view/', views.assign_view, name='assign_view'),
+    path('assign_sitter/<int:id>/', views.assign_sitter, name='assign_sitter'),
 
 ]
 

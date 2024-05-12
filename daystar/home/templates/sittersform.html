@@ -94,30 +94,32 @@
                     <th scope="col">Name</th>
                     <th scope="col">Date Of Birth</th>
                     <th scope="col">Contact</th>
+                    <th scope="col">date</th>
                     <th scope="col">Location</th>
                     <th scope="col">Gender</th>
-                    <th scope="col">Level of Education</th>
-                    <th scope="col">Next of Kin</th>
+                    <!-- <th scope="col">Level of Education</th> -->
+                    <!-- <th scope="col">Next of Kin</th> -->
                     <th scope="col">NIN</th>
-                    <th scope="col">Recommenders Name</th>
-                    <th scope="col">Religion</th>
+                    <!-- <th scope="col">Recommenders Name</th> -->
+                    <!-- <th scope="col">Religion</th> -->
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 {% for sitter in sitters %}
                 <tr>
-                    <th scope="row">ST-00{{ sitter.id }}</th>
+                    <th scope="row">ST-00{{ forloop.counter }}</th>
                     <td>{{ sitter.Sitter_name }}</td>
                     <td>{{ sitter.Date_of_birth }}</td>
                     <td>{{ sitter.Contact }}</td>
+                    <td>{{ sitter.date }}</td>
                     <td>{{ sitter.Location }}</td>
                     <td>{{ sitter.Gender}}</td>   
-                    <td>{{ sitter.Level_of_education }}</td>
-                    <td>{{ sitter.Next_of_kin }}</td>
+                    <!-- <td>{{ sitter.Level_of_education }}</td> -->
+                    <!-- <td>{{ sitter.Next_of_kin }}</td> -->
                     <td>{{ sitter.NIN }}</td>
-                    <td>{{ sitter.Recommenders_name }}</td>
-                    <td>{{ sitter.Religion }}</td>
+                    <!-- <td>{{ sitter.Recommenders_name }}</td> -->
+                    <!-- <td>{{ sitter.Religion }}</td> -->
                     <td>   
                         <!-- <a href="{% url 'read_sitter' id=sitter.id %}"class="btn btn-primary mb-2">View</a> -->
                         <a href="{% url 'edit_sitter' id=sitter.id %}" class="btn"><i class="fas fa-edit"></i>Edit</a>
@@ -136,7 +138,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Baby: {{ baby.b_first_name}} {{ baby.b_last_name}}</h5>
+                                        <h5 class="modal-title">Sitter: {{ sitter.Sitter_name}}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close">
                                             <span aria-hidden="true"></span>
@@ -145,13 +147,17 @@
 
                                     <div class="modal-body">
                                         <ul class="list-unstyled">
-                                            <li>Sitter No: <strong> {{ sitter.sitter_name }} </strong> </li>
-                                            <li>Sitter Name: <strong> {{ sitter.sitter_number }} </strong> </li>
-                                            <li>Age: <strong> {{ sitter.b_age }} </strong> </li>
-                                            <li>Gender: <strong> {{ sitter.gender }} </strong> </li>
-                                            <li>Location: <strong> {{ sitter.location }} </strong> </li>
-                                            <li>Father Name: <strong> {{ sitter_father_name }} {{ baby.b_father_last_name }} </strong> </li>
-                                            <li>Mother Name: <strong> {{ sitter.mother_name }} {{ baby.b_mother_last_name }} </strong> </li>
+                                            <!-- <li>Sitter No: <strong> {{ sitter.sitter.id }} </strong> </li> -->
+                                            <li>Sitter Name: <strong> {{ sitter.Sitter_name }} </strong> </li>
+                                            <li>DOB: <strong> {{ sitter.Date_of_birth }} </strong> </li>
+                                            <li>Date: <strong> {{ sitter.date }} </strong> </li>
+                                            <li>Location: <strong> {{ sitter.Location }} </strong> </li>
+                                            <li>Gender: <strong> {{ sitter.Gender }} </strong> </li>
+                                            <li>Educ. Level: <strong> {{ sitter.Level_of_education }} </strong> </li>
+                                            <li>Next of Kin: <strong> {{ sitter.Next_of_kin }} </strong> </li>
+                                            <li>NIN: <strong> {{ sitter.NIN }} </strong> </li>
+                                            <li>Recommenders Name: <strong> {{ sitter.Recommenders_name }} </strong> </li>
+                                            <li>Religion: <strong> {{ sitter.Religion }} </strong> </li>
 
                                         </ul>
                                     </div>

@@ -23,6 +23,7 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                {% if user.is_authenticated %}
                 <div class="collapse navbar-collapse justify-content-center" id="navbarColor01">
                     <ul class="navbar-nav">
                     <li class="nav-item">
@@ -62,7 +63,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="paymentsDropdown">
                             <a class="dropdown-item" href="/paymentform/">Baby Payments</a>
-                            <!-- <a class="dropdown-item" href="/pay_list/">Sitter Payments</a> -->
+                            <a class="dropdown-item" href="/assign_view/">Sitter Payments</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -73,7 +74,8 @@
                         <a class="nav-link text-white" href="/logout" id="medi">Logout</a>
                     </li>
                     </ul>
-            </div>
+                    {% endif %}
+                </div>
         </nav>
         <!-- end of nav -->
     </div>

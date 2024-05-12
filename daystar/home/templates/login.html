@@ -1,7 +1,7 @@
-
+{% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
     <style>
         /* Additional CSS styles */
         body {
@@ -56,8 +56,7 @@
     {% block content %}
 
 
-
-    
+    <div class = "container w-25 d-flex justify-content-center alighn align-items center">
     <form id="form" method="POST">
         {% csrf_token %}
         {{form | crispy}}
@@ -65,6 +64,7 @@
         <input type="submit" value="Login" class="btn   btn-block submit"
             style="background-color: #343a40; color: aliceblue;"> <br>
     </form>
+</div>
     {% endblock %}
     <footer>
         <div class="footer">

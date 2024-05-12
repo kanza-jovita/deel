@@ -6,10 +6,10 @@ from django.core.validators import MinValueValidator
 #Create your models here.
 class Sitterreg(models.Model):
     Sitter_name = models.CharField(max_length=30, null=False,blank=False)
-    Sitter_number = models.CharField(max_length=30, null=False,blank=False)
+    # Sitter_number = models.CharField(max_length=30, null=False,blank=False)
     Date_of_birth = models.DateField(null=True, blank=True)
-    Contact = models.IntegerField()
-    date = models.DateField(default=timezone.now)
+    Contact = models.CharField(max_length=30,null=False,blank=False)
+    date = models.DateTimeField()
     Location_choices = [('kabalagala', 'Kabalagala'),]
     Location = models.CharField(choices=Location_choices, max_length=100)
     Gender =  models.CharField(choices=[('male', 'Male'),('female', 'Female')], max_length=100)
@@ -18,22 +18,15 @@ class Sitterreg(models.Model):
     NIN = models.CharField(max_length=30, null=False,blank=False)
     Recommenders_name = models.CharField(max_length=30, null=False,blank=False)
     Religion = models.CharField(max_length=30, null=True,blank=True)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
     def __str__(self):
         return str(self.Sitter_name)
 
-#sitter arrival
-class Sitter_arrival(models.Model):
-    sitter_name=models.ForeignKey(Sitterreg, on_delete=models.CASCADE) 
-    date_of_arrival=models.DateField(default=timezone.now)   
-    timein=models.TimeField ()
-    timeout=models.TimeField (null=True, blank=True)
-    Attendancestatus = models.CharField(choices=[('onduty', 'On Duty'), ('offduty', 'Off Duty')], max_length=100)
-    def __str__(self):
-        return str(self.sitter_name)
+
     
 #Sitter payments    
 class Sitterpayment(models.Model):
-    sitter_names = models.ForeignKey(Sitter_arrival, on_delete=models.CASCADE)
+    # sitter_names = models.ForeignKey(Sitter_arrival, on_delete=models.CASCADE)
     amount = models.IntegerField(default=3000)
     date = models.DateField(default=timezone.now)
     babies_assigned = models.IntegerField(default=0)
@@ -55,14 +48,15 @@ class Categorystay(models.Model):
 
          
 class Babyreg(models.Model):
-    c_stay = models.ForeignKey(Categorystay, on_delete=models.SET_NULL, null=True, blank=True)
-    assigned = models.ForeignKey(Sitter_arrival, on_delete=models.SET_NULL, null=True, blank=True)
     Baby_name = models.CharField(max_length=30, null=False, blank=False)
+    fathers_names = models.CharField(max_length=30, null=False, blank=False)
+    mothers_names = models.CharField(max_length=30, null=False, blank=False)
+    c_stay = models.ForeignKey(Categorystay, on_delete=models.SET_NULL, null=True, blank=True)
+    # assigned = models.ForeignKey(Sitter_arrival, on_delete=models.SET_NULL, null=True, blank=True)
     Date = models.DateTimeField()
     Gender = models.CharField(max_length=30, null=False, blank=False)
     Age = models.IntegerField()
     Location = models.CharField(max_length=30, null=False, blank=False)
-    Parents_names = models.CharField(max_length=30, null=False, blank=False)
     brought = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
 
@@ -72,15 +66,32 @@ class Babyreg(models.Model):
             return str(self.Baby_name)
         else:
             return "Unnamed Baby"
+
+#sitter arrival
+class Sitter_arrival(models.Model):
+    sitter_name=models.ForeignKey(Sitterreg, on_delete=models.CASCADE) 
+    date_of_arrival=models.DateTimeField()  
+    # timein=models.TimeField ()
+    # timeout=models.TimeField (null=True, blank=True)
+    # Attendancestatus = models.CharField(choices=[('onduty', 'On Duty'), ('offduty', 'Off Duty')], max_length=100)
+    Attendancestatus = models.BooleanField(default=False)
+    babies = models.ManyToManyField(Babyreg)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
+
+    def __str__(self):
+        return self.sitter_name.Sitter_name
+    
+
 #Babies departure      
 class Departure(models.Model):
     baby_name=models.ForeignKey(Babyreg,on_delete=models.CASCADE) 
-    date=models.DateField(default=timezone.now)
-    timeout=models.TimeField()
+    date=models.DateTimeField() 
+    # timeout=models.TimeField()
     picker=models.CharField(max_length=200)
     contact = models.CharField(max_length=30)
     NIN = models.CharField(max_length=30, null='False',blank = 'False')
     comment=models.CharField(max_length=200,null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
     def __str__(self):
         return str(self.baby_name)
     
@@ -89,19 +100,6 @@ class Categorymode(models.Model):
     c_name = models.CharField(max_length=100,null=True,blank=True)
     def __str__(self):
         return str(self.c_name)
-    
-# class Payment(models.Model):
-#     payee = models.ForeignKey(Babyreg, on_delete=models.CASCADE, null=True, blank=True)
-#     c_payment = models.ForeignKey(Categorystay, on_delete=models.SET_NULL, null=True, blank=True)
-#     c_mode = models.ForeignKey(Categorymode, on_delete=models.SET_NULL, null=True)
-#     date = models.DateField(auto_now_add=True, null=True)
-#     amount=models.IntegerField(null=False, blank=False)
-#     balance=models.IntegerField(null=True, blank=True)
-#     def __str__(self):
-#       return str(self.payee) 
-    
-#     def get_balance(self):
-#         return self.actual_amount - self.amount_paid 
 
 
 
@@ -121,12 +119,14 @@ class Payment(models.Model):
     payment_status = models.CharField(choices=[('Cleared', 'Cleared'), ('Pending', 'Pending')], max_length=100,default=0)
     balance = models.IntegerField(null=True, blank=True)
     
-    def __str__(self):
-        return str(self.payee)
     
     def save(self, *args, **kwargs):
         self.balance = self.selected_amount - self.amount_paid
         super().save(*args, **kwargs)
+        
+
+    def __str__(self):
+        return str(self.payee)
 
 
 #Dolls    

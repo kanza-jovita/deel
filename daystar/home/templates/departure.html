@@ -82,7 +82,7 @@
     <table class="table table-bordered table-hover">
         <thead class="table-white">
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">Baby No</th>
                 <th scope="col">Name</th>
                 <th scope="col">Date</th>
                 <th scope="col">Timeout</th>
@@ -96,7 +96,7 @@
         <tbody>
             {% for baby in babies %}
             <tr>
-                <td>BB-00{{ baby.id }}</td>
+                <td>BB-00{{ forloop.counter }}</td>
                 <td>{{ baby.baby_name}}</td>
                 <td>{{ baby.date }}</td>
                 <td>{{ baby.timeout }}</td>

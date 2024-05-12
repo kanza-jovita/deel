@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container w-100">
+    <h1>Assigning Babies to {{sitters.s_name}}</h1>
+
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+
+    <div class="container">
+    <form method="post" class="registration-form">
+        {% csrf_token %}
+        
+        <!-- Select sitter -->
+        {{ form }}
+        {% comment %} <input type="hidden" name="sitter" value="{{ sitters.id }}"> {% endcomment %}
+        <br>
+    
+        <!-- Submit button -->
+        <button type="submit">Assign Babies</button>
+    </form>
+    </div>
+
+</div>
+
+{% endblock %}

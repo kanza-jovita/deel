@@ -1,13 +1,20 @@
 {% extends 'base.html' %} 
 {% block content %}
 <br><br>
+<style>
+    .receipt-container {
+        overflow-x: hidden;
+        max-width: 100vw;
+}
+</style>
+<div receipt-container>
 <div class="container" style="background-color: aliceblue;">
     <h1 class="card-header text-center" class="v">ALL RECEIPTS</h1><br>
     {% for sale in sales %}
     <div class="card" style="opacity: 90%;" >
         
         <div class="card-body">
-            <h5 style="text-align: right;"><h5>Date: {{ receipt.sale_date}}</h5>
+            <!-- <h5 style="text-align: right;"><h5>Date: {{ receipt.sale_date}}</h5> -->
         </h5>
             <h2 class="v">Daystar Daycare</h2>
             <h3 class="card-title" style="color:#365486; ">Child name : {{sale.payee | title}}</h3>
@@ -20,12 +27,13 @@
                 <h6 class="card-text">Amount Due: UGX{{ sale.get_change }}</h6>
                 <a href="{% url 'receipt_detail' sale.id %}">
                    
-                    <button class="button" type="submit"style="width:auto;">Print Receipt</button> <br>
+                    <button class="button" type="submit"style="width:auto; ">Print Receipt</button> <br>
                 </a>
             </div>
         </div>
     </div>
     <br />
     {% endfor %}
+</div>
 </div>
 {% endblock %}

@@ -82,8 +82,8 @@
                 <th scope="col">Name</th>
                 <!-- <th scope="col">Sitters number</th> -->
                 <th scope="col">Date</th>
-                <th scope="col">Time In</th>
-                <th scope="col">Time Out</th>
+                <!-- <th scope="col">Time In</th> -->
+                <!-- <th scope="col">Time Out</th> -->
                 <th scope="col">Status</th>
                 <th scope=>Action</th>
             </tr>
@@ -95,8 +95,8 @@
                 <td>ST-00{{ sitter.id }}</td>
                 <td>{{ sitter.sitter_name}}</td>
                 <td>{{ sitter.date_of_arrival }}</td>
-                <td>{{ sitter.timein }}</td>
-                <td>{{ sitter.timeout }}</td>
+                <!-- <td>{{ sitter.timein }}</td> -->
+                <!-- <td>{{ sitter.timeout }}</td> -->
                 <td>{{ sitter.Attendancestatus}}</td>
                 <td class="btn-container">
                     <a href="{% url 'editonduty' id=sitter.id %}"  class="btn btn-primary ">Update</a>

@@ -85,6 +85,29 @@
     <h2>PAYMENTS</h2>
 </div>
 <a style="float: right;" href="/addpayment" class="btn btn-primary mb-3">Make payment</a>
+
+
+
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Total Amount Paid</th>
+        <th scope="col">Total Debtors</th>
+        <th scope="col">Net Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>UGX{{total}}</td>
+        <td>UGX{{balance}}</td>
+        <td>UGX{{net}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br><br>
+
+
 <div class="table-responsive">
     <table class="table table-bordered table-hover">
         <thead class="table-teal">
@@ -125,6 +148,7 @@
     </table>
     <br><br><br><br>
 </div>
+
 {% endblock %}
 
 

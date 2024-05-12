@@ -1,5 +1,75 @@
 {% extends 'base.html' %}
 {% block content %}
+<style>
+    body {
+        background-color: rgba(158, 184, 217, 0.5); 
+    }
+
+    .btn-container {
+        display: flex;
+        align-items: center; 
+    }
+
+    .btn {
+        background-color: #2a5982; 
+        color: #fff; 
+        border: none; 
+        padding: 0.5rem 1rem; 
+        margin-right: 0.5rem; 
+        cursor: pointer; 
+    }
+
+    .btn i {
+        margin-right: 0.25rem; 
+    }
+
+    .card-header {
+        background-color: #fff; 
+        padding: 1rem; 
+        margin-bottom: 1rem; 
+    }
+
+    .table {
+        width: 100%; 
+        border-collapse: collapse; 
+        border: 1px solid #dee2e6; 
+    }
+
+    th,
+    td {
+        border: 1px solid #dee2e6;
+        padding: 0.75rem; 
+        text-align: left; 
+    }
+
+    th {
+        /* background-color: #f0f0f0;  */
+        background-color: rgb(36, 34, 34);
+    }
+
+    /* Centering the search bar */
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    /* Adjusting the width of the search input */
+    .search-input {
+        width: 300px; /* Adjust this value as needed */
+        margin-right: 0.5rem; /* Adding some space between input and button */
+    }
+
+    /* Resizing the search button */
+    .search-btn {
+        padding: 0.5rem 0.75rem; /* Adjust this value as needed */
+    }
+
+    /* Moving the Add button to the right corner */
+    .add-btn {
+        margin-left: auto; /* Automatically align to the right */
+    }
+</style>
 <div class="card-header" style="background-color: white;" >
     <h2>BABY DETAILS</h2>
   </div>
@@ -7,31 +77,31 @@
     <table class="table table-bordered">
         <thead>
             <tr class=>
-                <th scope="col">#</th>
+                <th scope="col">Baby No</th>
+                <th scope="col">Baby Name</th>
+                <th scope="col">Father's Name</th>
+                <th scope="col">Mother's Name</th>
                 <th scope="col">Categorystay</th>
-                <th scope="col">Name</th>
-                <th scope="col">Number</th>
                 <th scope="col">Date</th>
                 <th scope="col">Gender</th>
                 <th scope="col">Age</th>
                 <th scope="col">Location</th>
-                <th scope="col">Parents Names</th>
-                <th scope="col">Action</th> 
+                <!-- <th scope="col">Action</th>  -->
                 
             </tr>
         </thead>
         <tbody>
            
             <tr >
-                <td>{{ babies_info.id }}</td>
-                <td>{{ babies_info.c_stay}}</td>
+                <td>BB-00{{ forloop.counter }}</td>
                 <td>{{ babies_info.Baby_name }}</td>
-                <td>{{ babies_info.Baby_number }}</td>
+                <td>{{ babies_info.fathers_names }}</td>
+                <td>{{ babies_info.mothers_names }}</td>
+                <td>{{ babies_info.c_stay}}</td>
                 <td>{{ babies_info.Date }}</td>
                 <td>{{ babies_info.Gender }}</td>
                 <td>{{ babies_info.Age}}</td>
                 <td>{{ babies_info.Location }}</td>
-                <td>{{ babies_info.Parents_names }}</td>
                 <td>
                     <div>
                         <!-- <a href="{% url 'edit' id=babies_info.id %}" class="btn btn-primary mb-2">Edit baby</a> -->

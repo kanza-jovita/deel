@@ -21,8 +21,10 @@ def index(request):
     homeContent = template.render()
     return HttpResponse(homeContent)
 
-def log_out(request):
-    return redirect('/login/')
+
+# def log_out(request):
+#     logout(request)
+#     return redirect('/logout/')
 
 @login_required 
 def home(request):
@@ -40,8 +42,9 @@ def home(request):
         "sitters": sitters,
         "recent_babies": recent_babies
     }
-    template = loader.get_template("home.html")
-    return HttpResponse(template.render(context))
+    # template = loader.get_template("home.html")
+    # return HttpResponse(template.render(context))
+    return render(request,'home.html',context)
 
 #Sitter views
 @login_required
@@ -237,6 +240,15 @@ def payment(request):
     
     return render(request, 'paymentform.html', {'form': form, 'payments': payments})
 
+def all_payments(request):
+    payments=Payment.objects.all()
+    total=sum([items.amount_paid for items in payments])
+    balance=sum([items.get_balance() for items in payments])
+    net=total+balance
+    return render(request,'paymentform.html',{'payments':payments,'total':total,'balanca':balance,'net':net})
+
+
+
 
 @login_required
 def addpayment(request):
@@ -315,19 +327,20 @@ def editdeparture(request,id):
      return render(request,'editdeparture.html',{'form':form,'departures':departures})  
 
 
-# @login_required
-# def procurement(request):
-#     query = request.GET.get('q')
+@login_required
+def doll(request):
+    query = request.GET.get('q')
 
-#     products = Product.objects.all().order_by('-id')
+    dolls = Doll.objects.all().order_by('id')
 
-#     if query:
-#         products = products.annotate(search=SearchVector('product_name')).filter(search=query)
+    if query:
+        dolls = dolls.annotate(search=SearchVector('doll_name')).filter(search=query)
 
-#     product_filters = ProductFilter(request.GET, queryset=products)
-#     products = product_filters.qs
+    doll_filters = DollFilter(request.GET, queryset=dolls)
+    dolls = doll_filters.qs
 
-#     return render(request, 'procurement.html', {'products': products, 'product_filters': product_filters})
+    return render(request, 'doll.html', {'dolls': dolls, 'doll_filters': doll_filters})
+
 
 
 
@@ -456,6 +469,30 @@ def all_issue_items(request):
     total_received_quantity = Procurement.objects.aggregate(total_received_quantity=Sum('Quantity'))['total_received_quantity'] or 0
     net_quantity = total_received_quantity - total_issued_quantity
     return render(request, 'all_issue_items.html', {'issues': issues, 'total_issued_quantity': total_issued_quantity, 'total_received_quantity': total_received_quantity, 'net_quantity': net_quantity})
+
+
+def assign_view(request):
+    assign = Sitter_arrival.objects.all()
+    for assigns in assign:
+        assigns.payment = assigns.babies.all().count()*3000
+    return render(request, 'assign_view.html',{'assign': assign})
+
+def assign_sitter(request,id):
+    baby = Babyreg.objects.all()
+    sitter = Sitterreg.objects.get(id=id)
+    if request.method == 'POST':
+         form = Sitter_arrivalForm(request.POST)
+         if form.is_valid():
+            form.save()
+            return redirect('assign_view')
+         else:
+             print("Form is not valid")
+    else:
+        form = Sitter_arrivalForm()
+    return render(request, 'assign_sitter.html', {'form': form, 'baby':baby,'sitter':sitter})
+
+
+
 
 
 

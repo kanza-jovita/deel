@@ -43,7 +43,8 @@
     }
 
     th {
-        background-color: #f0f0f0; 
+        /* background-color: #f0f0f0;  */
+        background-color: rgb(36, 34, 34);
     }
 
     /* Centering the search bar */
@@ -88,16 +89,15 @@
 
     <div class="table-responsive">
         <table class="table">
-            <thead>
+            <thead  class="thead-dark">
                 <tr>
-                    <th scope="col">Bay Number</th>
-                    <th scope="col">Categorystay</th>
+                    <th scope="col">Baby Number</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Categorystay</th>
                     <th scope="col">Date</th>
                     <th scope="col">Gender</th>
                     <th scope="col">Age</th>
                     <th scope="col">Location</th>
-                    <th scope="col">Parents Names</th>
                     <!-- <th scope="col">Time In</th> -->
                     <th scope="col">Brought by</th>
                     <th scope="col">Action</th> <!-- Fixed typo here -->
@@ -106,14 +106,13 @@
             <tbody>
                 {% for baby in babies %}
                 <tr>
-                    <th scope="row">BB-00{{ baby.id }}</th>
-                    <td>{{ baby.c_stay}}</td>
+                    <th scope="row">BB-00{{ forloop.counter }}</th>
                     <td>{{ baby.Baby_name }}</td>
+                    <td>{{ baby.c_stay}}</td>
                     <td>{{ baby.Date }}</td>
                     <td>{{ baby.Gender }}</td>
                     <td>{{ baby.Age}}</td>
                     <td>{{ baby.Location }}</td>
-                    <td>{{ baby.Parents_names }}</td>
                     <!-- <td>{{ baby.timein }}</td> -->
                     <td>{{ baby.brought }}</td>
                     <td class="btn-container">
@@ -136,7 +135,7 @@
                                 <div class="modal-content">
 
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Baby: {{ baby.b_first_name}} {{ baby.b_last_name}}</h5>
+                                        <h5 class="modal-title">Baby: {{ baby.Baby_name}}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close">
                                             <span aria-hidden="true"></span>
@@ -145,12 +144,18 @@
 
                                     <div class="modal-body">
                                         <ul class="list-unstyled">
-                                            <li>Baby Name: <strong> {{ sitter.sitter_name }} </strong> </li>
-                                            <li>Age: <strong> {{ sitter.b_age }} </strong> </li>
-                                            <li>Gender: <strong> {{ sitter.gender }} </strong> </li>
-                                            <li>Location: <strong> {{ sitter.location }} </strong> </li>
-                                            <li>Father Name: <strong> {{ sitter_father_name }} {{ baby.b_father_last_name }} </strong> </li>
-                                            <li>Mother Name: <strong> {{ sitter.mother_name }} {{ baby.b_mother_last_name }} </strong> </li>
+                                            <li>Baby Name: <strong> {{ baby.Baby_name }} </strong> </li>
+                                            <li>Father's Name: <strong> {{ baby.fathers_names }} </strong> </li>
+                                            <li>Mother's Name: <strong> {{ baby.mothers_names }} </strong> </li>
+                                            <li>Period: <strong> {{ baby.c_stay }} </strong> </li>
+                                            <!-- <li>Assigned Sitter: <strong> {{ baby.assigned }} </strong> </li> -->
+                                            <li>Date: <strong> {{ baby.Date }} </strong> </li>
+                                            <li>Gender: <strong> {{ baby.Gender }} </strong> </li>
+                                            <li>Age: <strong> {{ baby.Age }} </strong> </li>
+                                            <li>Location: <strong> {{ baby.Location }} </strong> </li>
+                                            
+                                            <li>Brought By: <strong> {{ baby.brought }} </strong> </li>
+                                        
 
                                         </ul>
                                     </div>
@@ -166,7 +171,7 @@
                         </td>
                     </td>
                 </tr>
-                {% endfor %}
+            {% endfor %}
             </tbody>
         </table>
     </div>
