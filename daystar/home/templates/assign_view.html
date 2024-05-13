@@ -57,18 +57,18 @@
 
     /* Adjusting the width of the search input */
     .search-input {
-        width: 300px; /* Adjust this value as needed */
-        margin-right: 0.5rem; /* Adding some space between input and button */
+        width: 300px;
+        margin-right: 0.5rem; 
     }
 
     /* Resizing the search button */
     .search-btn {
-        padding: 0.5rem 0.75rem; /* Adjust this value as needed */
+        padding: 0.5rem 0.75rem; 
     }
 
     /* Moving the Add button to the right corner */
     .add-btn {
-        margin-left: auto; /* Automatically align to the right */
+        margin-left: auto; 
     }
 </style>
 
@@ -81,7 +81,6 @@
                 <th scope="col">Babies Attended To</th>
                 <th scope="col">Date</th>
                 <th scope="col">Amount Paid</th>
-                <!-- <th scope="col">Actions</th> -->
             </tr>
         </thead>
         <tbody>
@@ -96,7 +95,6 @@
                         {% endfor %}
                     </td>
                     <td>{{ attendance.date_of_arrival }}</td>
-                    <!-- {% comment %} <td>{{ attendance.babies.all|length }}</td> {% endcomment %} -->
                     <td>{{ attendance.payment }}</td>
                 </tr>
             {% endfor %}

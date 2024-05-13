@@ -1,80 +1,43 @@
-{% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
-    <style>
-        /* Additional CSS styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: rgba(158, 184, 217, 0.5); /* Faint background color */
-            background-size: cover; /* Cover the entire background */
-            background-position: center; /* Center the background image */
-            background-repeat: no-repeat; /* Do not repeat the background image */
-        }
-    
-        .login-container {
-            margin-top: 50px; /* Adjust as needed */
-        }
-    
-        form {
-            background-color: rgba(255, 255, 255, 0.8); /* White background with opacity */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Soft shadow effect */
-            padding: 20px; /* Add padding for better spacing */
-            border-radius: 15px; /* Add border radius for rounded corners */
-            max-width: 400px; /* Limit form width for better readability */
-            margin: 0 auto; /* Center the form horizontally */
-        }
-    
-        input[type="text"],
-        input[type="password"] {
-            padding: 10px;
-            border: 1px solid #ced4da; /* Light gray border */
-            border-radius: 5px;
-            margin-bottom: 10px; /* Add spacing between input fields */
-            width: 100%; /* Make input fields expand to full width */
-        }
-    
-        input[type="submit"] {
-            padding: 10px 20px; /* Reduced padding for button */
-            background-color: #1e1e1f; /* Blue color for submit button */
-            color: #fff; /* White text color */
-            border: none;
-            border-radius: 50px; /* Rounded button corners */
-            cursor: pointer;
-            transition: background-color 0.3s ease; /* Smooth transition effect */
-            width: 100%; /* Make button full width */
-            max-width: 200px; /* Limit button width */
-        }
-    
-        input[type="submit"]:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
-    </style>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - DayStar Daycare</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="icon" href="{% static 'favicon/favicon.ico' %}" type="image/x-icon">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+
+</head>
 
     <div class="login-container" style="padding-top: 10px;">
+        <h3 class="heading">Member Login</h3>
       </div>
     {% block content %}
-
-
-    <div class = "container w-25 d-flex justify-content-center alighn align-items center">
-    <form id="form" method="POST">
+    
+    <form id="form" method="POST"
+        style="border-radius: 25px; border: 2px solid white; padding: 20px; width: 400px; height: 350px; margin: 0 auto; 
+         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); margin-bottom: 20px;">
         {% csrf_token %}
         {{form | crispy}}
         <br>
-        <input type="submit" value="Login" class="btn   btn-block submit"
-            style="background-color: #343a40; color: aliceblue;"> <br>
+        <input type="submit" name="Submit" value="Login" class="btn   btn-block submit"
+            style="background-color: #2a5982;  color: aliceblue;"> <br>
     </form>
-</div>
+
     {% endblock %}
-    <footer>
+
+    
         <div class="footer">
-            <!-- <div class="social-icons">
-                <a href="https://www.facebook.com/your-page" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="https://twitter.com/your-handle" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.instagram.com/your-account/" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div> -->
-            <p>&copy; 2023 Kanza Jovita. All rights reserved.</p>
+            <footer class=" text-center" style="color:white;">
+                <p>&copy; 2023 DayStar Daycare. All rights reserved.</p>
+            </footer>
         </div>
-  </footer>
 </body>
+
 </html>

@@ -3,7 +3,7 @@
 {% block content %}
 <style>
     body {
-        background-color: rgba(158, 184, 217, 0.5); /* Faint background color */
+        background-color: rgba(158, 184, 217, 0.5); 
     }
 
     .btn-container {
@@ -56,18 +56,18 @@
 
     /* Adjusting the width of the search input */
     .search-input {
-        width: 300px; /* Adjust this value as needed */
-        margin-right: 0.5rem; /* Adding some space between input and button */
+        width: 300px; 
+        margin-right: 0.5rem; 
     }
 
     /* Resizing the search button */
     .search-btn {
-        padding: 0.5rem 0.75rem; /* Adjust this value as needed */
+        padding: 0.5rem 0.75rem; 
     }
 
     /* Moving the Add button to the right corner */
     .add-btn {
-        margin-left: auto; /* Automatically align to the right */
+        margin-left: auto; 
     }
 </style>
 
@@ -75,7 +75,6 @@
     <h2>BABIES LEFT</h2>
 </div>
 <a href="/adddeparture" class="btn btn-primary mb-3">Add</a>
-<!-- <a style="margin-left: 900px;" href="/arrival" class="btn btn-primary mb-3">DAILY DEPARTURE REGISTER</a> -->
 
 
 <div class="table-responsive">
@@ -85,7 +84,6 @@
                 <th scope="col">Baby No</th>
                 <th scope="col">Name</th>
                 <th scope="col">Date</th>
-                <th scope="col">Timeout</th>
                 <th scope="col">Picker</th>
                 <th scope="col">Contact</th>
                 <th scope="col">NIN</th>
@@ -99,7 +97,6 @@
                 <td>BB-00{{ forloop.counter }}</td>
                 <td>{{ baby.baby_name}}</td>
                 <td>{{ baby.date }}</td>
-                <td>{{ baby.timeout }}</td>
                 <td>{{ baby.picker}}</td>
                 <td>{{ baby.contact}}</td>
                 <td>{{ baby.NIN}}</td>

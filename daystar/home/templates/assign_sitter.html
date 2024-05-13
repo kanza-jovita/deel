@@ -13,13 +13,10 @@
     <div class="container">
     <form method="post" class="registration-form">
         {% csrf_token %}
-        
-        <!-- Select sitter -->
         {{ form }}
         {% comment %} <input type="hidden" name="sitter" value="{{ sitters.id }}"> {% endcomment %}
         <br>
     
-        <!-- Submit button -->
         <button type="submit">Assign Babies</button>
     </form>
     </div>

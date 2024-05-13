@@ -86,7 +86,7 @@ def edit_sitter(request, id):
 def search_sitter(request):
     search_query = request.GET.get('search', '')
     if search_query:
-        sitters = Sitterreg.objects.filter(Sitter_name__icontains=search_query) | Sitterreg.objects.filter(Sitter_number__icontains=search_query)
+        sitters = Sitterreg.objects.filter(Sitter_name__icontains=search_query) 
     else:
         sitters = Sitterreg.objects.all()
 
@@ -285,7 +285,7 @@ def editpayment(request, id):
 def search_baby(request):
     search_query = request.GET.get('search', '')
     if search_query:
-        babies = Babyreg.objects.filter(Baby_name__icontains=search_query) | Babyreg.objects.filter(Baby_number__icontains=search_query)
+        babies = Babyreg.objects.filter(Baby_name__icontains=search_query)
     else:
         babies = Babyreg.objects.all()
 
