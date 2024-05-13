@@ -46,7 +46,7 @@
     <!-- end of navbar -->
 
     <!-- beginning of card -->
-    <div class="julie">
+    <!-- <div class="julie">
 
         <div class="card" style=" background-color:aliceblue;">
             <div class="card-body">
@@ -58,15 +58,22 @@
                 </div>
 
             </div>
-        </div>
+        </div> -->
 
         <!-- end of card -->
 
         <!-- main -->
-        <div class="back" style="text-align: center;">
-            <a href="/login"> <img src="{% static 'images/baby1.jpg' %}"> </a>
-            <a href="/login"> <img src="{% static 'images/baby3.jpg' %}"> </a>
-            <a href="/login"> <img src="{% static 'images/baby4.jpg' %}"> </a>
+        <div class="back d-flex gap-4"style="text-align: center; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin-top: 20px;
+            padding-bottom: 20px;">
+            <a href="/login"> <img class="rounded-circle" src="{% static 'images/baby1.jpg' %}"> </a>
+            <div class="container" style="width: 100px; height: 100px;">
+            <a href="/login"> <img class="rounded-circle img-fluid" src="{% static 'images/baby3.jpg' %}"> </a>
+            </div>
+            <a href="/login"> <img class="rounded-circle" src="{% static 'images/baby4.jpg' %}"> </a>
 
         </div>
 

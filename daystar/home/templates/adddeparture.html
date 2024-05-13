@@ -2,12 +2,17 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
+<style>
+    body {
+        background-color: rgba(158, 184, 217, 0.5);  
+    }
+</style>
 <h4 ></h4><hr>
 <div class="container">
     <form method="POST" class="registration-form">
         {% csrf_token %}
         {{ form | crispy }}
-        <button type="submit" class="btn btn-primary" >Depart</button>
+        <button type="submit" class="btn"  style="background-color: #2a5982; color: aliceblue; width: 100px;">Depart</button>
     </form>
     <br><br>
 </div>

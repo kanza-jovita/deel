@@ -1,43 +1,22 @@
+{% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login - DayStar Daycare</title>
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-    <link rel="icon" href="{% static 'favicon/favicon.ico' %}" type="image/x-icon">
-    {% load bootstrap5 %}
-    {% bootstrap_css %}
-    {% bootstrap_javascript %}
+{% block content %}
+<div class="border border" style="background-color:  rgba(158, 184, 217, 0.5);">
+    <center>
+        <div class="login-container" style="padding-top: 10px;">
+            <h3 class="heading">Member Login</h3>
+          </div>
+        </center>
+        <form id="form" method="POST"
+            style="border-radius: 25px; border: 2px solid white; padding: 20px; width: 400px; height: 350px; margin: 0 auto; 
+             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); margin-bottom: 20px;">
+            {% csrf_token %}
+            {{form | crispy}}
+            <br>
+            <input type="submit" name="Submit" value="Login" class="btn   btn-block submit"
+                style="background-color: #2a5982;  color: aliceblue; width: 100px;"> <br>
+        </form>
 
-
-</head>
-
-    <div class="login-container" style="padding-top: 10px;">
-        <h3 class="heading">Member Login</h3>
-      </div>
-    {% block content %}
-    
-    <form id="form" method="POST"
-        style="border-radius: 25px; border: 2px solid white; padding: 20px; width: 400px; height: 350px; margin: 0 auto; 
-         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); margin-bottom: 20px;">
-        {% csrf_token %}
-        {{form | crispy}}
-        <br>
-        <input type="submit" name="Submit" value="Login" class="btn   btn-block submit"
-            style="background-color: #2a5982;  color: aliceblue;"> <br>
-    </form>
-
-    {% endblock %}
-
-    
-        <div class="footer">
-            <footer class=" text-center" style="color:white;">
-                <p>&copy; 2023 DayStar Daycare. All rights reserved.</p>
-            </footer>
-        </div>
-</body>
-
-</html>
+</div>
+{% endblock %}

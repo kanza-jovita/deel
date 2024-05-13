@@ -6,7 +6,7 @@ from django.core.validators import MinValueValidator
 #Create your models here.
 class Sitterreg(models.Model):
     Sitter_name = models.CharField(max_length=30, null=False,blank=False)
-    # Sitter_number = models.CharField(max_length=30, null=False,blank=False)
+    Sitter_number = models.CharField(max_length=30, null=False, blank=False)
     Date_of_birth = models.DateField(null=True, blank=True)
     Contact = models.CharField(max_length=30,null=False,blank=False)
     date = models.DateTimeField()
@@ -17,7 +17,7 @@ class Sitterreg(models.Model):
     Next_of_kin = models.CharField(max_length=30, null=False,blank=False)
     NIN = models.CharField(max_length=30, null=False,blank=False)
     Recommenders_name = models.CharField(max_length=30, null=False,blank=False)
-    Religion = models.CharField(max_length=30, null=True,blank=True)
+    Religion = models.CharField(choices=[('Anglican', 'Anglican'),('Catholic', 'Catholic'),('Pentecostal','Pentecostal'),('Muslim','Muslim'),('Other','Other')], max_length=100)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     def __str__(self):
         return str(self.Sitter_name)
@@ -35,7 +35,7 @@ class Sitterpayment(models.Model):
 
     def total_amount(self):
         total = self.amount * self.babies_assigned
-        return total  # Removed int() conversion here
+        return total  
 
 
 
@@ -45,10 +45,10 @@ class Categorystay(models.Model):
     def __str__(self):
         return str(self.name) 
     
-
-         
+     
 class Babyreg(models.Model):
     Baby_name = models.CharField(max_length=30, null=False, blank=False)
+    baby_number = models.CharField(max_length=30, null=False, blank=False)
     fathers_names = models.CharField(max_length=30, null=False, blank=False)
     mothers_names = models.CharField(max_length=30, null=False, blank=False)
     c_stay = models.ForeignKey(Categorystay, on_delete=models.SET_NULL, null=True, blank=True)
@@ -86,7 +86,6 @@ class Sitter_arrival(models.Model):
 class Departure(models.Model):
     baby_name=models.ForeignKey(Babyreg,on_delete=models.CASCADE) 
     date=models.DateTimeField() 
-    # timeout=models.TimeField()
     picker=models.CharField(max_length=200)
     contact = models.CharField(max_length=30)
     NIN = models.CharField(max_length=30, null='False',blank = 'False')
@@ -164,7 +163,7 @@ class Salesrecord(models.Model):
 #here we are getting change.(money to be given to the parent)    
     def get_change(self):
         change= self.get_total() - self.amount_received
-        return int(change)#sales is linked to products
+        return int(change)
     
     
 #Procurement
@@ -183,11 +182,6 @@ class Procurement(models.Model):
 
     def __str__(self):
         return str(self.item_name)
-
-    # def total_amount(self):
-    #     if self.Quantity is not None and self.Unit_price is not None:
-    #         return self.Quantity * self.Unit_price
-    #     return 0
 
 class Used(models.Model):
     item = models.ForeignKey(Procurement, on_delete=models.CASCADE)

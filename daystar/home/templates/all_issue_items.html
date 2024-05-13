@@ -21,13 +21,19 @@
   .btn i {
       margin-right: 0.25rem; 
   }
-
-  .card-header {
-      background-color: #fff; 
-      padding: 1rem; 
-      margin-bottom: 1rem; 
-  }
-
+  .card-header{
+    border: 1px  #333; 
+    opacity:90%;
+    width: 87%;
+    text-align: center; 
+    box-shadow: 0 7px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width:30%;
+    margin: 0 auto; 
+    margin-top: 10px;
+    background-color: aliceblue;
+    text-align: center; 
+  } 
   .table {
       width: 100%; 
       border-collapse: collapse; 
@@ -76,14 +82,14 @@
       <tr>
         <th scope="col">Available Quantity</th>
         <th scope="col">Total Quantity issued</th>
-        <th scope="col">Net Quantity</th>
+        <!-- <th scope="col">Net Quantity</th> -->
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>{{total_received_quantity}}</td>
         <td>{{total_issued_quantity}}</td>
-        <td>{{net_quantity}}</td>
+        <!-- <td>{{net_quantity}}</td> -->
       </tr>
     </tbody>
   </table>

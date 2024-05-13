@@ -39,13 +39,13 @@ class SalesrecordForm(ModelForm):
         fields = [ 'quantity_sold', 'amount_received', 'payee']  
 
 
-class Departure_form(ModelForm):
-    class Meta:
-        model = Departure
-        fields = '__all__'
-        widgets = {
-            'date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-        }
+# class Departure_form(ModelForm):
+#     class Meta:
+#         model = Departure
+#         fields = '__all__'
+#         widgets = {
+#             'date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+#         }
 
 class AddForm(ModelForm):
      class Meta:
@@ -71,16 +71,18 @@ class SitterpaymentForm(ModelForm):
 class   DepartureForm(ModelForm):
      class Meta:
          model=Departure
-         fields='__all__'
+         fields= ['baby_name', 'date', 'picker', 'contact', 'NIN', 'comment']
+         widget = {
+               'date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+         }
+
 
 class Sitter_arrivalForm(ModelForm):
      class Meta:
          model=Sitter_arrival
          fields=['date_of_arrival', 'sitter_name', 'babies', 'Attendancestatus']
          widgets = {
-            'date_of_arrival': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-        }
-         widgets = {
             'babies':forms.CheckboxSelectMultiple(attrs={'class':'checkbox'}),
+            'date_of_arrival': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }      
          

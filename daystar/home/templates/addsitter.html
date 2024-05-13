@@ -7,7 +7,7 @@
     }
 </style>
 
-<div class="card-header" style="background-color: white;" >
+<div class="card-header" style="background-color: white; margin-top: 10px;" >
     <h2>REGISTER SITTER</h2>
   </div>
 <hr>
@@ -15,7 +15,7 @@
     <form method="post" class="registration-form">
         {% csrf_token %}
         {{ form|crispy }}<br>
-        <button type="register" class="btn btn-primary">Register</button>
+        <button type="register" class="btn" style="background-color: #2a5982;  color: aliceblue; width: 100px;">Register</button>
     </form>
     <br><br>
     <br>

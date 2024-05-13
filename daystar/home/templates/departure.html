@@ -18,18 +18,26 @@
         padding: 0.5rem 1rem; 
         margin-right: 0.5rem; 
         cursor: pointer; 
+        width: 100px;
     }
 
     .btn i {
         margin-right: 0.25rem; 
     }
 
-    .card-header {
-        background-color: #fff; 
-        padding: 1rem; 
-        margin-bottom: 1rem; 
-    }
-
+    .card-header{
+    border: 1px  #333; 
+    opacity:90%;
+    width: 87%;
+    text-align: center; 
+    box-shadow: 0 7px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width:30%;
+    margin: 0 auto; 
+    margin-top: 10px;
+    background-color: aliceblue;
+    text-align: center; 
+  } 
     .table {
         width: 100%; 
         border-collapse: collapse; 
@@ -81,8 +89,9 @@
     <table class="table table-bordered table-hover">
         <thead class="table-white">
             <tr>
-                <th scope="col">Baby No</th>
+                <th scope="col">#</th>
                 <th scope="col">Name</th>
+                <th scope="col">Baby No</th>
                 <th scope="col">Date</th>
                 <th scope="col">Picker</th>
                 <th scope="col">Contact</th>
@@ -94,8 +103,9 @@
         <tbody>
             {% for baby in babies %}
             <tr>
-                <td>BB-00{{ forloop.counter }}</td>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ baby.baby_name}}</td>
+                <td>BB-00{{ baby.baby_number}}</td>
                 <td>{{ baby.date }}</td>
                 <td>{{ baby.picker}}</td>
                 <td>{{ baby.contact}}</td>

@@ -10,8 +10,9 @@ from django.urls import reverse
 from django.contrib.postgres.search import SearchQuery, SearchVector
 from django.http import HttpResponseBadRequest
 from django.contrib import messages
-from django.db.models import Sum, Avg
-from datetime import datetime, date
+from django.db.models import Sum
+from django.core.paginator import Paginator
+
 
 
 
@@ -22,10 +23,6 @@ def index(request):
     return HttpResponse(homeContent)
 
 
-# def log_out(request):
-#     logout(request)
-#     return redirect('/logout/')
-
 @login_required 
 def home(request):
     count_babies = Babyreg.objects.count()
@@ -33,7 +30,7 @@ def home(request):
     count_transactions = Payment.objects.count()
     recent_babies = Babyreg.objects.all().order_by('-id')
     sitters = Sitterreg.objects.all()
-    total_agg = Doll.objects.aggregate(total=Sum('quantity')) # = {'total': 180 }
+    total_agg = Doll.objects.aggregate(total=Sum('quantity')) 
     context = {
         "count_babies": count_babies,
         "count_sitters": count_sitters,
@@ -42,15 +39,18 @@ def home(request):
         "sitters": sitters,
         "recent_babies": recent_babies
     }
-    # template = loader.get_template("home.html")
-    # return HttpResponse(template.render(context))
     return render(request,'home.html',context)
 
 #Sitter views
 @login_required
 def sittersform(request):
-    sitters= Sitterreg.objects.all()
-    return render(request,'sittersform.html',{'sitters':sitters})
+    # sitters= Sitterreg.objects.all()
+    siter = Paginator(Sitterreg.objects.all(),2)
+    page  = request.GET.get('page')
+    sitters = siter.get_page(page)
+    nums = 'k'*sitters.paginator.num_pages
+    return render(request,'sittersform.html',{'nums':nums,'sitters':sitters})
+
 @login_required
 def addsitter(request):
     if request.method == 'POST':
@@ -68,6 +68,7 @@ def addsitter(request):
 def read_sitter(request,id ):
     sitters_info=Sitterreg.objects.get(id=id)
     return render(request,'read_sitter.html',{'sitters_info':sitters_info})
+
 @login_required
 def edit_sitter(request, id):
     sitter = get_object_or_404(Sitterreg, id=id)
@@ -246,8 +247,6 @@ def all_payments(request):
     balance=sum([items.get_balance() for items in payments])
     net=total+balance
     return render(request,'paymentform.html',{'payments':payments,'total':total,'balanca':balance,'net':net})
-
-
 
 
 @login_required

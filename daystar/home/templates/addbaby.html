@@ -6,7 +6,7 @@
         background-color: rgba(158, 184, 217, 0.5); 
     }
 </style>
-<div class="card-header" style="background-color: white;" >
+<div class="card-header" style="background-color: white; margin-top: 10px;" >
     <h2>REGISTER BABIES</h2>
   </div>
 <hr>
@@ -15,7 +15,7 @@
         {% csrf_token %}
         {{ form|crispy }}
 <br>
-    <button type="submit" name="submit" class="btn btn-primary">Register</button>
+    <button type="submit" name="submit" class="btn"  style="background-color: #2a5982;  color: aliceblue; width: 100px;">Register</button>
     </form>
     <br><br>
     <br>
