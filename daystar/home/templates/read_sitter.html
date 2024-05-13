@@ -3,12 +3,8 @@
 
 {% block content %}
 
-
 <main id="main" class="mt-3">
-    <!-- Section - Bootstrap Brain Component -->
-
-    <!-- Section - Bootstrap Brain Component -->
-    <section class="pb-3 pb-md-4 pb-xl-5 bg-light">
+    <section class="pb-3 pb-md-4 pb-xl-5" style="background-color: rgba(158, 184, 217, 0.5); ">
         <div class="container">
             <div class="row gy-4 gy-lg-0">
                 <div class="col-12 col-lg-4 col-xl-4">
@@ -18,31 +14,30 @@
                                 class="card widget-card border-light shadow-sm"
                             >
                             
-
                                 <div class="card-body">
                                     <div class="text-center mb-3">
                                         <img
-                                            src="{% static '/images/undraw_profile.svg' %}"
+                                            src="{% static '/images/mother.jpg' %}"
                                             class="img-fluid rounded-circle w-25"
-                                            alt="sitter {{ sitter.s_number }}"
+                                            alt="sitter {{ sitter.Sitter_number }}"
                                         />
                                     </div>
                                     <h5 class="text-center mb-1">
-                                        {{ sitters_info.Sitter_name }}  ,
-                                        <span>{{ sitter.Gender }}</span>
+                                        {{ sitters_info.Sitter_name }}
+                                        <span>{{ sitters_info.Sitter_number }}</span>
                                     </h5>
 
                                     <div class="d-flex gap-4">
                                         <a href="{% url 'edit_sitter' sitters_info.id %}"
                                             ><button
-                                                class="btn btn-outline-primary"
+                                                class="btn btn-primary"
                                                 type="button"
                                             >
                                                 <i
                                                     class="fa fa-pen"
                                                     aria-hidden="true"
                                                 ></i
-                                                >EDIT
+                                                >Edit
                                             </button>
                                         </a>
                                         <a href="{% url 'assign_sitter' sitters_info.id %}"
@@ -51,7 +46,7 @@
                                                 type="button"
                                             >
                                                 <i
-                                                    class="fa fa-pen"
+                                                    class=""
                                                     aria-hidden="true"
                                                 ></i
                                                 >Assign
@@ -66,7 +61,7 @@
                                 class="card widget-card border-light shadow-sm"
                             >
                                 <div class="card-header text-bg-primary-outline">
-                                    About Me
+                                    About 
                                 </div>
                                 <div class="card-body">
                                     <ul
@@ -79,7 +74,7 @@
                                                 ></span>
                                                 Education
                                             </h6>
-                                            <span>M.S Computer Science</span>
+                                            <span>{{sitters_info.Level_of_education}}</span>
                                         </li>
                                         <li class="list-group-item">
                                             <h6 class="mb-1">
@@ -89,7 +84,7 @@
                                                 Location
                                             </h6>
                                             <span
-                                                >Mountain View, California</span
+                                                >{{sitters_info.Location}}</span
                                             >
                                         </li>
                                         <li class="list-group-item">
@@ -97,9 +92,9 @@
                                                 <span
                                                     class="bii bi-building-fill-gear me-2"
                                                 ></span>
-                                                Company
+                                                NIN
                                             </h6>
-                                            <span>GitHub Inc</span>
+                                            <span>{{sitters_info.NIN}}</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -121,10 +116,8 @@
                                 id="profileTab"
                                 role="tablist"
                             >
-                                <li class="nav-item" role="presentation">
-                                        Overview
-                                </li>
                             </ul>
+                            
                             <div
                                 class="tab-content pt-4"
                                 id="profileTabContent"
@@ -136,19 +129,16 @@
                                     aria-labelledby="overview-tab"
                                     tabindex="0"
                                 >
+
                                     <h5 class="mb-3">About</h5>
-                                    {% comment %} <p class="lead mb-3">
-                                        Ethan Leo is a seasoned and
-                                        results-driven Project Manager who
+                                    <p class="lead mb-3">
+                                        Nata Nancy is a seasoned and
+                                        results-driven sitter who
                                         brings experience and expertise to
-                                        project management. With a proven track
-                                        record of successfully delivering
-                                        complex projects on time and within
-                                        budget, Ethan Leo is the go-to
-                                        professional for organizations seeking
-                                        efficient and effective project
-                                        leadership.
-                                    </p> {% endcomment %}
+                                        DayStar Daycare. With a proven track
+                                        record of consistent attendance,Nata Nancy is the go-to
+                                        professional for child care.
+                                    </p> 
                                     <h5 class="mb-3">Assigned Babies</h5>
                                     <div class="row g-0">
                                     
@@ -162,16 +152,16 @@
                                               </tr>
                                             </thead>
                                             <tbody>
-                                                {% for babe in baby %}
+                                                {% for sitter in sitters %}
                                               <tr>
                                                 <th scope="row">{{ forloop.counter }}</th>
-                                                <td>{{ babe.b_name }}</td>
+                                                <td>{{ sitter.Sitter_name }}</td>
                                                 <td>
                                                     {% for attendance in sitter.attendance_set.all %}
                                                         {{ attendance.a_payment_date|date }}
                                                     {% endfor %}
                                                 </td>
-                                                <td>{{ babe.b_stayperiod }}</td>
+                                                <td>{{ baby.C_stay }}</td>
                                               </tr>
                                               {% endfor %}
                                             </tbody>

@@ -10,7 +10,7 @@ class Sitterreg(models.Model):
     Date_of_birth = models.DateField(null=True, blank=True)
     Contact = models.CharField(max_length=30,null=False,blank=False)
     date = models.DateTimeField()
-    Location_choices = [('kabalagala', 'Kabalagala'),]
+    Location_choices = [('Kabalagala', 'Kabalagala'),]
     Location = models.CharField(choices=Location_choices, max_length=100)
     Gender =  models.CharField(choices=[('male', 'Male'),('female', 'Female')], max_length=100)
     Level_of_education = models.CharField(choices=[('Degree','Degree'),('Diploma','Diploma'),('Certificate','Certificate')],max_length=200,default=0)

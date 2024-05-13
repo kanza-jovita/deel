@@ -84,7 +84,7 @@
     <table class="table table-bordered table-hover">
         <thead class="table-white">
             <tr>
-                <th scope="col">Sitter Number</th>
+                <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <!-- <th scope="col">Sitters number</th> -->
                 <th scope="col">Date</th>
@@ -98,7 +98,7 @@
         <tbody>
             {% for sitter in onduty  %}
             <tr>
-                <td>ST-00{{ sitter.id }}</td>
+                <td>{{ sitter.id }}</td>
                 <td>{{ sitter.sitter_name}}</td>
                 <td>{{ sitter.date_of_arrival }}</td>
                 <!-- <td>{{ sitter.timein }}</td> -->

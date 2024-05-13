@@ -120,7 +120,7 @@
     <table class="table table-bordered table-hover">
         <thead class="table-teal">
             <tr>
-                <th scope="col">Baby No</th>
+                <th scope="col">#</th>
                 <th scope="col">Payee</th>
                 <th scope="col">Period</th>
                 <th scope="col">Mode</th>
@@ -135,7 +135,7 @@
         <tbody>
             {% for payment  in payments %}
             <tr style="background-color: white;">
-                <td>BB-00{{ payment.id }}</td>
+                <td>{{ payment.id }}</td>
                 <td>{{ payment.payee }}</td>
                 <td>{{ payment.c_payment }}</td>
                 <td>{{ payment.c_mode }}</td>
