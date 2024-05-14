@@ -43,6 +43,10 @@ urlpatterns = [
     path('addonduty/', views.addonduty, name='addonduty'),
     path('editdontudy/<int:id>/', views.editonduty, name='editonduty'),
     path('delete/<int:id>/', views.delete_onduty, name='delete_onduty'),
+    path('add_sitter_departure/', views.add_sitter_departure, name='add_sitter_departure'),
+    path('sitter_departure/', views.sitter_departure, name='sitter_departure'),
+    path('editoffduty/<int:id>/', views.editoffduty, name='editoffduty'),
+     
 
     
 #procurement

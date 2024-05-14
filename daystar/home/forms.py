@@ -84,5 +84,17 @@ class Sitter_arrivalForm(ModelForm):
          widgets = {
             'babies':forms.CheckboxSelectMultiple(attrs={'class':'checkbox'}),
             'date_of_arrival': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
-        }      
+        }  
+
+
+
+
+class SitterdepartureForm(forms.ModelForm):
+    class Meta:
+        model = Sitter_departure
+        fields = ['sitter', 'departure_time', 'comment'] 
+        widgets = {
+            'departure_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }
+          
          

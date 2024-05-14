@@ -7,7 +7,7 @@ from .filters import *
 from django.contrib.auth import authenticate,login,logout 
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from django.contrib.postgres.search import SearchQuery, SearchVector
+from django.contrib.postgres.search import SearchVector
 from django.http import HttpResponseBadRequest
 from django.contrib import messages
 from django.db.models import Sum
@@ -28,8 +28,8 @@ def home(request):
     count_babies = Babyreg.objects.count()
     count_sitters = Sitterreg.objects.count()
     count_transactions = Payment.objects.count()
-    recent_babies = Babyreg.objects.all().order_by('-id')
-    sitters = Sitterreg.objects.all()
+    recent_babies = Babyreg.objects.all()[:2]
+    sitters = Sitterreg.objects.all()[:2]
     total_agg = Doll.objects.aggregate(total=Sum('quantity')) 
     context = {
         "count_babies": count_babies,
@@ -172,9 +172,36 @@ def delete_onduty(request, id):
         instance.delete()
         return redirect('onduty')
     else:
-        # Handle GET request or other cases
         pass
 
+#sitter_departure
+def sitter_departure(request):
+    offduty = Sitter_departure.objects.all()
+    return render(request, 'sitter_departure.html', {'offduty': offduty})
+
+
+def add_sitter_departure(request):
+    if request.method == 'POST':
+        form = SitterdepartureForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('sitter_departure') 
+        else:
+            print("Form is not valid") 
+    else:
+        form = SitterdepartureForm()
+    return render(request, 'add_sitter_departure.html', {'form': form})
+
+def editoffduty(request, id):
+    offduty=get_object_or_404(Sitter_departure,id=id)
+    if request.method == 'POST':  
+       form=SitterdepartureForm(request.POST,instance=offduty)
+       if form.is_valid():
+           form.save()
+           return redirect('sitter_departure')
+    else:
+            form=SitterdepartureForm(instance=offduty) 
+    return render(request,'editoffduty.html',{'form':form,'offduty':offduty})   
 
               
 #Babies views
@@ -337,7 +364,6 @@ def doll(request):
 
     doll_filters = DollFilter(request.GET, queryset=dolls)
     dolls = doll_filters.qs
-
     return render(request, 'doll.html', {'dolls': dolls, 'doll_filters': doll_filters})
 
 

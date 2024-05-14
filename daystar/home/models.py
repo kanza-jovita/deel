@@ -82,6 +82,18 @@ class Sitter_arrival(models.Model):
         return self.sitter_name.Sitter_name
     
 
+class Sitter_departure(models.Model):
+    sitter = models.ForeignKey(Sitterreg, on_delete=models.CASCADE)
+    sitter_number = models.CharField(max_length=30,null=True,blank=False)
+    departure_time = models.DateTimeField() 
+    comment = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True,null=True)
+
+
+    def __str__(self):
+        return f"{self.sitter} - {self.departure_time}"
+
+
 #Babies departure      
 class Departure(models.Model):
     baby_name=models.ForeignKey(Babyreg,on_delete=models.CASCADE) 

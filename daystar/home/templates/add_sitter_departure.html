@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    body {
+        background-color: rgba(158, 184, 217, 0.5); 
+    }
+</style>
+<div class="card-header">
+    <h2>DEPARTURE FORM</h2>
+  </div>
+<hr>
+<div class="container">
+    <form method="post" class="registration-form">
+        {% csrf_token %}
+        {{ form|crispy }}
+<br>
+<button type="submit" name="submit" class="btn"  style="background-color: #2a5982;  color: aliceblue; width: 100px;">Register</button>
+    </form>
+    <br><br>
+</div>
+
+{% endblock %}
