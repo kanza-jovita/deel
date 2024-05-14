@@ -97,4 +97,15 @@ class SitterdepartureForm(forms.ModelForm):
             'departure_time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
           
-         
+
+
+#checkIn and CheckOut forms
+class CheckInForm(forms.ModelForm):
+    class Meta:
+        model = CheckIn
+        fields = '__all__'
+
+class CheckOutForm(forms.ModelForm):
+    class Meta:
+        model = CheckOut
+        fields = '__all__'

@@ -43,10 +43,12 @@
     }
 
     th,
-    td {
+    tr {
         border: 1px solid #dee2e6;
-        padding: 0.75rem; 
-        text-align: left; 
+        text-align: left;
+        height: 10px;
+        padding: 15px;
+
     }
 
     th {
@@ -105,11 +107,7 @@
                     <th scope="col">Date</th>
                     <th scope="col">Location</th>
                     <th scope="col">Gender</th>
-                    <!-- <th scope="col">Level of Education</th> -->
-                    <!-- <th scope="col">Next of Kin</th> -->
                     <th scope="col">NIN</th>
-                    <!-- <th scope="col">Recommenders Name</th> -->
-                    <!-- <th scope="col">Religion</th> -->
                     <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -121,14 +119,11 @@
                     <td>ST-00{{ sitter.Sitter_number }}</td>
                     <td>{{ sitter.Date_of_birth }}</td>
                     <td>{{ sitter.Contact }}</td>
-                    <td>{{ sitter.date }}</td>
+                    <!-- <td>{{ sitter.date | time:'H:i'}}</td> -->
+                    <td>{{ sitter.date | date}}</td>
                     <td>{{ sitter.Location }}</td>
                     <td>{{ sitter.Gender}}</td>   
-                    <!-- <td>{{ sitter.Level_of_education }}</td> -->
-                    <!-- <td>{{ sitter.Next_of_kin }}</td> -->
                     <td>{{ sitter.NIN }}</td>
-                    <!-- <td>{{ sitter.Recommenders_name }}</td> -->
-                    <!-- <td>{{ sitter.Religion }}</td> -->
                     <td>   
                         <!-- <a href="{% url 'read_sitter' id=sitter.id %}"class="btn btn-primary mb-2">View</a> -->
                         <a href="{% url 'edit_sitter' id=sitter.id %}" class="btn"><i class="fas fa-edit"></i>Edit</a>

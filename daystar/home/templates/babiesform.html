@@ -17,7 +17,7 @@
         padding: 0.5rem 1rem; 
         margin-right: 0.5rem; 
         cursor: pointer;
-        width: 100px; 
+        /* width: 100px;  */
     }
 
     .btn i {
@@ -108,35 +108,37 @@
                     <th scope="col">Gender</th>
                     <th scope="col">Age</th>
                     <th scope="col">Location</th>
-                    <!-- <th scope="col">Time In</th> -->
-                    <th scope="col">Brought by</th>
+                    <th scope="col">Time In</th>
+                    <th scope="col">Time Out</th>
                     <th scope="col">Action</th> 
                 </tr>
             </thead>
             <tbody>
-                {% for baby in babies %}
+                {% for baby,checkin,checkout in data %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ baby.Baby_name }}</td>
                     <td>BB-00{{ baby.baby_number }}</td>
                     <td>{{ baby.c_stay}}</td>
-                    <td>{{ baby.Date }}</td>
+                    <td>{{ baby.Date | date }}</td>
                     <td>{{ baby.Gender }}</td>
                     <td>{{ baby.Age}}</td>
                     <td>{{ baby.Location }}</td>
-                    <!-- <td>{{ baby.timein }}</td> -->
-                    <td>{{ baby.brought }}</td>
+                    <td>{{ checkin.checkin_time | time:'H:i a' }}</td>
+                    <!-- <td>{{ checkin.checked_in_by }}</td> -->
+                    <td>{{ checkout.checkout_time | time:'H:i a' }}</td>
+                    <!-- <td>{{ checkout.checked_out_by }}</td> -->
                     <td class="btn-container">
-                        <a href="{% url 'edit' id=baby.id %}" class="btn"><i class="fas fa-edit"></i>Edit</a>
+                        <a href="{% url 'edit' id=baby.id %}" class="btn"><i class="fas fa-edit" style="font-size: 15px;"></i><span>Edit</span></a>
                         <form action="{% url 'delete_baby' id=baby.id %}" method="POST" onsubmit="return confirm('Delete')">
                             {% csrf_token %}
-                            <button class="btn" type="submit"><i class="fas fa-trash"></i>Delete</button>
+                            <button class="btn" type="submit"><i class="fas fa-trash" style="font-size: 15px;"></i>Delete</button>
                         </form>
                         <td>
                             <button type="button" class="btn btn-primary me-1"
                                 href="{% url 'read' id=baby.id %}" data-bs-toggle="modal"
                                 data-bs-target="#myModal{{baby.id}}">
-                                <i class="fa-solid fa-circle-info fa-lg"></i>
+                                <i class="fa-solid fa-circle-info fa-lg" style="font-size: 15px;"></i>
                             </button>
 
 
@@ -166,7 +168,36 @@
                                             <li>Location: <strong> {{ baby.Location }} </strong> </li>
                                             
                                             <li>Brought By: <strong> {{ baby.brought }} </strong> </li>
-                                        
+                                           
+                                            <li>
+                                            <!-- Number of checkins: {{ baby.checkins.count }} -->
+                                            <a href="{% url 'checkin' baby.id %}" class="btn btn-info">checkin</a>
+
+                                            </li>
+                                            <li>{{ baby.checkins.last.checked_in_by }}</li>
+                                            <li>
+                                            {% if baby.checkins.exists %}
+                                                {% with last_checkout=baby.checkins.last %}
+                                                <!-- Last checkin exists: {{ last_checkout|yesno:"Yes,No" }} -->
+                                                    {% if last_checkout.exists %}
+                                                        Checked Out at {{ last_checkout.checkout_time|time:"H:i" }}
+                                                    {% else %}
+                                                        <a href="{% url 'checkout' baby.checkins.last.id %}" class="btn btn-danger">checkout</a>
+                                                    {% endif %}
+                                                {% endwith %}
+                                            {% else %}
+                                                Not Checked Out
+                                            {% endif %}
+                                            </li>
+                                            <li>
+                                            <!-- {% if baby.checkins.exists %}
+                                                {% if baby.checkins.last.exists %}
+                                                    {{ baby.checkins.last.checkouts.last.checked_out_by }}
+                                                {% endif %}
+                                            {% endif %} -->
+                                            {{ checkout.checked_out_by }}
+                                            </li>
+                                            
 
                                         </ul>
                                     </div>

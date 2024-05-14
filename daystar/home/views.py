@@ -12,6 +12,7 @@ from django.http import HttpResponseBadRequest
 from django.contrib import messages
 from django.db.models import Sum
 from django.core.paginator import Paginator
+from itertools import zip_longest
 
 
 
@@ -45,7 +46,7 @@ def home(request):
 @login_required
 def sittersform(request):
     # sitters= Sitterreg.objects.all()
-    siter = Paginator(Sitterreg.objects.all(),2)
+    siter = Paginator(Sitterreg.objects.all(),5)
     page  = request.GET.get('page')
     sitters = siter.get_page(page)
     nums = 'k'*sitters.paginator.num_pages
@@ -208,7 +209,11 @@ def editoffduty(request, id):
 @login_required
 def babiesform(request):
       babies= Babyreg.objects.all()
-      return render(request,'babiesform.html',{'babies':babies})
+      checkin = CheckIn.objects.all()
+      checkout = CheckOut.objects.all()
+      data = zip_longest(babies, checkin, checkout)
+      return render(request,'babiesform.html',{'data':data})
+      
 
 @login_required
 def addbaby(request):
@@ -519,7 +524,41 @@ def assign_sitter(request,id):
 
 
 
+#CheckIn views
+def checkin(request, baby_id):
+    baby = Babyreg.objects.get(id=baby_id)
+    if request.method == 'POST':
+        form = CheckInForm(request.POST)
+        if form.is_valid():
+            checked_in_by = form.cleaned_data['checked_in_by']
+            CheckIn.objects.create(baby=baby, checkin_time=timezone.now(), checked_in_by=checked_in_by)
+            # form.save()
+            return redirect('babiesform')  # Redirect to viewbaby page
+    else:
+        form = CheckInForm()
+    return render(request, 'checkin.html', {'form': form, 'baby': baby})
 
+
+def checkout(request, checkin_id):
+    checkin = CheckIn.objects.get(id=checkin_id)
+    baby = checkin.baby
+    if request.method == 'POST':
+        
+        form = CheckOutForm(request.POST)
+        
+        if form.is_valid():
+            checked_out_by = form.cleaned_data['checked_out_by']
+            CheckOut.objects.create(checkin=checkin, checkout_time=timezone.now(), checked_out_by=checked_out_by)
+            # checkout = form.save(commit=False)
+            # checkout.checkin = checkin
+            # checkout.save()
+            # baby = checkin.baby
+            baby.is_checked_in = False
+            baby.save()
+            return redirect('babiesform')
+    else:
+        form = CheckOutForm()
+    return render(request, 'checkout.html', {'form': form, 'checkin': checkin})
 
 
 

@@ -209,6 +209,22 @@ class Used(models.Model):
 
 
 
+#CheckIn and CheckOut
+class CheckIn(models.Model):
+    baby = models.ForeignKey(Babyreg,related_name='checkins', on_delete=models.CASCADE)
+    checkin_time = models.DateTimeField(default=timezone.now)
+    checked_in_by = models.CharField(max_length=100)
+    def __str__(self):
+        return f"{self.baby.Baby_name} checked in by {self.checked_in_by} at {self.checkin_time}"
+
+class CheckOut(models.Model):
+    checkin = models.OneToOneField(CheckIn, related_name='checkouts', on_delete=models.CASCADE)
+    checkout_time = models.DateTimeField(default=timezone.now)
+    checked_out_by = models.CharField(max_length=100)
+    def __str__(self):
+            return f" {self.checkin.baby.Baby_name} checked out by {self.checked_out_by} at {self.checkout_time}"
+
+
 
 
     

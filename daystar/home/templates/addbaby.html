@@ -11,11 +11,11 @@
   </div>
 <hr>
 <div class="container">
-    <form method="post" class="registration-form">
+    <form method="post" class="registration-form position-relative">
         {% csrf_token %}
         {{ form|crispy }}
 <br>
-    <button type="submit" name="submit" class="btn"  style="background-color: #2a5982;  color: aliceblue; width: 100px;">Register</button>
+    <button type="submit" name="submit" class="btn position-absolute bottom-0 end-0 m-2"  style="background-color: #2a5982;  color: aliceblue; width: 100px;">Register</button>
     </form>
     <br><br>
     <br>

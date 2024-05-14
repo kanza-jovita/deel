@@ -48,7 +48,6 @@ urlpatterns = [
     path('editoffduty/<int:id>/', views.editoffduty, name='editoffduty'),
      
 
-    
 #procurement
     path('inventory/', views.inventory, name='inventory'),
     path('add_to_stocks/<str:pk>', views.add_to_stocks, name='add_to_stocks'),
@@ -67,6 +66,11 @@ urlpatterns = [
 #assign
     path('assign_view/', views.assign_view, name='assign_view'),
     path('assign_sitter/<int:id>/', views.assign_sitter, name='assign_sitter'),
+
+
+#Checkin and Checkout
+    path('checkin/<int:baby_id>/', views.checkin, name='checkin'),
+    path('checkout/<int:checkin_id>/', views.checkout, name='checkout'),
 
 ]
 
