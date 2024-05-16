@@ -130,10 +130,7 @@
                     <!-- <td>{{ checkout.checked_out_by }}</td> -->
                     <td class="btn-container">
                         <a href="{% url 'edit' id=baby.id %}" class="btn"><i class="fas fa-edit" style="font-size: 15px;"></i><span>Edit</span></a>
-                        <form action="{% url 'delete_baby' id=baby.id %}" method="POST" onsubmit="return confirm('Delete')">
-                            {% csrf_token %}
-                            <button class="btn" type="submit"><i class="fas fa-trash" style="font-size: 15px;"></i>Delete</button>
-                        </form>
+                        <a href="{% url 'delete_baby' id=baby.id %}" class="btn"><i class="fas fa-trash" style="font-size: 15px;"></i><span>Delete</span></a>
                         <td>
                             <button type="button" class="btn btn-primary me-1"
                                 href="{% url 'read' id=baby.id %}" data-bs-toggle="modal"

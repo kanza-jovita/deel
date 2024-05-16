@@ -239,13 +239,15 @@ def read(request,id ):
 def edit(request,id):
     baby=get_object_or_404(Babyreg,id=id)
     if request.method == 'POST':
-        form=Babyreg_form (request.POST,instance=baby)
+        form=Babyreg_form(request.POST,instance=baby)
         if form.is_valid():
             form.save()
             return redirect('babiesform')
     else:
             form =Babyreg_form(instance=baby)
-    return render(request,'edit.html',{'form':form,baby:baby})
+    return render(request,'edit.html',{'form':form,'baby':baby})
+
+
 
 @login_required
 def delete_baby (request, id):
@@ -257,6 +259,8 @@ def delete_baby (request, id):
     else:
         messages.success("you are not authorised")
         return redirect('babiesform')
+    
+
     
 #Babies payments
 @login_required
@@ -323,6 +327,8 @@ def search_baby(request):
     return render(request, 'babiesform.html', {'babies': babies})
 
 
+
+
 #departures
 @login_required
 def departure(request):
@@ -359,17 +365,23 @@ def editdeparture(request,id):
 
 
 @login_required
+# def doll(request):
+#     query = request.GET.get('search_query')
+#     dolls = Doll.objects.all().order_by('id')
+
+#     if query:
+#         dolls = dolls.annotate(search=SearchVector('name_of_the_doll')).filter(search=query)
+
+#     doll_filters = DollFilter(request.GET, queryset=dolls)
+#     dolls = doll_filters.qs
+#     return render(request, 'doll.html', {'dolls': dolls, 'doll_filters': doll_filters})
+
+@login_required
 def doll(request):
-    query = request.GET.get('q')
-
-    dolls = Doll.objects.all().order_by('id')
-
-    if query:
-        dolls = dolls.annotate(search=SearchVector('doll_name')).filter(search=query)
-
-    doll_filters = DollFilter(request.GET, queryset=dolls)
-    dolls = doll_filters.qs
-    return render(request, 'doll.html', {'dolls': dolls, 'doll_filters': doll_filters})
+    dolls=Doll.objects.all().order_by('id')
+    doll_filter=DollFilter(request.GET,queryset=dolls)
+    dolls = doll_filter.qs
+    return render(request,'dolls/doll.html',{'dolls':dolls,'doll_filter':doll_filter})
 
 
 

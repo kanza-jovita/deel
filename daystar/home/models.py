@@ -54,7 +54,7 @@ class Babyreg(models.Model):
     c_stay = models.ForeignKey(Categorystay, on_delete=models.SET_NULL, null=True, blank=True)
     # assigned = models.ForeignKey(Sitter_arrival, on_delete=models.SET_NULL, null=True, blank=True)
     Date = models.DateTimeField()
-    Gender = models.CharField(max_length=30, null=False, blank=False)
+    Gender =  models.CharField(choices=[('male', 'Male'),('female', 'Female')], max_length=100)
     Age = models.IntegerField()
     Location = models.CharField(max_length=30, null=False, blank=False)
     brought = models.CharField(max_length=200)
