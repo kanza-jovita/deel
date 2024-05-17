@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <style>
     body {
@@ -108,13 +109,11 @@
                     <th scope="col">Gender</th>
                     <th scope="col">Age</th>
                     <th scope="col">Location</th>
-                    <th scope="col">Time In</th>
-                    <th scope="col">Time Out</th>
                     <th scope="col">Action</th> 
                 </tr>
             </thead>
             <tbody>
-                {% for baby,checkin,checkout in data %}
+                {% for baby in babies %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ baby.Baby_name }}</td>
@@ -124,10 +123,6 @@
                     <td>{{ baby.Gender }}</td>
                     <td>{{ baby.Age}}</td>
                     <td>{{ baby.Location }}</td>
-                    <td>{{ checkin.checkin_time | time:'H:i a' }}</td>
-                    <!-- <td>{{ checkin.checked_in_by }}</td> -->
-                    <td>{{ checkout.checkout_time | time:'H:i a' }}</td>
-                    <!-- <td>{{ checkout.checked_out_by }}</td> -->
                     <td class="btn-container">
                         <a href="{% url 'edit' id=baby.id %}" class="btn"><i class="fas fa-edit" style="font-size: 15px;"></i><span>Edit</span></a>
                         <a href="{% url 'delete_baby' id=baby.id %}" class="btn"><i class="fas fa-trash" style="font-size: 15px;"></i><span>Delete</span></a>
@@ -163,46 +158,15 @@
                                             <li>Gender: <strong> {{ baby.Gender }} </strong> </li>
                                             <li>Age: <strong> {{ baby.Age }} </strong> </li>
                                             <li>Location: <strong> {{ baby.Location }} </strong> </li>
-                                            
                                             <li>Brought By: <strong> {{ baby.brought }} </strong> </li>
-                                           
-                                            <li>
-                                            <!-- Number of checkins: {{ baby.checkins.count }} -->
-                                            <a href="{% url 'checkin' baby.id %}" class="btn btn-info">checkin</a>
-
-                                            </li>
-                                            <li>{{ baby.checkins.last.checked_in_by }}</li>
-                                            <li>
-                                            {% if baby.checkins.exists %}
-                                                {% with last_checkout=baby.checkins.last %}
-                                                <!-- Last checkin exists: {{ last_checkout|yesno:"Yes,No" }} -->
-                                                    {% if last_checkout.exists %}
-                                                        Checked Out at {{ last_checkout.checkout_time|time:"H:i" }}
-                                                    {% else %}
-                                                        <a href="{% url 'checkout' baby.checkins.last.id %}" class="btn btn-danger">checkout</a>
-                                                    {% endif %}
-                                                {% endwith %}
-                                            {% else %}
-                                                Not Checked Out
-                                            {% endif %}
-                                            </li>
-                                            <li>
-                                            <!-- {% if baby.checkins.exists %}
-                                                {% if baby.checkins.last.exists %}
-                                                    {{ baby.checkins.last.checkouts.last.checked_out_by }}
-                                                {% endif %}
-                                            {% endif %} -->
-                                            {{ checkout.checked_out_by }}
-                                            </li>
-                                            
-
+                    
                                         </ul>
                                     </div>
                                     
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary"
                                             data-bs-dismiss="modal">Close</button>
-                                            <a href="{% url 'read' id=baby.id %}" type="button" class="btn btn-primary">View</a>
+                                            <!-- <a href="{% url 'read' id=baby.id %}" type="button" class="btn btn-primary">View</a> -->
                                     </div>
                                 </div>
                             </div>
@@ -215,4 +179,37 @@
         </table>
     </div>
 </div>
+
+<hr>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            
+        
+{% if babies.has_previous %}
+<li class="page-item">
+    <a href="?page=1" class="page-link">&laquo; First</a>
+</li>
+<li class="page-item">
+    <a href="?page={{babies.previous_page_number}}" class="page-link">Previous</a>
+</li>
+{% endif %}
+
+{% for i in nums %}
+<li class="page-item">
+    <a href="?page={{ forloop.counter }} "class="page-link">{{ forloop.counter }}</a>
+</li>
+
+{% endfor %}
+
+{% if babies.has_next %}
+<li class="page-item">
+    <a href="?page={{ babies.next_page_number }} "class="page-link">Next</a>
+</li>
+<li class="page-item">
+    <a href="?page={{ babies.paginator.num_pages }}"  class="page-link">Last &raquo;</a>
+</li>
+{% endif %}
+</ul>
+</nav>
 {% endblock %}

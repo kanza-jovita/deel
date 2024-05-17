@@ -7,12 +7,10 @@ from .filters import *
 from django.contrib.auth import authenticate,login,logout 
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from django.contrib.postgres.search import SearchVector
 from django.http import HttpResponseBadRequest
 from django.contrib import messages
 from django.db.models import Sum
 from django.core.paginator import Paginator
-from itertools import zip_longest
 
 
 
@@ -208,12 +206,14 @@ def editoffduty(request, id):
 #Babies views
 @login_required
 def babiesform(request):
-      babies= Babyreg.objects.all()
-      checkin = CheckIn.objects.all()
-      checkout = CheckOut.objects.all()
-      data = zip_longest(babies, checkin, checkout)
-      return render(request,'babiesform.html',{'data':data})
-      
+    # babies= Babyreg.objects.all()
+    baby = Paginator(Babyreg.objects.all(),5)
+    page  = request.GET.get('page')
+    babies = baby.get_page(page)
+    nums = 'k'*babies.paginator.num_pages
+    # return render(request,'sittersform.html',{'nums':nums,'sitters':sitters})
+    return render(request,'babiesform.html',{'nums':nums,'babies':babies})
+
 
 @login_required
 def addbaby(request):
@@ -318,13 +318,9 @@ def editpayment(request, id):
 
 
 def search_baby(request):
-    search_query = request.GET.get('search', '')
-    if search_query:
-        babies = Babyreg.objects.filter(Baby_name__icontains=search_query)
-    else:
-        babies = Babyreg.objects.all()
-
-    return render(request, 'babiesform.html', {'babies': babies})
+    query = request.GET.get('search')
+    babies = Babyreg.objects.filter(Baby_name__icontains=query)
+    return render(request, 'babiesform.html', {'babies':babies})
 
 
 
@@ -365,16 +361,10 @@ def editdeparture(request,id):
 
 
 @login_required
-# def doll(request):
-#     query = request.GET.get('search_query')
-#     dolls = Doll.objects.all().order_by('id')
-
-#     if query:
-#         dolls = dolls.annotate(search=SearchVector('name_of_the_doll')).filter(search=query)
-
-#     doll_filters = DollFilter(request.GET, queryset=dolls)
-#     dolls = doll_filters.qs
-#     return render(request, 'doll.html', {'dolls': dolls, 'doll_filters': doll_filters})
+def search_doll(request):
+    query = request.GET.get('search')
+    dolls = Doll.objects.filter(name_of_the_doll__icontains=query)
+    return render(request, 'doll.html', {'dolls':dolls})
 
 @login_required
 def doll(request):
@@ -536,55 +526,3 @@ def assign_sitter(request,id):
 
 
 
-#CheckIn views
-def checkin(request, baby_id):
-    baby = Babyreg.objects.get(id=baby_id)
-    if request.method == 'POST':
-        form = CheckInForm(request.POST)
-        if form.is_valid():
-            checked_in_by = form.cleaned_data['checked_in_by']
-            CheckIn.objects.create(baby=baby, checkin_time=timezone.now(), checked_in_by=checked_in_by)
-            # form.save()
-            return redirect('babiesform')  # Redirect to viewbaby page
-    else:
-        form = CheckInForm()
-    return render(request, 'checkin.html', {'form': form, 'baby': baby})
-
-
-def checkout(request, checkin_id):
-    checkin = CheckIn.objects.get(id=checkin_id)
-    baby = checkin.baby
-    if request.method == 'POST':
-        
-        form = CheckOutForm(request.POST)
-        
-        if form.is_valid():
-            checked_out_by = form.cleaned_data['checked_out_by']
-            CheckOut.objects.create(checkin=checkin, checkout_time=timezone.now(), checked_out_by=checked_out_by)
-            # checkout = form.save(commit=False)
-            # checkout.checkin = checkin
-            # checkout.save()
-            # baby = checkin.baby
-            baby.is_checked_in = False
-            baby.save()
-            return redirect('babiesform')
-    else:
-        form = CheckOutForm()
-    return render(request, 'checkout.html', {'form': form, 'checkin': checkin})
-
-
-
-
-
- 
-
-
-  
-
-
-
-
-
-
-
- 

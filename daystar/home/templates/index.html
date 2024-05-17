@@ -4,89 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>DayStar Daycare Management System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
     <link rel="icon" href="{% static 'favicon/favicon.ico' %}" type="image/x-icon">
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    
     <style>
         body {
-            background-image: url('{% static "images/mine.jpg" %}');
+            background-color: #f8f9fa;
+        }
+      .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            background-image: url('../static/images/jovin.jpg');
             background-size: cover;
             background-position: center;
-            color: #fff;
-            margin: 0;
-            padding: 0;
         }
-        .welcome-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-        .btn-welcome,
-        .btn-login {
-            background-color: #ff6f61; /* Coral color */
-            border-color: #ff6f61;
-            color: #fff;
-            margin: 10px;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 18px;
-        }
-        .btn-welcome:hover,
-        .btn-login:hover {
-            background-color: #ff8b81; /* Lighter coral color */
-            border-color: #ff8b81;
+      .hero-text {
+            max-width: 600px;
+            margin-left: auto; /* Aligns the text to the right */
         }
 
-    .social-icons {
-  display: inline-block; /* This makes the icons appear on the same line */
-}
+        h1{
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            color: black;
+        }
 
-    .icon {
-  display: inline-block; /* This ensures each icon appears inline */
-  margin-right: 10px; /* Adjust the spacing between icons */
-}
+        h5{
+    color: white;
+        }
 
-i {
-    font-size: 15px;
-}
+    .footer{
+     padding-top:10px;
+     background-color:  #121314;
+     color: white;
+     position: fixed;
+     width: 100%;
+     left: 0; 
+     bottom: 0;
+     text-align: center;
+  }
 
-.anchor {
-    width: 50px;
-    margin: 0px;
+</style>
+</head>
+<body>
 
-}
-    </style>
-</head>     
-<!-- <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-body">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img style="border-radius: 50px;" src="{% static 'images/logo.jpg' %}" alt="logo" class="logo-img" /></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarColor01">
-                <div class="ml-auto">
-                    <a class="btn btn-light" href="{% url 'login' %}" id="medi">Login</a>
-                </div>
-            </div>
+<div class="container hero-section">
+    <div class="row">
+        <div class="col-md-12 hero-text">
+            <h1>Welcome to Daystar </h1>
+            <h5>A safe and nurturing environment for your child.</h5>
+            <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
         </div>
-    </nav> -->
-
-    <div class="welcome-message">
-        <h1>Welcome to DayStar Daycare</h1>
-        <p style="font-size: 24px;">Where Little Stars Shine Brightest in a Home of Joy</p>
-        <a href="#" class="btn btn-welcome">Continue</a>
-        <a href="{% url 'login' %}" class="btn btn-login">Login</a>
     </div>
+</div>
+
     
     <footer>
-        <div class="footer" style="background-color: whitesmoke; box-shadow: 10px 10px 5px lightblue; height: 70px;">
+        <div class="footer" style="background-color: rgb(34, 31, 31); box-shadow: 10px 10px 5px lightblue; height: 70px;">
             <!-- <div class="social-icons" style="width: 100%;">
                 <a class="anchor" href="https://www.facebook.com/your-page" target="_blank"><i class="fab fa-facebook"></i></a>
                 <a class="anchor" href="https://twitter.com/your-handle" target="_blank"><i class="fab fa-twitter"></i></a>

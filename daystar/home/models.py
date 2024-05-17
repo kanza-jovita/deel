@@ -12,7 +12,7 @@ class Sitterreg(models.Model):
     date = models.DateTimeField()
     Location_choices = [('Kabalagala', 'Kabalagala'),]
     Location = models.CharField(choices=Location_choices, max_length=100)
-    Gender =  models.CharField(choices=[('male', 'Male'),('female', 'Female')], max_length=100)
+    Gender =  models.CharField(choices=[('Male', 'Male'),('Female', 'Female')], max_length=100)
     Level_of_education = models.CharField(choices=[('Degree','Degree'),('Diploma','Diploma'),('Certificate','Certificate')],max_length=200,default=0)
     Next_of_kin = models.CharField(max_length=30, null=False,blank=False)
     NIN = models.CharField(max_length=30, null=False,blank=False)
@@ -21,21 +21,6 @@ class Sitterreg(models.Model):
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     def __str__(self):
         return str(self.Sitter_name)
-
-
-    
-#Sitter payments    
-class Sitterpayment(models.Model):
-    # sitter_names = models.ForeignKey(Sitter_arrival, on_delete=models.CASCADE)
-    amount = models.IntegerField(default=3000)
-    date = models.DateField(default=timezone.now)
-    babies_assigned = models.IntegerField(default=0)
-    def __str__(self):
-        return f"Sitter Payment - {self.sitter_names.sitter_name}"
-
-    def total_amount(self):
-        total = self.amount * self.babies_assigned
-        return total  
 
 
 
@@ -54,7 +39,7 @@ class Babyreg(models.Model):
     c_stay = models.ForeignKey(Categorystay, on_delete=models.SET_NULL, null=True, blank=True)
     # assigned = models.ForeignKey(Sitter_arrival, on_delete=models.SET_NULL, null=True, blank=True)
     Date = models.DateTimeField()
-    Gender =  models.CharField(choices=[('male', 'Male'),('female', 'Female')], max_length=100)
+    Gender =  models.CharField(choices=[('Male', 'Male'),('Female', 'Female')], max_length=100)
     Age = models.IntegerField()
     Location = models.CharField(max_length=30, null=False, blank=False)
     brought = models.CharField(max_length=200)
@@ -80,6 +65,22 @@ class Sitter_arrival(models.Model):
 
     def __str__(self):
         return self.sitter_name.Sitter_name
+
+
+#Sitter payments    
+class Sitterpayment(models.Model):
+    sitter_names = models.ForeignKey(Sitter_arrival, on_delete=models.CASCADE)
+    amount = models.IntegerField(default=3000)
+    date = models.DateField(default=timezone.now)
+    babies_assigned = models.IntegerField(default=0)
+    def __str__(self):
+        return f"Sitter Payment - {self.sitter_names.sitter_name}"
+
+    def total_amount(self):
+        total = self.amount * self.babies_assigned
+        return total  
+
+
     
 
 class Sitter_departure(models.Model):
@@ -204,27 +205,3 @@ class Used(models.Model):
     def __str__(self):
         return f"Issued {self.quantity_issued} units of {self.item.item_name} on {self.issue_date}"
 
-
-
-
-
-
-#CheckIn and CheckOut
-class CheckIn(models.Model):
-    baby = models.ForeignKey(Babyreg,related_name='checkins', on_delete=models.CASCADE)
-    checkin_time = models.DateTimeField(default=timezone.now)
-    checked_in_by = models.CharField(max_length=100)
-    def __str__(self):
-        return f"{self.baby.Baby_name} checked in by {self.checked_in_by} at {self.checkin_time}"
-
-class CheckOut(models.Model):
-    checkin = models.OneToOneField(CheckIn, related_name='checkouts', on_delete=models.CASCADE)
-    checkout_time = models.DateTimeField(default=timezone.now)
-    checked_out_by = models.CharField(max_length=100)
-    def __str__(self):
-            return f" {self.checkin.baby.Baby_name} checked out by {self.checked_out_by} at {self.checkout_time}"
-
-
-
-
-    
