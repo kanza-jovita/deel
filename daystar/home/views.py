@@ -202,6 +202,29 @@ def editoffduty(request, id):
             form=SitterdepartureForm(instance=offduty) 
     return render(request,'editoffduty.html',{'form':form,'offduty':offduty})   
 
+#Assign sitter
+def assign_view(request):
+    assign = Sitter_arrival.objects.all()
+    for assigns in assign:
+        assigns.payment = assigns.babies.all().count()*3000
+    return render(request, 'assign_view.html',{'assign': assign})
+
+def assign_sitter(request,id):
+    baby = Babyreg.objects.all()
+    sitter = Sitterreg.objects.get(id=id)
+    if request.method == 'POST':
+         form = Sitter_arrivalForm(request.POST)
+         if form.is_valid():
+            form.save()
+            return redirect('assign_view')
+         else:
+             print("Form is not valid")
+    else:
+        form = Sitter_arrivalForm()
+    return render(request, 'assign_sitter.html', {'form': form, 'baby':baby,'sitter':sitter})
+
+
+
               
 #Babies views
 @login_required
@@ -501,28 +524,5 @@ def all_issue_items(request):
     total_received_quantity = Procurement.objects.aggregate(total_received_quantity=Sum('Quantity'))['total_received_quantity'] or 0
     net_quantity = total_received_quantity - total_issued_quantity
     return render(request, 'all_issue_items.html', {'issues': issues, 'total_issued_quantity': total_issued_quantity, 'total_received_quantity': total_received_quantity, 'net_quantity': net_quantity})
-
-
-def assign_view(request):
-    assign = Sitter_arrival.objects.all()
-    for assigns in assign:
-        assigns.payment = assigns.babies.all().count()*3000
-    return render(request, 'assign_view.html',{'assign': assign})
-
-def assign_sitter(request,id):
-    baby = Babyreg.objects.all()
-    sitter = Sitterreg.objects.get(id=id)
-    if request.method == 'POST':
-         form = Sitter_arrivalForm(request.POST)
-         if form.is_valid():
-            form.save()
-            return redirect('assign_view')
-         else:
-             print("Form is not valid")
-    else:
-        form = Sitter_arrivalForm()
-    return render(request, 'assign_sitter.html', {'form': form, 'baby':baby,'sitter':sitter})
-
-
 
 

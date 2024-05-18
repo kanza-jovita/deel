@@ -40,7 +40,7 @@ class Babyreg(models.Model):
     # assigned = models.ForeignKey(Sitter_arrival, on_delete=models.SET_NULL, null=True, blank=True)
     Date = models.DateTimeField()
     Gender =  models.CharField(choices=[('Male', 'Male'),('Female', 'Female')], max_length=100)
-    Age = models.IntegerField()
+    Age = models.CharField(max_length=20, blank=False, null=False)
     Location = models.CharField(max_length=30, null=False, blank=False)
     brought = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
