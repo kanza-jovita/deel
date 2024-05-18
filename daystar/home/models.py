@@ -153,8 +153,8 @@ class Doll(models.Model):
     doll_number = models.CharField(max_length=200,null=True, blank=True)
     quantity=models.IntegerField(default=0)
     issued_quantity=models.IntegerField(default=0,blank=True,null=True) 
-    received_quantity=models.IntegerField(default=0,null=True,blank=True)
-    Unit_price=models.IntegerField(default=0,null=True, blank=True)
+    received_quantity=models.IntegerField(default=0,null=False,blank=False)
+    Unit_price=models.IntegerField(default=0,null=False, blank=False)
     date=models.DateField(default=timezone.now)
     def __str__(self):
         return self.name_of_the_doll
@@ -190,8 +190,8 @@ class Procurement(models.Model):
     item_name = models.CharField(max_length=200)
     Quantity = models.IntegerField(default=0)
     date = models.DateField(auto_now_add=True, null=True)
-    Unit_price = models.IntegerField(null=True)
-    received_quantity = models.IntegerField(default=0, null=True, blank=True)
+    # Unit_price = models.IntegerField(null=True)
+    received_quantity = models.IntegerField(default=0, null=False, blank=False)
 
     def __str__(self):
         return str(self.item_name)

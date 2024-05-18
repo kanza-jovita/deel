@@ -16,6 +16,7 @@ admin.site.register(Sitterpayment)
 admin.site.register(Salesrecord)
 admin.site.register(Departure)
 admin.site.register(Sitter_departure)
+admin.site.register(Used)
 
 
 

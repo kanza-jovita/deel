@@ -68,7 +68,7 @@ class SitterpaymentForm(ModelForm):
          fields='__all__'
 
 
-class   DepartureForm(ModelForm):
+class DepartureForm(ModelForm):
      class Meta:
          model=Departure
          fields= ['baby_name', 'date', 'picker', 'contact', 'NIN', 'comment']
