@@ -6,13 +6,26 @@
     body {
         background-color: rgba(158, 184, 217, 0.5); 
     }
-</style
-<body>
+
+    .card-header{
+    border: 1px  #333; 
+    opacity:90%;
+    width: 87%;
+    text-align: center; 
+    box-shadow: 0 7px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width:30%;
+    margin: 0 auto; 
+    background-color: aliceblue;
+    text-align: center; 
+  } 
+</style>
+
     <div class="card-header" style=" margin-top: 10px;">
         <h2>ARRIVAL FORM</h2>
     </div>
     <hr>
-    <div class=" formfeild">
+ 
     <div class="container">
         <form method="POST" action="" class="registration-form">
             {% csrf_token %}
@@ -20,7 +33,6 @@
             <button type="submit" class="btn" style="background-color: #2a5982; color: aliceblue; width: 100px;">Arrive</button>
         </form>
         <br><br>
-    </div>
 </div>
 {% endblock %}
   

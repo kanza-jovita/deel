@@ -39,12 +39,12 @@
     padding: 8px;
     text-align: left;
     border: none; 
-    outline: none; 
+    outline: none;  
     
 }
 
 .table th {
-    color: black;
+    color: rgb(39, 38, 38);
 }
 
 .table tbody tr:hover {
@@ -54,12 +54,9 @@
 
 .table th, .table td {
     white-space: nowrap;
-    /* overflow: hidden; */
-    /* text-overflow: ellipsis; */
 }
 
 .table-responsive {
-    /* display: flex; */
     justify-content: center;
 }
 

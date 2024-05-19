@@ -75,13 +75,22 @@
     .add-btn {
         margin-left: auto; 
     }
+    .del_btn {
+        background-color: rgb(222, 85, 85); 
+        color: #fff; 
+        border: none; 
+        padding: 0.5rem 1rem; 
+        margin-right: 0.5rem; 
+        cursor: pointer;
+        border-radius: 5px;
+    }
 </style>
 <div class="card-header">
     <h2>SITTER ATTENDANCE LIST</h2>
 </div>
 <a href="/addonduty" class="btn btn-primary mb-3">Add duty </a>
 <div class="table-responsive">
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered"  style="border-top: 2px solid rgb(34,32,32);">
         <thead class="table-white">
             <tr>
                 <th scope="col">#</th>
@@ -108,7 +117,7 @@
                     <a href="{% url 'editonduty' id=sitter.id %}"  class="btn btn-primary ">Update</a>
                     <form action="{% url 'delete_onduty' id=sitter.id %}" method="POST" onsubmit="return confirm('Delete')">
                         {% csrf_token %}
-                        <button class="btn" type="submit"><i class="fas fa-trash"></i>Delete</button>
+                        <button class="del_btn btn" type="submit"><i class="fas fa-trash"></i>Delete</button>
                     </form>
                 </td>
             </tr>

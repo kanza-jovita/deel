@@ -1,13 +1,37 @@
 from django.db import models
 from django.contrib.auth .models import User
 from django.utils import timezone
-from django.core.validators import MinValueValidator
+import re
+from django.core.exceptions import ValidationError
 
 #Create your models here.
+
+
+#letter validation
+def validate_letters(value):
+    if not re.match("^([a-zA-Z]+\s)*[a-zA-Z]+$", value):
+        raise ValidationError("Only letters are allowed.")
+
+#number validation function
+def validate_numbers(value):
+    if not re.match("^[0-9]*$", value):
+        raise ValidationError("Only numbers are allowed.")
+
+#contact length validation function
+def validate_contact_length(value):
+    if len(value) != 10:
+        raise ValidationError("Contact field must contain exactly 10 digits.")
+
+#NIN length validation function
+def validate_NIN_length(value):
+    if len(value) != 14:
+        raise ValidationError("NIN field must contain exactly 14 digits.")
+
+
 class Sitterreg(models.Model):
-    Sitter_name = models.CharField(max_length=30, null=False,blank=False)
-    Sitter_number = models.CharField(max_length=30, null=False, blank=False)
-    Date_of_birth = models.DateField(null=True, blank=True)
+    Sitter_name = models.CharField(max_length=30, null=False,blank=False,validators=[validate_letters])
+    Sitter_number = models.CharField(max_length=30, null=False, blank=False,validators=[validate_numbers])
+    Date_of_birth = models.DateField(null=True, blank=False,)
     Contact = models.CharField(max_length=30,null=False,blank=False)
     date = models.DateTimeField()
     Location_choices = [('Kabalagala', 'Kabalagala'),]
@@ -15,7 +39,7 @@ class Sitterreg(models.Model):
     Gender =  models.CharField(choices=[('Male', 'Male'),('Female', 'Female')], max_length=100)
     Level_of_education = models.CharField(choices=[('Degree','Degree'),('Diploma','Diploma'),('Certificate','Certificate')],max_length=200,default=0)
     Next_of_kin = models.CharField(max_length=30, null=False,blank=False)
-    NIN = models.CharField(max_length=30, null=False,blank=False)
+    NIN = models.CharField(max_length=30, null=False,blank=False,validators=[validate_NIN_length])
     Recommenders_name = models.CharField(max_length=30, null=False,blank=False)
     Religion = models.CharField(choices=[('Anglican', 'Anglican'),('Catholic', 'Catholic'),('Pentecostal','Pentecostal'),('Muslim','Muslim'),('Other','Other')], max_length=100)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
@@ -81,13 +105,12 @@ class Sitterpayment(models.Model):
         return total  
 
 
-    
 
 class Sitter_departure(models.Model):
     sitter = models.ForeignKey(Sitterreg, on_delete=models.CASCADE)
     sitter_number = models.CharField(max_length=30,null=True,blank=False)
     departure_time = models.DateTimeField() 
-    comment = models.TextField(blank=True)
+    comment = models.CharField(max_length=200,blank=True,null=True)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
 
 
@@ -161,6 +184,7 @@ class Doll(models.Model):
     
 class Salesrecord(models.Model):    
     doll=models.ForeignKey(Doll, on_delete=models.CASCADE,null=False, blank=False)
+    doll_no = models.CharField(max_length=10,default=0)
     payee = models.ForeignKey(Babyreg, on_delete=models.SET_NULL, null=True, blank=True)
     quantity_sold=models.IntegerField(default=0)
     amount_received=models.IntegerField(default=0)

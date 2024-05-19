@@ -13,7 +13,20 @@
 <div class="container">
     <form method="post" class="registration-form position-relative">
         {% csrf_token %}
-        {{ form|crispy }}
+<!-- 
+This line generates a CSRF (Cross-Site Request Forgery) token. 
+It is a security measure to protect against CSRF attacks. 
+When the form is submitted, the server will check that the token matches 
+the one it originally sent, ensuring the form submission is legitimate. 
+-->
+
+{{ form|crispy }}
+<!-- 
+This line renders the form object passed from the view using the Crispy Forms library. 
+The |crispy filter applies the styling defined by the Crispy Forms template pack 
+(such as Bootstrap), making the form look more elegant and user-friendly. 
+-->
+
 <br>
     <button type="submit" name="submit" class="btn position-absolute bottom-0 end-0 m-2"  style="background-color: #2a5982;  color: aliceblue; width: 100px;">Register</button>
     </form>
