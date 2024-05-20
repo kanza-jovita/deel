@@ -96,11 +96,11 @@
 
 <br><br>
 
-<div class="table-responsive">
-    <table class="table table-bordered"  style="border-top: 2px solid rgb(34,32,32);">
+<div class="table-responsive" style="margin-left: left; float: right;">
+    <table class="table table-bordered"  style="border-top: 2px solid rgb(34,32,32); border-left: 2px solid rgb(34,32,32); border-right: 2px solid rgb(34,32,32);">
         <thead class="table">
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">ID</th>
                 <th scope="col">Payee</th>
                 <th scope="col">Period</th>
                 <th scope="col">Mode</th>
@@ -114,7 +114,7 @@
         </thead>
         <tbody>
             {% for payment  in payments %}
-            <tr style="background-color: white;">
+            <tr style="background-color:rgba(158, 184, 217, 0.5);">
                 <td>{{ payment.id }}</td>
                 <td>{{ payment.payee }}</td>
                 <td>{{ payment.c_payment }}</td>

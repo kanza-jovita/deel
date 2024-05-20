@@ -1,15 +1,10 @@
 {% extends 'base.html' %} 
 {% block content %}
 <br><br>
-<style>
-    .receipt-container {
-        overflow-x: hidden;
-        max-width: 100vw;
-}
-</style>
+
 <div receipt-container>
 <div class="container" style="background-color: aliceblue;">
-    <h1 class="card-header text-center" class="v">ALL RECEIPTS</h1><br>
+    <h1 class="card-header text-center">ALL RECEIPTS</h1><br>
     {% for sale in sales %}
     <div class="card" style="opacity: 90%;" >
         
@@ -27,7 +22,7 @@
                 <h6 class="card-text">Amount Due: UGX{{ sale.get_change }}</h6>
                 <a href="{% url 'receipt_detail' sale.id %}">
                    
-                    <button class="button" type="submit"style="width:auto; ">Print Receipt</button> <br>
+                    <button class="button" type="submit">Print Receipt</button> <br>
                 </a>
             </div>
         </div>

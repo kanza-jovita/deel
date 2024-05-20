@@ -82,10 +82,12 @@ class Sitter_arrival(models.Model):
     date_of_arrival=models.DateTimeField()  
     # timein=models.TimeField ()
     # timeout=models.TimeField (null=True, blank=True)
-    # Attendancestatus = models.CharField(choices=[('onduty', 'On Duty'), ('offduty', 'Off Duty')], max_length=100)
-    Attendancestatus = models.BooleanField(default=False)
-    babies = models.ManyToManyField(Babyreg)
+    Attendancestatus = models.CharField(choices=[('onduty', 'On Duty'), ('offduty', 'Off Duty')], max_length=100)
+    # Attendancestatus = models.BooleanField(default=False)
+    babies = models.ManyToManyField(Babyreg,blank=True)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
+    payment = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    num_babies = models.IntegerField(default=0)
 
     def __str__(self):
         return self.sitter_name.Sitter_name
@@ -228,4 +230,5 @@ class Used(models.Model):
 
     def __str__(self):
         return f"Issued {self.quantity_issued} units of {self.item.item_name} on {self.issue_date}"
+
 

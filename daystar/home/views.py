@@ -216,13 +216,36 @@ def editoffduty(request, id):
         form = SitterdepartureForm(instance=offduty)  # Creating a form instance pre-filled with sitter departure data for GET requests
     return render(request,'editoffduty.html',{'form':form,'offduty':offduty})  # Rendering the edit sitter departure form template
 
+# @login_required
+# def assign_view(request):
+#     assign = Sitter_arrival.objects.all()
+#     for assigns in assign:
+#         assigns.payment = assigns.babies.all().count() * 3000
+#         assigns.save()
+#     return render(request, 'assign_view.html',{'assign': assign})  
+
 @login_required
 def assign_view(request):
-    assign = Sitter_arrival.objects.all()  # Retrieving all sitter arrival objects
+    assign = Sitter_arrival.objects.all()
     for assigns in assign:
-        # Calculating payment for each sitter based on the number of assigned babies
-        assigns.payment = assigns.babies.all().count() * 3000
-    return render(request, 'assign_view.html',{'assign': assign})  # Rendering the assign view template with assigned sitters and payment details
+        num_babies = assigns.babies.all().count()
+        assigns.num_babies = num_babies
+        assigns.payment = num_babies * 3000
+        assigns.save()
+    return render(request, 'assign_view.html', {'assign': assign})
+
+
+@login_required
+def assign_view(request):
+    assign = Sitter_arrival.objects.all()
+    for assigns in assign:
+        num_babies = assigns.babies.all().count()
+        assigns.num_babies = num_babies
+        assigns.payment = num_babies * 3000
+        assigns.save()
+        print(f'Sitter: {assigns.sitter_name.Sitter_name}, Babies: {num_babies}, Payment: {assigns.payment}')
+    return render(request, 'assign_view.html', {'assign': assign})
+
 
 @login_required
 def assign_sitter(request, id):

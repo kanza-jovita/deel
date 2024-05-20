@@ -115,10 +115,10 @@
                 <td>{{ sitter.Attendancestatus}}</td>
                 <td class="btn-container">
                     <a href="{% url 'editonduty' id=sitter.id %}"  class="btn btn-primary ">Update</a>
-                    <form action="{% url 'delete_onduty' id=sitter.id %}" method="POST" onsubmit="return confirm('Delete')">
+                    <!-- <form action="{% url 'delete_onduty' id=sitter.id %}" method="POST" onsubmit="return confirm('Delete')">
                         {% csrf_token %}
                         <button class="del_btn btn" type="submit"><i class="fas fa-trash"></i>Delete</button>
-                    </form>
+                    </form> -->
                 </td>
             </tr>
             {% endfor %}

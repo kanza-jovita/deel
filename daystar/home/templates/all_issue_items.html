@@ -77,7 +77,7 @@
 <div class="card-header">
 <h2>ALL QUANTITY</h2>
 </div>
-  <table class="table">
+  <table class="table" style="border-top: 2px solid rgb(34,32,32);">
     <thead class="thead-dark">
       <tr>
         <th scope="col">Available Quantity</th>
@@ -97,7 +97,7 @@
 <br><br>
 
 <div class="container">
-  <table class="table">
+  <table class="table" style="border-top: 2px solid rgb(34,32,32); border-bottom: 2px solid rgb(34,32,32); border-left: 2px solid rgb(34,32,32); border-right: 2px solid rgb(34,32,32);">
     <thead class="thead-dark">
       <tr>
         <th scope="col">Stock name</th>
@@ -109,7 +109,7 @@
     {% for issue  in issues %}
     <tbody>
       <tr> 
-        <td>{{issue.item | title}}</td>
+        <td style="color: rgb(221, 100, 100);">{{issue.item | title}}</td>
         <td>{{issue.quantity_issued}}</td>
         <td>{{issue.issue_date}}</td>  
         <td>{{issue.issued_to}}</td>  

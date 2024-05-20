@@ -144,10 +144,10 @@
 }
   
 .button {
-    background-color: #343a40;
+    background-color: #2780d9;
     cursor: pointer;
     border-radius: 10px;
-    border: 10px solid;
+    /* border: 10px solid; */
     padding-left: 20px;
     padding-right: 40px;
     margin-left: 200px;
