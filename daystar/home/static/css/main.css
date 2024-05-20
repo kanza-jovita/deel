@@ -144,15 +144,19 @@
 }
   
 .button {
-    background-color: #2780d9;
-    cursor: pointer;
-    border-radius: 10px;
-    /* border: 10px solid; */
+  
+    border-radius: 5px;
     padding-left: 20px;
     padding-right: 40px;
     margin-left: 200px;
     margin-right: 200px;
     margin-top: 20px;
     margin-bottom: 20px;
+    background-color: #2a5982; 
+    color: #fff; 
+    border: none; 
+    padding: 0.5rem 1rem; 
+    margin-right: 0.5rem; 
+    cursor: pointer;
 }
 

@@ -32,7 +32,7 @@ class Sitterreg(models.Model):
     Sitter_name = models.CharField(max_length=30, null=False,blank=False,validators=[validate_letters])
     Sitter_number = models.CharField(max_length=30, null=False, blank=False,validators=[validate_numbers])
     Date_of_birth = models.DateField(null=True, blank=False,)
-    Contact = models.CharField(max_length=30,null=False,blank=False)
+    Contact = models.CharField(max_length=30,null=False,blank=False,validators=[validate_contact_length])
     date = models.DateTimeField()
     Location_choices = [('Kabalagala', 'Kabalagala'),]
     Location = models.CharField(choices=Location_choices, max_length=100)
@@ -125,8 +125,8 @@ class Departure(models.Model):
     baby_name=models.ForeignKey(Babyreg,on_delete=models.CASCADE) 
     date=models.DateTimeField() 
     picker=models.CharField(max_length=200)
-    contact = models.CharField(max_length=30)
-    NIN = models.CharField(max_length=30, null='False',blank = 'False')
+    contact = models.CharField(max_length=30,validators=[validate_contact_length])
+    NIN = models.CharField(max_length=30, null='False',blank = 'False',validators=[validate_NIN_length])
     comment=models.CharField(max_length=200,null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
     def __str__(self):
