@@ -137,13 +137,13 @@
                         <td>
                             <button type="button" class="btn btn-primary me-1"
                                 href="{% url 'read_sitter' id=sitter.id %}" data-bs-toggle="modal"
-                                data-bs-target="#myModal{{baby.id}}">
+                                data-bs-target="#myModal{{sitter.id}}">
                                 <i class="fa-solid fa-circle-info fa-lg"></i>
                             </button>
 
 
                             <!-- modal view -->
-                            <div class="modal" id="myModal{{baby.id}}" tabindex="-1" aria-labelledby="myModallabel1" aria-hidden="true">
+                            <div class="modal" id="myModal{{sitter.id}}" tabindex="-1" aria-labelledby="myModallabel1" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
 

@@ -66,7 +66,7 @@ class Babyreg(models.Model):
     Gender =  models.CharField(choices=[('Male', 'Male'),('Female', 'Female')], max_length=100)
     Age = models.CharField(max_length=20, blank=False, null=False)
     Location = models.CharField(max_length=30, null=False, blank=False)
-    brought = models.CharField(max_length=200)
+    brought_by = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True,null=True)
 
     def __str__(self):

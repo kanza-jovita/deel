@@ -6,75 +6,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DayStar Daycare Management System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}"> -->
     <link rel="icon" href="{% static 'favicon/favicon.ico' %}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-    
+
     <style>
         body {
-            background-color: #f8f9fa;
-        }
-      .hero-section {
+            background-color: aliceblue;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
             height: 100vh;
             display: flex;
+            flex-direction: column;
+        }
+
+        .hero-section {
+            flex: 1;
+            display: flex;
             align-items: center;
-            text-align: center;
+            justify-content: flex-start;
+            padding-left: 50px;
             color: white;
-            background-image: url('../static/images/jovin.jpg');
+            background-image: url("{% static 'images/jovita2.jpg' %}");
             background-size: cover;
             background-position: center;
-        }
-      .hero-text {
-            max-width: 600px;
-            margin-left: auto; /* Aligns the text to the right */
+            text-align: left;
         }
 
-        h1{
-            font-family: Georgia, 'Times New Roman', Times, serif;
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2a5982;
+            font-size: 3em;
+            font-weight: bold;
+            margin: 0;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        p {
             color: black;
+            font-size: 1.5em;
+            margin: 20px 0;
+            line-height: 1.5;
         }
 
-        h5{
+        .highlight-blue {
+            color: #2a5982;
+        }
+
+        .highlight-yellow {
+            color: yellow;
+        }
+
+        .btn-primary, .submit {
+            font-size: 1.2em;
+            padding: 10px 20px;
+            background-color: #2a5982;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .submit a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer{
+    background-color:  #121314;
     color: white;
-        }
-
-    .footer{
-     padding-top:10px;
-     background-color:  #121314;
-     color: white;
-     position: fixed;
-     width: 100%;
-     left: 0; 
-     bottom: 0;
-     text-align: center;
-  }
-
-</style>
+    position:fixed; 
+    left: 0; 
+    bottom: 0; 
+    width: 100%;
+    text-align: center;
+    padding: 10px;   }
+    </style>
 </head>
 <body>
-
-<div class="container hero-section">
-    <div class="row">
-        <div class="col-md-12 hero-text">
-            <h1>Welcome to Daystar </h1>
-            <h5>A safe and nurturing environment for your child.</h5>
-            <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+    <div class="hero-section">
+        <div>
+            <h1><b>Welcome to Daystar Daycare</b></h1>
+            <div>
+                <h6>A safe and nurturing environment for your child.</h6>
+                <p>
+                    <span class="highlight-blue">At<b> Daystar Daycare</b></span> 🦋 we believe in providing a safe, nurturing,<br> and 
+                    <span class="highlight-blue"><b>stimulating environment</b></span> for children to learn.
+                    <br>
+                    Each child's <span class="highlight-blue"><b>social, emotional, physical</b></span>, and 
+                    <span class="highlight-blue"><b>cognitive development</b></span>.
+                </p>
+            </div>
+            <button class="submit"><a href="{% url 'login' %}" class="kanza">Login</a></button>
         </div>
     </div>
-</div>
-
     
-    <footer>
-        <div class="footer" style="background-color: rgb(34, 31, 31); box-shadow: 10px 10px 5px lightblue; height: 70px;">
-            <!-- <div class="social-icons" style="width: 100%;">
-                <a class="anchor" href="https://www.facebook.com/your-page" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a class="anchor" href="https://twitter.com/your-handle" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a class="anchor" href="https://www.instagram.com/your-account/" target="_blank"><i class="fab fa-instagram"></i></a>
-            </div> -->
-            <p>&copy; 2023 Kanza Jovita. All rights reserved.</p>
-        </div>
+    <footer class="footer" >
+        <p style="color: white;">&copy; 2023 Kanza Jovita. All rights reserved.</p>
     </footer>
 </body>
 </html>
