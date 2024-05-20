@@ -48,9 +48,6 @@ class Usedform(ModelForm):
     class Meta:
         model = Used
         fields = '__all__'
-        widgets = {
-            'issue_date': forms.DateTimeInput(attrs={'type': 'datetime-local', 'class': 'form-control'}),
-        }
         
 
 class PaymentForm(ModelForm):

@@ -88,6 +88,7 @@
             <form method="POST" class="sales-form">
                 {% csrf_token %}
                 {{ issue_form | crispy }}
+                <br>
                 <button type="submit" class="btn btn-primary" >ISSUE</button>
             </form>
             <br><br>
