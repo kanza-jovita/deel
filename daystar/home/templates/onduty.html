@@ -93,7 +93,7 @@
     <table class="table table-bordered"  style="border-top: 2px solid rgb(34,32,32);">
         <thead class="table-white">
             <tr>
-                <th scope="col">#</th>
+                <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <!-- <th scope="col">Sitters number</th> -->
                 <th scope="col">Date</th>
@@ -107,7 +107,7 @@
         <tbody>
             {% for sitter in onduty  %}
             <tr>
-                <td>{{ sitter.id }}</td>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ sitter.sitter_name}}</td>
                 <td>{{ sitter.date_of_arrival }}</td>
                 <!-- <td>{{ sitter.timein }}</td> -->
