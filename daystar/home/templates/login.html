@@ -2,6 +2,49 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
+<style>
+form{
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+  box-shadow: 0 0 15px;
+}
+
+
+.submit {
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 13px;
+  box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.04);
+  width:200px;
+}
+
+.btn {
+    font-size: 20px;
+}
+#id_username {
+border: 1px solid;
+margin-bottom: 20px;
+
+
+}
+#id_password {
+border: 1px solid;
+}
+
+.asteriskField{
+color: red;
+font-style: bold;
+}
+ 
+</style>
 <div class="border border" style="background-color:  rgba(158, 184, 217, 0.5);">
     <center>
         <div class="login-container" style="padding-top: 10px;">
@@ -15,7 +58,7 @@
             {{form | crispy}}
             <br>
             <input type="submit" name="Submit" value="Login" class="btn   btn-block submit"
-                style="background-color: #2a5982;  color: aliceblue; width: 100px;"> <br>
+                style="background-color: #2a5982;  color: aliceblue; "> <br>
         </form>
 
 </div>
