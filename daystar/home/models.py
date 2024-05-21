@@ -56,8 +56,8 @@ class Categorystay(models.Model):
     
      
 class Babyreg(models.Model):
-    Baby_name = models.CharField(max_length=30, null=False, blank=False)
-    baby_number = models.CharField(max_length=30, unique=True ,null=False, blank=False)
+    Baby_name = models.CharField(max_length=30, null=False, blank=False, validators=[validate_letters])
+    baby_number = models.CharField(max_length=30, unique=True ,null=False, blank=False, validators=[validate_numbers])
     fathers_names = models.CharField(max_length=30, null=False, blank=False)
     mothers_names = models.CharField(max_length=30, null=False, blank=False)
     c_stay = models.ForeignKey(Categorystay, on_delete=models.SET_NULL, null=True, blank=True)
