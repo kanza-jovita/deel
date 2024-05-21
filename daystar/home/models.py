@@ -30,7 +30,7 @@ def validate_NIN_length(value):
 
 class Sitterreg(models.Model):
     Sitter_name = models.CharField(max_length=30, null=False,blank=False,validators=[validate_letters])
-    Sitter_number = models.CharField(max_length=30, null=False, blank=False,validators=[validate_numbers])
+    Sitter_number = models.CharField(max_length=30, null=False, unique=True ,blank=False,validators=[validate_numbers])
     Date_of_birth = models.DateField(null=True, blank=False,)
     Contact = models.CharField(max_length=30,null=False,blank=False,validators=[validate_contact_length])
     date = models.DateTimeField()
@@ -57,7 +57,7 @@ class Categorystay(models.Model):
      
 class Babyreg(models.Model):
     Baby_name = models.CharField(max_length=30, null=False, blank=False)
-    baby_number = models.CharField(max_length=30, null=False, blank=False)
+    baby_number = models.CharField(max_length=30, unique=True ,null=False, blank=False)
     fathers_names = models.CharField(max_length=30, null=False, blank=False)
     mothers_names = models.CharField(max_length=30, null=False, blank=False)
     c_stay = models.ForeignKey(Categorystay, on_delete=models.SET_NULL, null=True, blank=True)
