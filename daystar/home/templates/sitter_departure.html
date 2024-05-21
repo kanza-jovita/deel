@@ -80,7 +80,7 @@
         <tbody>
             {% for sitter in offduty %}
             <tr>
-                <td>{{ sitter.id }}</td>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ sitter.sitter}}</td>
                 <td>ST-00{{ sitter.sitter_number }}</td>
                 <td>{{ sitter.departure_time }}</td>
