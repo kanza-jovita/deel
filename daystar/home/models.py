@@ -161,6 +161,12 @@ class Payment(models.Model):
         self.balance = self.selected_amount - self.amount_paid
         super().save(*args, **kwargs)
         
+    def save(self, *args, **kwargs):
+    # Calculate the remaining balance by subtracting the amount already paid from the selected amount.
+        self.balance = self.selected_amount - self.amount_paid
+        
+        # Call the save method of the parent class (superclass). This ensures that any additional logic defined in the parent's save method is executed.
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.payee)

@@ -115,8 +115,8 @@ def delete_sitter(request, id):
 def add_payment(request):
     if request.method == 'POST':  # Checking if the request method is POST
         form = SitterpaymentForm(request.POST)  # Binding data from POST request to the payment form
-        if form.is_valid():  # Checking if the form data is valid
-            form.save()  # Saving the form data to the database
+        if form.is_valid():  
+            form.save()  
             return redirect('pay_list')  # Redirecting to the payment list page upon successful form submission
         else:
             print("Form is not valid")  # Printing an error message if form validation fails
@@ -164,8 +164,8 @@ def editonduty(request, id):
     onduty = get_object_or_404(Sitter_arrival, id=id)  # Retrieving sitter arrival object by id or returning 404 if not found
     if request.method == 'POST':  # Checking if the request method is POST
        form = Sitter_arrivalForm(request.POST, instance=onduty)  # Binding data from POST request to the sitter arrival form for editing
-       if form.is_valid():  # Checking if the form data is valid
-           form.save()  # Saving the updated form data to the database
+       if form.is_valid(): 
+           form.save()  
            return redirect('onduty')  # Redirecting to the onduty view upon successful form submission
     else:
         form = Sitter_arrivalForm(instance=onduty)  # Creating a form instance pre-filled with sitter arrival data
@@ -193,8 +193,8 @@ def sitter_departure(request):
 def add_sitter_departure(request):
     if request.method == 'POST':  # Checking if the request method is POST
         form = SitterdepartureForm(request.POST)  # Binding data from POST request to the sitter departure form
-        if form.is_valid():  # Checking if the form data is valid
-            form.save()  # Saving the form data to the database
+        if form.is_valid(): 
+            form.save() 
             return redirect('sitter_departure')  # Redirecting to the sitter departure view upon successful form submission
         else:
             print("Form is not valid")  # Printing an error message if form validation fails
@@ -209,8 +209,8 @@ def editoffduty(request, id):
     offduty = get_object_or_404(Sitter_departure, id=id)
     if request.method == 'POST':  # Checking if the request method is POST
        form = SitterdepartureForm(request.POST, instance=offduty)  # Binding data from POST request to the sitter departure form for editing
-       if form.is_valid():  # Checking if the form data is valid
-           form.save()  # Saving the updated form data to the database
+       if form.is_valid():  
+           form.save()  
            return redirect('sitter_departure')  # Redirecting to the sitter departure view upon successful form submission
     else:
         form = SitterdepartureForm(instance=offduty)  # Creating a form instance pre-filled with sitter departure data for GET requests
@@ -253,8 +253,8 @@ def assign_sitter(request, id):
     sitter = Sitterreg.objects.get(id=id)  # Retrieving the sitter object by id
     if request.method == 'POST':  # Checking if the request method is POST
          form = Sitter_arrivalForm(request.POST)  # Binding data from POST request to the sitter arrival form
-         if form.is_valid():  # Checking if the form data is valid
-            form.save()  # Saving the form data to the database
+         if form.is_valid():  
+            form.save()  
             return redirect('assign_view')  # Redirecting to the assign view upon successful form submission
          else:
              print("Form is not valid")  # Printing an error message if form validation fails
@@ -281,8 +281,8 @@ def babiesform(request):
 def addbaby(request):
     if request.method == 'POST':  # Checking if the request method is POST
         form = Babyreg_form(request.POST)  # Binding data from POST request to the baby registration form
-        if form.is_valid():  # Checking if the form data is valid
-            form.save()  # Saving the form data to the database
+        if form.is_valid(): 
+            form.save()  
             return redirect('babiesform')  # Redirecting to the babiesform view upon successful form submission
         else:
             print("Form is not valid")  # Printing an error message if form validation fails
@@ -304,8 +304,8 @@ def edit(request, id):
     baby = get_object_or_404(Babyreg, id=id)
     if request.method == 'POST':  # Checking if the request method is POST
         form = Babyreg_form(request.POST, instance=baby)  # Binding data from POST request to the baby registration form for editing
-        if form.is_valid():  # Checking if the form data is valid
-            form.save()  # Saving the updated form data to the database
+        if form.is_valid():  
+            form.save()  
             return redirect('babiesform')  # Redirecting to the babiesform view upon successful form submission
     else:
         form = Babyreg_form(instance=baby)  # Creating a form instance pre-filled with baby data for GET requests
@@ -334,8 +334,8 @@ def delete_baby(request, id):
 def payment(request):
     if request.method == 'POST':  # Checking if the request method is POST
         form = PaymentForm(request.POST)  # Binding data from POST request to the payment form
-        if form.is_valid():  # Checking if the form data is valid
-            form.save()  # Saving the form data to the database
+        if form.is_valid():  
+            form.save()  
             # Redirecting to the payment list page upon successful form submission
             return redirect('paymentform')
     else:
@@ -363,8 +363,8 @@ def addpayment(request):
     if request.method == 'POST':  # Checking if the request method is POST
         form = PaymentForm(request.POST)  # Binding data from POST request to the payment form
         if form.is_valid():  # Checking if the form data is valid
-            form.save()  # Saving the form data to the database
-            print(form)  # Printing the form data (for debugging purposes)
+            form.save()  
+            print(form)  
             return redirect('paymentform')  # Redirecting to the payment list page upon successful form submission
         else:
             print("Form is not valid")  # Printing an error message if form validation fails
@@ -381,8 +381,8 @@ def editpayment(request, id):
     
     if request.method == 'POST':  # Checking if the request method is POST
         form = PaymentForm(request.POST, instance=payment)  # Binding data from POST request to the payment form for editing
-        if form.is_valid():  # Checking if the form data is valid
-            form.save()  # Saving the updated form data to the database
+        if form.is_valid():  
+            form.save()  
             return redirect('paymentform')  # Redirecting to the payment list page after editing payment
     else:
         form = PaymentForm(instance=payment)  # Creating a form instance pre-filled with payment data for GET requests
@@ -411,7 +411,7 @@ def adddeparture(request):
     if request.method == 'POST':  # Checking if the request method is POST
         form = DepartureForm(request.POST)  # Binding data from POST request to the departure form
         if form.is_valid():  # Checking if the form data is valid
-            form.save()  # Saving the form data to the database
+            form.save()  
             print(form)  # Printing the form data (for debugging purposes)
             return redirect('departure')  # Redirecting to the departure list page upon successful form submission
         else:
@@ -428,7 +428,7 @@ def editdeparture(request, id):
     departures = get_object_or_404(Departure, id=id)
     if request.method == 'POST':  # Checking if the request method is POST
         form = DepartureForm(request.POST, instance=departures)  # Binding data from POST request to the departure form for editing
-        if form.is_valid():  # Checking if the form data is valid
+        if form.is_valid():  
             form.save()  # Saving the updated form data to the database
             return redirect('departure')  # Redirecting to the departure list page after editing departure
     else:
@@ -555,7 +555,7 @@ def add_to_stocks(request, pk):
             issued_procurement.save()  # Saving the updated procurement item to the database
             return redirect('inventory')  # Redirecting to the inventory page upon successful form submission
         else:
-            print("Form is not valid")  # Printing a message if the form is not valid (for debugging purposes)
+            print("Form is not valid")  # Printing a message if the form is not valid 
     else:
         form = AddForm()  # Creating a new, empty add form
     # Rendering the add_to_stocks template with the add form
@@ -577,9 +577,9 @@ def issue(request, pk):
             issued_quantity = int(request.POST['quantity_issued'])  # Getting the issued quantity from the POST data
             issued_item.Quantity -= issued_quantity  # Reducing the quantity of the procured item by the issued quantity
             issued_item.save()  # Saving the updated procurement item to the database
-            print(issued_item.item_name)  # Printing the name of the issued item (for debugging purposes)
-            print(request.POST['quantity_issued'])  # Printing the issued quantity (for debugging purposes)
-            print(issued_item.Quantity)  # Printing the remaining quantity of the item (for debugging purposes)
+            print(issued_item.item_name)  # Printing the name of the issued item 
+            print(request.POST['quantity_issued'])  # Printing the issued quantity 
+            print(issued_item.Quantity)  # Printing the remaining quantity of the item 
             return redirect('inventory')  # Redirecting to the inventory page upon successful form submission
     # Rendering the issue template with the issue form
     return render(request, 'issue.html', {'issue_form': issue_form})
